@@ -1,0 +1,18 @@
+.eventForm {
+  display: none;
+}
+.joinForm {
+  display: none;
+}
+.container {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+
+  .containerLeft {
+    width: 30%;
+  }
+  .containerRight {
+    width: 65%;
+  }
+}
