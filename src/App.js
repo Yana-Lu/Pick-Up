@@ -5,6 +5,8 @@ import { HomePage } from './components/HomePage'
 import { EventPage } from './components/EventPage'
 import { signInWithFacebook, signOutWithFacebook, auth } from './components/Firebase'
 import styles from './scss/MainPage.module.scss'
+import { Button } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 //確認登入狀況
 
@@ -47,13 +49,14 @@ function App() {
         <div className={styles.startAction}>
           <Link to="/eventpage">揪團淨灘</Link>
         </div>
+        <div className={styles.hiUser}></div>
         <div className={styles.signIn}>
-          <button className={styles.signInBtn} id="signInBtn" onClick={signInWithFacebook}>
+          <Button class="btn btn-primary" className={styles.signInBtn} id="signInBtn" onClick={signInWithFacebook}>
             登入
-          </button>
-          <button className={styles.signOutBtn} id="signOutBtn" onClick={signOutWithFacebook}>
+          </Button>
+          <Button class="btn btn-success" className={styles.signOutBtn} id="signOutBtn" onClick={signOutWithFacebook}>
             登出
-          </button>
+          </Button>
         </div>
       </header>
       <Route path="/" exact component={HomePage} />

@@ -1,12 +1,17 @@
+import { Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { EventPage } from './EventPage'
 import React from 'react'
 import styles from '../scss/HomePage.module.scss'
+import { Button } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 export function HomePage() {
   return (
     <div className={styles.main}>
       <div className={styles.keyvisual}>
-        <div className={styles.slogan}>說好的陽光沙灘</div>
-        <div className={styles.subSlogan}>人煙罕至的沙灘怎麼會有這麼多人造垃圾？</div>
+        <div className={styles.slogan}>Sunshine, Beach, glamorous life?</div>
+        <div className={styles.subSlogan}>What kind of future do you want?</div>
       </div>
       <div className={styles.motive}>
         <div className={styles.title}>
@@ -50,12 +55,14 @@ export function HomePage() {
         <div className={styles.title}>
           <h2>參與行動</h2>
         </div>
-        <div className={styles.boxes}>
-          <div className={styles.box}></div>
-          <div className={styles.box}></div>
-          <div className={styles.box}></div>
+        <div className={styles.actionGo}>Text somthing.</div>
+        <div className={styles.actionStart}>
+          <Link to="/eventpage">
+            <Button class="btn btn-primary">揪團淨灘</Button>
+          </Link>
         </div>
       </div>
+      <Route path="/eventpage" exact component={EventPage} />
     </div>
   )
 }
