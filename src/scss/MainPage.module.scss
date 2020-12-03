@@ -1,0 +1,47 @@
+.header {
+  width: 100vw;
+  height: 5vh;
+  // margin-bottom: 0.5vh;
+  display: grid;
+  // grid-template-columns: repeat(10, 1hr);
+  align-items: center;
+  // background-image: url('./../images/cleanBeach.jpg');
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  .logo {
+    grid-column-start: 2;
+    grid-column-end: 4;
+
+    .image {
+      height: 4vh;
+      width: auto;
+      background-image: url('./../images/logo6(fix).png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  }
+  .motive {
+    grid-column-start: 5;
+    grid-column-end: 6;
+  }
+  .actionIntro {
+    grid-column-start: 6;
+    grid-column-end: 7;
+  }
+  .startAction {
+    grid-column-start: 7;
+    grid-column-end: 8;
+  }
+  .signIn {
+    grid-column-start: 10;
+    grid-column-end: 11;
+
+    .signInBtn {
+      display: block;
+    }
+
+    .signOutBtn {
+      display: none;
+    }
+  }
+}

@@ -1,5 +1,11 @@
 .map {
-  height: 75vh;
-  width: 60vw;
+  height: 100%;
+  width: 100%;
   background-color: rgb(163, 212, 255);
+}
+.eventForm {
+  display: none;
+}
+.setEventBtn {
+  display: none;
 }

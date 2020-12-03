@@ -21,38 +21,104 @@ export const firestore = firebaseSet.firestore()
 firebase.analytics()
 
 //登入功能
-const provider = new firebase.auth.GoogleAuthProvider()
+const provider = new firebase.auth.FacebookAuthProvider()
 provider.setCustomParameters({
   prompt: 'select_account',
 })
 
-export const signInWithGoogle = () => auth.signInWithPopup(provider)
+export const signInWithFacebook = () =>
+  auth.signInWithPopup(provider).then(async (result) => {
+    if (result) {
+      console.log(result)
+      const { user } = result
+      db.collection('user')
+        .doc(user.uid)
+        .set(
+          {
+            userName: user.displayName,
+            email: user.email,
+          },
+          { merge: true }
+        )
+        .then(() => {
+          console.log(`Hi~${user.displayName}`)
+          localStorage.setItem('user', JSON.stringify(user))
+        })
+    }
+  })
+
+//登出功能
+export const signOutWithFacebook = () =>
+  auth
+    .signOut()
+    .then(function () {
+      console.log('Sign-out successful')
+      localStorage.clear()
+      window.location.reload()
+    })
+    .catch(function (error) {
+      // An error happened.
+    })
 export default firebaseSet
 
 //firestore資料存取
 var db = firebase.firestore()
-var enentRef = db.collection('event')
-var joinRef = enentRef.doc().collection('member')
+var eventRef = db.collection('event')
+var joinRef = eventRef.doc().collection('member')
 
-export function SetEvent(title, host, email, phone, date, time, memberLimit) {
-  enentRef
-    .doc()
-    .set({
-      title: title,
-      host: host,
-      email: email,
-      phone: phone,
-      lat: '',
-      lng: '',
-      date: date,
-      time: time,
-      member_limit: memberLimit - 1,
+/*
+====================================
+開團
+====================================
+*/
+//save the data of this event to event cellection
+export function SetEvent(obj) {
+  console.log(obj.userId)
+  // let hosteventId = []
+  db.collection('event')
+    .add({
+      title: obj.title,
+      host: obj.host,
+      email: obj.email,
+      phone: obj.phone,
+      lat: obj.lat,
+      lng: obj.lng,
+      date: obj.date,
+      time: obj.time,
+      member_limit: obj.memberLimit,
+      status: 'true',
+      userId: obj.userId,
     })
-    .then(() => {
-      console.log(enentRef)
+    .then((docRef) => {
+      db.collection('event').doc(docRef.id).collection('member').doc(obj.userId).set({
+        host: obj.host,
+        email: obj.email,
+        phone: obj.phone,
+      })
+      saveHostId(obj.userId, docRef)
     })
 }
 
+//save the data of host to user cellection底下的host id doc
+
+function saveHostId(userId, docRef) {
+  console.log(userId)
+  db.collection('user')
+    .doc(userId)
+    .collection('beHost')
+    .doc()
+    .set({
+      eventId: docRef.id,
+    })
+    .then(() => {
+      console.log('開團的doc底下存到開團ID了')
+    })
+}
+/*
+====================================
+跟團
+====================================
+*/
 export function JoinEvent(name, phone, email) {
   joinRef
     .doc()
@@ -65,10 +131,14 @@ export function JoinEvent(name, phone, email) {
       console.log('join this evnet!')
     })
 }
-
+/*
+====================================
+render data 到 eventPage
+====================================
+*/
 export function showEvent(callback) {
   let allEvent = []
-  enentRef
+  eventRef
     .get()
     .then((item) => {
       item.forEach((doc) => {
@@ -83,6 +153,7 @@ export function showEvent(callback) {
           memberLimit: doc.data().member_limit,
           lat: doc.data().lat,
           lng: doc.data().lng,
+          status: doc.data().status,
         })
       })
       return allEvent
