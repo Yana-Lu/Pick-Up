@@ -3,6 +3,207 @@
   height: 95vh;
   // background-color: #a8dadc;
   background-image: url('./../images/cleanBeach1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
   display: grid;
-  grid-template-columns: 1hr;
-  0ㄑ ㄖㄙ
+  grid-template-columns: 30% 40% 30%;
+  grid-template-rows: 40% 10% 50%;
+  .slogan {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    font-size: 60px;
+    color: #cdeae5;
+    text-align: center;
+  }
+  .subSlogan {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    font-size: 48px;
+    color: #cdeae5;
+    text-align: center;
+  }
+}
+.motive {
+  width: 100vw;
+  height: 70vh;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 20% 5% 75%;
+
+  .title {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display: flex;
+    align-items: center;
+
+    h2 {
+      width: 20%;
+      text-align: center;
+      border-bottom: 1px #8d8d8d solid;
+      box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+      padding-bottom: 10px;
+      margin: 0 auto;
+    }
+  }
+
+  .boxes {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    display: flex;
+    justify-content: center;
+
+    .box {
+      width: 30%;
+      height: 70%;
+      margin: 20px;
+      box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
+        rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    }
+  }
+}
+
+.forWhat {
+  width: 100vw;
+  height: 60vh;
+  background-color: #f1faee;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 20% 5% 25% 50%;
+
+  .title {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display: flex;
+    align-items: center;
+
+    h2 {
+      width: 20%;
+      text-align: center;
+      border-bottom: 1px #8d8d8d solid;
+      box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+      padding-bottom: 10px;
+      margin: 0 auto;
+    }
+  }
+  .intro1 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    font-size: 30px;
+  }
+  .intro2 {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    text-align: center;
+    font-size: 20px;
+
+    .highlight {
+      font-size: 24px;
+      font-weight: 800;
+    }
+  }
+
+  .introImgs {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 5;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    .introImg {
+      width: 80%;
+      height: 60%;
+      margin: 0 auto;
+      background-image: url('./../images/trash1.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  }
+}
+.actionIntro {
+  width: 100vw;
+  height: 70vh;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 20% 5% 75%;
+
+  .title {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display: flex;
+    align-items: center;
+
+    h2 {
+      width: 20%;
+      text-align: center;
+      border-bottom: 1px #8d8d8d solid;
+      box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+      padding-bottom: 10px;
+      margin: 0 auto;
+    }
+  }
+
+  .boxes {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    display: flex;
+    justify-content: center;
+
+    .box {
+      width: 30%;
+      height: 70%;
+      margin: 20px;
+      box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
+        rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    }
+  }
+}
+.actionJoin {
+  width: 100vw;
+  height: 60vh;
+  background-color: #dee9e7;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 20% 5% 50% 25%;
+
+  .title {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display: flex;
+    align-items: center;
+
+    h2 {
+      width: 20%;
+      text-align: center;
+      border-bottom: 1px #8d8d8d solid;
+      box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+      padding-bottom: 10px;
+      margin: 0 auto;
+    }
+  }
+}
