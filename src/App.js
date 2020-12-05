@@ -51,10 +51,22 @@ function App() {
         </div>
         <div className={styles.hiUser}></div>
         <div className={styles.signIn}>
-          <Button class="btn btn-primary" className={styles.signInBtn} id="signInBtn" onClick={signInWithFacebook}>
+          <Button
+            variant="primary"
+            // class="btn btn-primary"
+            className={styles.signInBtn}
+            id="signInBtn"
+            onClick={signInWithFacebook}
+          >
             登入
           </Button>
-          <Button class="btn btn-success" className={styles.signOutBtn} id="signOutBtn" onClick={signOutWithFacebook}>
+          <Button
+            variant="success"
+            // class="btn btn-success"
+            className={styles.signOutBtn}
+            id="signOutBtn"
+            onClick={signOutWithFacebook}
+          >
             登出
           </Button>
         </div>

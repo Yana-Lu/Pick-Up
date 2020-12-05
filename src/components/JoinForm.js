@@ -1,12 +1,22 @@
 import { JoinEvent } from './Firebase'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { showEvent } from './Firebase'
 // import { Maps } from './Maps'
 
-export function JoinForm() {
+export function JoinForm(props) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
 
+  console.log(props)
+  //render畫面用
+  const [events, setEvents] = useState([])
+
+  useEffect(() => {
+    showEvent(setEvents)
+  }, [])
+
+  console.log(events)
   function handleChange(e) {
     console.log(e.target.id)
     console.log(e.target.value)

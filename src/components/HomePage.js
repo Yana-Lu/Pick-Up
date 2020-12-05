@@ -58,7 +58,7 @@ export function HomePage() {
         <div className={styles.actionGo}>Text somthing.</div>
         <div className={styles.actionStart}>
           <Link to="/eventpage">
-            <Button class="btn btn-primary">揪團淨灘</Button>
+            <Button variant="primary">揪團淨灘</Button>
           </Link>
         </div>
       </div>

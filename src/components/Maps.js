@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { showEvent } from './Firebase'
 import styles from '../scss/Map.module.scss'
-import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
 import MapStyles from './MapStyles'
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
+import Swal from 'sweetalert2'
 import { EventForm } from './EventForm'
 
 const libraries = ['places']
@@ -26,9 +28,33 @@ export function Maps(props) {
     googleMapsApiKey: `AIzaSyAhDv35adlrxazUwPtZvjU7NE3RAaq3piQ`,
     libraries,
   })
+  //render畫面用
+  const [events, setEvents] = useState([])
+
+  useEffect(() => {
+    showEvent(setEvents)
+  }, [])
+
+  console.log(events)
   //marker
   const [markers, setMarkers] = useState([])
 
+  const [newMaeker, setNewMarker] = useState({})
+
+  const markers = 
+
+  // setMarkers(events)
+  // let ary = []
+  // events.forEach((event) => {
+  //   console.log(event)
+  //   ary.push({
+  //     lat: event.lat,
+  //     lng: event.lng,
+  //     time: event.startDate,
+  //   })
+  // })
+  // console.log(ary)
+  // setMarkers(ary)
   //onMapClick function
 
   const onMapClick = React.useCallback((event) => {
@@ -60,8 +86,16 @@ export function Maps(props) {
   // }
 
   function showEventForm() {
-    let closePopup = document.getElementById('eventForm')
-    closePopup.style.display = 'block'
+    let user = JSON.parse(localStorage.getItem('user'))
+    if (!user) {
+      Swal.fire({
+        icon: 'warning',
+        title: '請先登入喔!',
+      })
+    } else {
+      let closePopup = document.getElementById('eventForm')
+      closePopup.style.display = 'block'
+    }
   }
 
   return (
@@ -76,7 +110,7 @@ export function Maps(props) {
       >
         {markers.map((marker) => (
           <Marker
-            key={marker.time.toISOString()}
+            key={marker?.time?.toISOString()}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => {
               setSelected(marker)
@@ -87,7 +121,9 @@ export function Maps(props) {
         {selected ? (
           <InfoWindow position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => setSelected(null)}>
             <div>
-              <h2 onClick={showEventForm}>我要開團</h2>
+              <h3 className={styles.openForm} onClick={showEventForm}>
+                我要開團
+              </h3>
             </div>
           </InfoWindow>
         ) : null}
