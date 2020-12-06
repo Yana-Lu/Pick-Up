@@ -59,7 +59,7 @@ export function EventForm(props) {
     // }
   }
   // const [startDate, setStartDate] = useState(new Date())
-  function handleDateChange(e) {
+  function handleStartDateChange(e) {
     console.log(e)
     setStartDate(e)
   }
@@ -129,7 +129,7 @@ export function EventForm(props) {
               className={styles.startDate}
               selected={startDate}
               controlId="event-startDate-input"
-              onChange={handleDateChange}
+              onChange={handleStartDateChange}
               showTimeSelect
               dateFormat="Pp"
             />

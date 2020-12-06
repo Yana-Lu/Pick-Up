@@ -1,0 +1,13 @@
+.Intro > .current {
+  display: block;
+  opacity: 1;
+  transition: opacity 1s;
+}
+.Intro {
+  display: none;
+}
+.innerIntro {
+  width: 85%;
+  height: 85%;
+  border: solid 3px gray;
+}

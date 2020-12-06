@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { showEvent } from './Firebase'
 import styles from '../scss/Map.module.scss'
 import MapStyles from './MapStyles'
-import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
+import { GoogleMap, useLoadScript, Marker, InfoWindow, Data } from '@react-google-maps/api'
 import Swal from 'sweetalert2'
 import { EventForm } from './EventForm'
 
@@ -36,29 +36,58 @@ export function Maps(props) {
   }, [])
 
   console.log(events)
-  //marker
+  //render markers
   const [markers, setMarkers] = useState([])
+  //click to choose new location
+  const [newMarker, setNewMarker] = useState([])
+  let allMarkers = []
+  function onMapload() {
+    events.forEach((event) => {
+      allMarkers.push({
+        eventId: event.eventId,
+        title: event.title,
+        hostName: event.hostName,
+        email: event.email,
+        phone: event.phone,
+        startDate: event.startDate,
+        endDate: event.endDate,
+        memberLimit: event.member_limit,
+        lat: event.lat,
+        lng: event.lng,
+        time: event.startDate,
+        status: event.status,
+      })
+    })
+    return allMarkers
+  }
 
-  const [newMaeker, setNewMarker] = useState({})
+  console.log(markers)
+  // setMarkers(allMarkers)
+  // setMarkers(markers)
+  // console.log(markers)
 
-  const markers = 
-
-  // setMarkers(events)
-  // let ary = []
-  // events.forEach((event) => {
-  //   console.log(event)
-  //   ary.push({
-  //     lat: event.lat,
-  //     lng: event.lng,
-  //     time: event.startDate,
+  // function onMapLoad(events) {
+  //   const markers = [events].map((event) => {
+  //     return {
+  //       eventId: event.eventId,
+  //       title: event.title,
+  //       hostName: event.hostName,
+  //       email: event.email,
+  //       phone: event.phone,
+  //       startDate: event.startDate,
+  //       endDate: event.endDate,
+  //       memberLimit: event.member_limit,
+  //       lat: event.lat,
+  //       lng: event.lng,
+  //       time: event.startDate,
+  //       status: event.status,
+  //     }
   //   })
-  // })
-  // console.log(ary)
-  // setMarkers(ary)
-  //onMapClick function
+  //   setMarkers(markers)
+  // }
 
-  const onMapClick = React.useCallback((event) => {
-    setMarkers(() => [
+  const onMapClick = useCallback((event) => {
+    setNewMarker(() => [
       {
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
@@ -69,13 +98,12 @@ export function Maps(props) {
     console.log(event.latLng.lng())
   }, [])
 
-  const mapRef = React.useRef()
-  const onMapLoad = React.useCallback((map) => {
-    mapRef.current = map
-  }, [])
+  // const mapRef = React.useRef()
+  // const onMapLoad = React.useCallback((map) => {
+  //   mapRef.current = map
+  // }, [])
 
   const [selected, setSelected] = useState(null)
-  console.log(markers)
 
   if (loadError) return 'Error loading maps'
   if (!isLoaded) return 'Loading Maps'
@@ -106,9 +134,18 @@ export function Maps(props) {
         center={center}
         options={options}
         onClick={onMapClick}
-        onLoad={onMapLoad}
+        // onLoad={onMapLoad}
       >
         {markers.map((marker) => (
+          <Marker
+            key={marker?.time?.toISOString()}
+            position={{ lat: marker.lat, lng: marker.lng }}
+            // onClick={() => {
+            //   setSelected(newMarker)
+            // }}
+          />
+        ))}
+        {newMarker.map((marker) => (
           <Marker
             key={marker?.time?.toISOString()}
             position={{ lat: marker.lat, lng: marker.lng }}
@@ -128,7 +165,7 @@ export function Maps(props) {
           </InfoWindow>
         ) : null}
       </GoogleMap>
-      <EventForm location={markers} />
+      <EventForm location={newMarker} />
     </div>
   )
 }

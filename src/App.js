@@ -47,7 +47,7 @@ function App() {
         <div className={styles.motive}>動機緣由</div>
         <div className={styles.actionIntro}>行動介紹</div>
         <div className={styles.startAction}>
-          <Link to="/eventpage">揪團淨灘</Link>
+          <Link to="/eventpage">我要參與</Link>
         </div>
         <div className={styles.hiUser}></div>
         <div className={styles.signIn}>
