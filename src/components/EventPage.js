@@ -3,10 +3,6 @@ import styles from '../scss/EventPage.module.scss'
 import { Maps } from './Maps'
 
 export function EventPage(props) {
-  // function showJoinForm() {
-  //   let closePopup = document.querySelector('.joinForm')
-  //   closePopup.style.display = 'block'
-  // }
   console.log(props)
   return (
     <div className={styles.container}>
@@ -16,7 +12,7 @@ export function EventPage(props) {
           <h3>如果你想開團</h3>
           <br />
           <div className={styles.eventStep1}>
-            <h3>1.點擊地圖上想開團的地點設立座標</h3>
+            <h3>1.在地圖上點擊地點設立座標</h3>
             <h3>2.點擊該座標</h3>
             <h3>3.點擊"我要開團"</h3>
             <h3>4.填好完整資料並點擊開團按鈕</h3>
@@ -28,21 +24,20 @@ export function EventPage(props) {
           <br />
           <div className={styles.eventStep2}>
             <h3>1.點擊地圖上想跟團的座標</h3>
-            <h3>2.點擊"我跟開團"</h3>
+            <h3>2.點擊"我想跟團"</h3>
             <h3>3.填好完整資料並點擊跟團按鈕</h3>
+            <p>開團中的行動資訊如下:</p>
           </div>
           <div className={styles.eventInfo}>
-            <p>行動主題:</p>
-            <p>開團人:</p>
-            <p>開團人信箱:</p>
-            <p>活動日期:</p>
-            <p>活動時間:</p>
+            <p id="infoTitle">行動主題:</p>
+            <p id="infoHost">開團人:</p>
+            <p id="infoEmail">開團人信箱:</p>
+            <p id="infoStartDate">活動時間:</p>
+            <p id="infoEndDate">至</p>
+            {/* <p id="infoMemgerLimit">人數上限:</p>
+            <p id="infoRest">剩餘名額:</p> */}
           </div>
         </div>
-        {/* <button className={styles.joinEvent} onClick={showJoinForm}>
-          我要跟團
-        </button> */}
-        {/* <JoinForm /> */}
       </div>
       <div className={styles.containerRight}>
         <h2>活動地點</h2>
@@ -52,4 +47,21 @@ export function EventPage(props) {
       </div>
     </div>
   )
+}
+export function ShowMarkerData(obj) {
+  console.log(obj)
+  let startDateObj = new Date(obj?.startDate)
+  let endDateObj = new Date(obj?.endDate)
+  console.log(obj?.startDate)
+  console.log(startDateObj)
+  let infoTitle = document.getElementById('infoTitle')
+  let infoHost = document.getElementById('infoHost')
+  let infoEmail = document.getElementById('infoEmail')
+  let infoStartDate = document.getElementById('infoStartDate')
+  let infoEndDate = document.getElementById('infoEndDate')
+  infoTitle.textContent = `行動主題：${obj?.title}`
+  infoHost.textContent = `開團人：${obj?.hostName}`
+  infoEmail.textContent = `開團人信箱：${obj?.email}`
+  infoStartDate.textContent = `活動時間：${startDateObj.toLocaleString()}`
+  infoEndDate.textContent = `至：${endDateObj.toLocaleString()}`
 }

@@ -52,13 +52,7 @@ export function EventForm(props) {
     } else {
       setMemberLimit(e.target.value)
     }
-    // else if (e.target.id === 'event-date-input') {
-    //   setDate(e.target.value)
-    // } else if (e.target.id === 'event-time-input') {
-    //   setTime(e.target.value)
-    // }
   }
-  // const [startDate, setStartDate] = useState(new Date())
   function handleStartDateChange(e) {
     console.log(e)
     setStartDate(e)
@@ -69,7 +63,7 @@ export function EventForm(props) {
   }
 
   function eventSubmit(e) {
-    e.preventDefault()
+    // e.preventDefault()
     // console.log(user.uid)
     //打包表單、經緯度、使用者ID資料
     let obj = {

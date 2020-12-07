@@ -64,7 +64,6 @@ export default firebaseSet
 //firestore資料存取
 var db = firebase.firestore()
 var eventRef = db.collection('event')
-var joinRef = eventRef.doc().collection('member')
 
 /*
 ====================================
@@ -83,8 +82,8 @@ export function SetEvent(obj) {
       phone: obj.phone,
       lat: obj.lat,
       lng: obj.lng,
-      startDate: obj.startDate,
-      endDate: obj.endDate,
+      startDate: obj.startDate.toUTCString(),
+      endDate: obj.endDate.toUTCString(),
       member_limit: obj.memberLimit,
       status: 'true',
       userId: obj.userId,
@@ -119,16 +118,35 @@ function saveHostId(userId, docRef) {
 跟團
 ====================================
 */
-export function JoinEvent(name, phone, email) {
-  joinRef
+export function JoinEvent(obj) {
+  console.log(obj.eventId)
+  console.log(obj.userId)
+  console.log(obj.name)
+  console.log(obj.phone)
+  db.collection('event')
+    .doc(obj.eventId)
+    .collection('member')
+    .doc(obj.userId)
+    .set({
+      name: obj.name,
+      phone: obj.phone,
+      email: obj.email,
+    })
+    .then(saveMemberId(obj.userId, obj.eventId))
+}
+//save the data of host to user cellection底下的host id doc
+
+function saveMemberId(userId, eventId) {
+  console.log(userId)
+  db.collection('user')
+    .doc(userId)
+    .collection('beMember')
     .doc()
     .set({
-      name: name,
-      phone: phone,
-      email: email,
+      eventId: eventId,
     })
     .then(() => {
-      console.log('join this evnet!')
+      console.log('跟團的doc底下存到開團ID了')
     })
 }
 /*

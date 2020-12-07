@@ -1,7 +1,11 @@
-import { JoinEvent } from './Firebase'
 import React, { useEffect, useState } from 'react'
+import { JoinEvent } from './Firebase'
 import { showEvent } from './Firebase'
-// import { Maps } from './Maps'
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Col } from 'react-bootstrap'
+//alert樣式
+import Swal from 'sweetalert2'
+//scss
+import styles from '../scss/EventPage.module.scss'
 
 export function JoinForm(props) {
   const [name, setName] = useState('')
@@ -16,8 +20,11 @@ export function JoinForm(props) {
     showEvent(setEvents)
   }, [])
 
-  console.log(events)
-  function handleChange(e) {
+  //從localStorage撈會員資料
+  let user = JSON.parse(localStorage.getItem('user'))
+  console.log(user)
+
+  function eventChange(e) {
     console.log(e.target.id)
     console.log(e.target.value)
     if (e.target.id === 'memeber-name-input') {
@@ -30,9 +37,21 @@ export function JoinForm(props) {
   }
 
   function handleSubmit(e) {
-    e.preventDefault()
-    console.log(name, phone, email)
-    JoinEvent(name, phone, email)
+    // e.preventDefault()
+    //打包表單
+    let obj = {
+      name: name,
+      email: email,
+      phone: phone,
+      eventId: props.event.eventId,
+      userId: user.uid,
+    }
+    // console.log(title, host, email, phone, date, time, memberLimit)
+    JoinEvent(obj)
+    Swal.fire({
+      icon: 'success',
+      title: '跟團成功!',
+    })
   }
 
   function closePopup() {
@@ -41,21 +60,31 @@ export function JoinForm(props) {
   }
 
   return (
-    <div className="joinForm" id="joinForm">
-      <form onSubmit={handleSubmit}>
-        <h3>姓名</h3>
-        <input type="text" id="memeber-name-input" value={name} onChange={handleChange} />
-        <h3>手機</h3>
-        <input type="text" id="memeber-phone-input" onChange={handleChange} />
-        <h3>email</h3>
-        <input type="text" id="memeber-email-input" onChange={handleChange} />
-        <div>
-          <button type="submit">跟團</button>
-        </div>
-      </form>
-      <button id="closePopup" onClick={closePopup}>
-        關閉
-      </button>
+    <div className={styles.eventFormBG} id="joinForm">
+      <div className={styles.eventFormOut}>
+        <Form className={styles.eventForm} onSubmit={handleSubmit}>
+          <Form.Group as={Col} controlId="memeber-name-input">
+            <Form.Label>姓名</Form.Label>
+            <Form.Control type="text" placeholder="請輸入姓名" onChange={eventChange} />
+          </Form.Group>
+          <Form.Group as={Col} controlId="memeber-phone-input">
+            <Form.Label>連絡電話</Form.Label>
+            <Form.Control type="phone" placeholder="請輸入聯絡電話" onChange={eventChange} />
+          </Form.Group>
+          <Form.Group as={Col} controlId="memeber-email-input">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" placeholder="請輸入email" onChange={eventChange} />
+          </Form.Group>
+          <div className={styles.btns}>
+            <Button variant="outline-success" type="submit">
+              跟團
+            </Button>
+            <Button variant="default" id="closePopup" onClick={closePopup}>
+              關閉
+            </Button>
+          </div>
+        </Form>
+      </div>
     </div>
   )
 }

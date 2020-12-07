@@ -141,10 +141,10 @@
 }
 .actionIntro {
   width: 100vw;
-  height: 120vh;
+  height: 150vh;
   display: grid;
   grid-template-columns: 33% 33% 33%;
-  grid-template-rows: 10% 3% 25% 62%;
+  grid-template-rows: 10% 3% 30% 57%;
 
   .title {
     grid-column-start: 1;
@@ -188,6 +188,9 @@
       box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
         rgba(17, 17, 26, 0.1) 0px 16px 56px;
       cursor: pointer;
+      background-color: #fff1f1;
+      text-align: center;
+      align-items: center;
     }
     .box:hover {
       border: solid 2px rgba(17, 17, 26, 0.1);
@@ -195,13 +198,16 @@
   }
   .actionIntroContent {
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 5;
     grid-row-start: 4;
     grid-row-end: 5;
     display: flex;
     justify-content: center;
-    width: 100vw;
     height: 70vh;
+    .Intro {
+      width: 850px;
+      margin: 30px auto;
+    }
   }
 }
 .actionJoin {

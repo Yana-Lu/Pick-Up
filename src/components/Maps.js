@@ -4,7 +4,9 @@ import styles from '../scss/Map.module.scss'
 import MapStyles from './MapStyles'
 import { GoogleMap, useLoadScript, Marker, InfoWindow, Data } from '@react-google-maps/api'
 import Swal from 'sweetalert2'
+import { JoinForm } from './JoinForm'
 import { EventForm } from './EventForm'
+import { ShowMarkerData } from './EventPage'
 
 const libraries = ['places']
 const mapContainerStyle = {
@@ -23,6 +25,7 @@ const options = {
   mapTypeControl: true,
 }
 
+export function showMarkerData(obj) {}
 export function Maps(props) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: `AIzaSyAhDv35adlrxazUwPtZvjU7NE3RAaq3piQ`,
@@ -41,50 +44,24 @@ export function Maps(props) {
   //click to choose new location
   const [newMarker, setNewMarker] = useState([])
   let allMarkers = []
-  function onMapload() {
-    events.forEach((event) => {
-      allMarkers.push({
-        eventId: event.eventId,
-        title: event.title,
-        hostName: event.hostName,
-        email: event.email,
-        phone: event.phone,
-        startDate: event.startDate,
-        endDate: event.endDate,
-        memberLimit: event.member_limit,
-        lat: event.lat,
-        lng: event.lng,
-        time: event.startDate,
-        status: event.status,
-      })
+  // function onMapload() {
+  events.forEach((event) => {
+    allMarkers.push({
+      eventId: event.eventId,
+      title: event.title,
+      hostName: event.hostName,
+      email: event.email,
+      phone: event.phone,
+      startDate: event.startDate,
+      endDate: event.endDate,
+      memberLimit: event.memberLimit,
+      lat: event.lat,
+      lng: event.lng,
+      time: new Date(event.startDate),
+      status: event.status,
     })
-    return allMarkers
-  }
-
+  })
   console.log(markers)
-  // setMarkers(allMarkers)
-  // setMarkers(markers)
-  // console.log(markers)
-
-  // function onMapLoad(events) {
-  //   const markers = [events].map((event) => {
-  //     return {
-  //       eventId: event.eventId,
-  //       title: event.title,
-  //       hostName: event.hostName,
-  //       email: event.email,
-  //       phone: event.phone,
-  //       startDate: event.startDate,
-  //       endDate: event.endDate,
-  //       memberLimit: event.member_limit,
-  //       lat: event.lat,
-  //       lng: event.lng,
-  //       time: event.startDate,
-  //       status: event.status,
-  //     }
-  //   })
-  //   setMarkers(markers)
-  // }
 
   const onMapClick = useCallback((event) => {
     setNewMarker(() => [
@@ -103,16 +80,28 @@ export function Maps(props) {
   //   mapRef.current = map
   // }, [])
 
-  const [selected, setSelected] = useState(null)
+  const [selected1, setSelected1] = useState(null)
+  const [selected2, setSelected2] = useState(null)
 
   if (loadError) return 'Error loading maps'
   if (!isLoaded) return 'Loading Maps'
-
-  // function showEventButton() {
-  //   let eventBtn = document.querySelector('.setEventBtn')
-  //   eventBtn.style.display = 'block'
+  // function ShowMarkerData(obj) {
+  //   console.log(obj)
   // }
 
+  function showJoinForm() {
+    // console.log()
+    let user = JSON.parse(localStorage.getItem('user'))
+    if (!user) {
+      Swal.fire({
+        icon: 'warning',
+        title: '請先登入喔!',
+      })
+    } else {
+      let closePopup = document.getElementById('joinForm')
+      closePopup.style.display = 'block'
+    }
+  }
   function showEventForm() {
     let user = JSON.parse(localStorage.getItem('user'))
     if (!user) {
@@ -125,7 +114,7 @@ export function Maps(props) {
       closePopup.style.display = 'block'
     }
   }
-
+  console.log(allMarkers)
   return (
     <div className={styles.map}>
       <GoogleMap
@@ -136,13 +125,14 @@ export function Maps(props) {
         onClick={onMapClick}
         // onLoad={onMapLoad}
       >
-        {markers.map((marker) => (
+        {allMarkers.map((marker) => (
           <Marker
             key={marker?.time?.toISOString()}
             position={{ lat: marker.lat, lng: marker.lng }}
-            // onClick={() => {
-            //   setSelected(newMarker)
-            // }}
+            onClick={() => {
+              setSelected1(marker)
+              ShowMarkerData(selected1)
+            }}
           />
         ))}
         {newMarker.map((marker) => (
@@ -150,13 +140,22 @@ export function Maps(props) {
             key={marker?.time?.toISOString()}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => {
-              setSelected(marker)
+              setSelected2(marker)
             }}
           />
         ))}
+        {selected1 ? (
+          <InfoWindow position={{ lat: selected1.lat, lng: selected1.lng }} onCloseClick={() => setSelected1(null)}>
+            <div>
+              <h3 className={styles.openForm} onClick={showJoinForm}>
+                我要跟團
+              </h3>
+            </div>
+          </InfoWindow>
+        ) : null}
 
-        {selected ? (
-          <InfoWindow position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => setSelected(null)}>
+        {selected2 ? (
+          <InfoWindow position={{ lat: selected2.lat, lng: selected2.lng }} onCloseClick={() => setSelected2(null)}>
             <div>
               <h3 className={styles.openForm} onClick={showEventForm}>
                 我要開團
@@ -165,6 +164,7 @@ export function Maps(props) {
           </InfoWindow>
         ) : null}
       </GoogleMap>
+      <JoinForm event={selected1} />
       <EventForm location={newMarker} />
     </div>
   )

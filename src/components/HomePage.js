@@ -59,19 +59,25 @@ export function HomePage() {
           你是否正好要去享受海洋的擁抱呢？能不能順手撿起沙灘上煞風景的垃圾呢？以下小撇步，讓你的行動更有意義：
         </div>
         <div className={styles.boxes}>
-          <div className={styles.box} onClick={clickBox(0)}></div>
-          <div className={styles.box} onClick={clickBox(1)}></div>
-          <div className={styles.box} onClick={clickBox(2)}></div>
+          <div className={styles.box} onClick={clickBox(0)}>
+            <h3>裝備介紹</h3>
+          </div>
+          <div className={styles.box} onClick={clickBox(1)}>
+            <h3>安全小叮嚀</h3>
+          </div>
+          <div className={styles.box} onClick={clickBox(2)}>
+            <h3>成果上傳</h3>
+          </div>
         </div>
         <div className={styles.actionIntroContent}>
-          <div class=".Intro">
-            <div class=".innerIntro">
+          <div className={styles.Intro}>
+            <div className="innerIntro">
               <h3>行動100%裝備，愛海洋也要愛自己。</h3>
-              <div className={styles.IntroImg1}></div>
+              <div className="IntroImg1"></div>
             </div>
           </div>
-          <div class=".Intro"></div>
-          <div class=".Intro"></div>
+          <div className="Intro"></div>
+          <div className="Intro"></div>
         </div>
       </div>
       <div className={styles.actionJoin}>
