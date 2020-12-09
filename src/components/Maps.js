@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 import { JoinForm } from './JoinForm'
 import { EventForm } from './EventForm'
 import { ShowMarkerData } from './EventPage'
+import { Picker } from 'emoji-mart'
 
 const libraries = ['places']
 const mapContainerStyle = {
@@ -138,6 +139,10 @@ export function Maps(props) {
           <Marker
             key={marker?.time?.toISOString()}
             position={{ lat: marker.lat, lng: marker.lng }}
+            icon={{
+              url: '/location(gray).png',
+              scaledSize: new window.google.maps.Size(50, 50),
+            }}
             onClick={() => {
               setSelected2(marker)
             }}
