@@ -51,6 +51,7 @@ function App() {
         </div>
         <div className={styles.hiUser}></div>
         <div className={styles.signIn}>
+          <div className={styles.signInIcon}></div>
           <Button
             variant="primary"
             // class="btn btn-primary"

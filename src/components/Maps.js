@@ -25,7 +25,6 @@ const options = {
   mapTypeControl: true,
 }
 
-export function showMarkerData(obj) {}
 export function Maps(props) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: `AIzaSyAhDv35adlrxazUwPtZvjU7NE3RAaq3piQ`,
@@ -131,7 +130,7 @@ export function Maps(props) {
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => {
               setSelected1(marker)
-              ShowMarkerData(selected1)
+              ShowMarkerData(marker)
             }}
           />
         ))}
@@ -155,7 +154,13 @@ export function Maps(props) {
         ) : null}
 
         {selected2 ? (
-          <InfoWindow position={{ lat: selected2.lat, lng: selected2.lng }} onCloseClick={() => setSelected2(null)}>
+          <InfoWindow
+            position={{ lat: selected2.lat, lng: selected2.lng }}
+            onCloseClick={() => {
+              setSelected2(null)
+              setNewMarker([])
+            }}
+          >
             <div>
               <h3 className={styles.openForm} onClick={showEventForm}>
                 我要開團

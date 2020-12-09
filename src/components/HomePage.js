@@ -71,9 +71,9 @@ export function HomePage() {
         </div>
         <div className={styles.actionIntroContent}>
           <div className={styles.Intro}>
-            <div className="innerIntro">
+            <div className={styles.innerIntro}>
               <h3>行動100%裝備，愛海洋也要愛自己。</h3>
-              <div className="IntroImg1"></div>
+              <div className={styles.IntroImg1}></div>
             </div>
           </div>
           <div className="Intro"></div>

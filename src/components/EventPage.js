@@ -26,13 +26,13 @@ export function EventPage(props) {
             <h3>1.點擊地圖上想跟團的座標</h3>
             <h3>2.點擊"我想跟團"</h3>
             <h3>3.填好完整資料並點擊跟團按鈕</h3>
-            <p>開團中的行動資訊如下:</p>
+            <p>開團中的行動資訊如下：</p>
           </div>
           <div className={styles.eventInfo}>
-            <p id="infoTitle">行動主題:</p>
-            <p id="infoHost">開團人:</p>
-            <p id="infoEmail">開團人信箱:</p>
-            <p id="infoStartDate">活動時間:</p>
+            <p id="infoTitle">行動主題：</p>
+            <p id="infoHost">開團人：</p>
+            <p id="infoEmail">開團人信箱：</p>
+            <p id="infoStartDate">活動時間：</p>
             <p id="infoEndDate">至</p>
             {/* <p id="infoMemgerLimit">人數上限:</p>
             <p id="infoRest">剩餘名額:</p> */}
