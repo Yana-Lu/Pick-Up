@@ -2,12 +2,13 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { showEvent } from './Firebase'
 import styles from '../scss/Map.module.scss'
 import MapStyles from './MapStyles'
-import { GoogleMap, useLoadScript, Marker, InfoWindow, Data } from '@react-google-maps/api'
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
+// import { Data } from '@react-google-maps/api'
 import Swal from 'sweetalert2'
 import { JoinForm } from './JoinForm'
 import { EventForm } from './EventForm'
 import { ShowMarkerData } from './EventPage'
-import { Picker } from 'emoji-mart'
+// import { Picker } from 'emoji-mart'
 
 const libraries = ['places']
 const mapContainerStyle = {
@@ -40,6 +41,7 @@ export function Maps(props) {
 
   console.log(events)
   //render markers
+  // eslint-disable-next-line no-unused-vars
   const [markers, setMarkers] = useState([])
   //click to choose new location
   const [newMarker, setNewMarker] = useState([])

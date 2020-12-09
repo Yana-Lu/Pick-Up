@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { HomePage } from './components/HomePage'
 import { EventPage } from './components/EventPage'
+import { ProfilePage } from './components/ProfilePage'
 import { signInWithFacebook, signOutWithFacebook, auth } from './components/Firebase'
 import styles from './scss/MainPage.module.scss'
 import { Button } from 'react-bootstrap'
@@ -12,11 +13,16 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   const [uid, setUid] = useState('')
-
+  const [userData, setUserData] = useState('')
+  let userName = document.getElementById('userName')
   auth.onAuthStateChanged(function (user) {
     if (user) {
+      console.log(auth.currentUser)
       console.log(auth.currentUser.uid)
       setUid(auth.currentUser.uid)
+      setUserData(auth.currentUser)
+      console.log('hi')
+      userName.textContent = `Hi~${auth.currentUser.displayName}`
     } else {
       console.log('使用者尚未登入')
     }
@@ -25,7 +31,9 @@ function App() {
   useEffect(() => {
     let signInBtn = document.getElementById('signInBtn')
     let signOutBtn = document.getElementById('signOutBtn')
+
     if (uid) {
+      //顯示使用者名字
       signInBtn.style.display = 'none'
       signOutBtn.style.display = 'block'
     } else {
@@ -49,31 +57,25 @@ function App() {
         <div className={styles.startAction}>
           <Link to="/eventpage">我要參與</Link>
         </div>
-        <div className={styles.hiUser}></div>
+        <div className={styles.hiUser}>
+          <Link to="/profile">
+            <div className={styles.userName} id="userName">
+              目前是訪客
+            </div>
+          </Link>
+        </div>
         <div className={styles.signIn}>
-          <div className={styles.signInIcon}></div>
-          <Button
-            variant="primary"
-            // class="btn btn-primary"
-            className={styles.signInBtn}
-            id="signInBtn"
-            onClick={signInWithFacebook}
-          >
+          <Button variant="primary" className={styles.signInBtn} id="signInBtn" onClick={signInWithFacebook}>
             登入
           </Button>
-          <Button
-            variant="success"
-            // class="btn btn-success"
-            className={styles.signOutBtn}
-            id="signOutBtn"
-            onClick={signOutWithFacebook}
-          >
+          <Button variant="success" className={styles.signOutBtn} id="signOutBtn" onClick={signOutWithFacebook}>
             登出
           </Button>
         </div>
       </header>
       <Route path="/" exact component={HomePage} />
       <Route path="/eventpage" exact component={() => <EventPage uid={uid} />} />
+      <Route path="/profile" exact component={() => <ProfilePage userData={userData} />} />
     </div>
   )
 }

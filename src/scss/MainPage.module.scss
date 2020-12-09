@@ -1,18 +1,19 @@
 @import '~bootstrap/scss/bootstrap';
 .header {
   width: 100vw;
-  height: 8vh;
-  // margin-bottom: 0.5vh;
+  height: 7vh;
   display: grid;
   // grid-template-columns: repeat(10, 1hr);
   align-items: center;
   text-align: center;
-  // background-image: url('./../images/cleanBeach.jpg');
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
+  color: #6d6e71;
+  a {
+    color: #6d6e71;
+  }
   .logo {
     grid-column-start: 2;
-    grid-column-end: 4;
+    grid-column-end: 5;
 
     .image {
       height: 4vh;
@@ -37,17 +38,39 @@
   .hiUser {
     grid-column-start: 9;
     grid-column-end: 10;
+
+    .userName {
+      line-height: 1;
+    }
   }
+
   .signIn {
     grid-column-start: 10;
     grid-column-end: 11;
+    display: flex;
+    .profile {
+      // grid-column-start: 10;
+      // grid-column-end: 11;
 
+      .profileIcon {
+        background-image: url('./../images/member.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 4vw;
+        height: 3vh;
+        margin-right: 5px;
+      }
+    }
     .signInBtn {
+      height: 3vh;
       display: block;
+      line-height: 1;
     }
 
     .signOutBtn {
+      height: 3vh;
       display: none;
+      line-height: 1;
     }
   }
 }

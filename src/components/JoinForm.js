@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { JoinEvent } from './Firebase'
 import { showEvent } from './Firebase'
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Col } from 'react-bootstrap'
+// import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Col } from 'react-bootstrap'
+import { Form, Button, Col } from 'react-bootstrap'
 //alert樣式
 import Swal from 'sweetalert2'
 //scss
@@ -14,6 +15,8 @@ export function JoinForm(props) {
 
   console.log(props)
   //render畫面用
+
+  // eslint-disable-next-line no-unused-vars
   const [events, setEvents] = useState([])
 
   useEffect(() => {
