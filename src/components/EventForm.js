@@ -34,6 +34,7 @@ export function EventForm(props) {
   //從localStorage撈會員資料
   let user = JSON.parse(localStorage.getItem('user'))
   console.log(user)
+  console.log(props.uid)
   // console.log(user.uid)
 
   function eventChange(e) {

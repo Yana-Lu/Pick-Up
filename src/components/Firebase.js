@@ -89,10 +89,18 @@ export function SetEvent(obj) {
       userId: obj.userId,
     })
     .then((docRef) => {
+      //存eventId到這個doc裡
+      db.collection('event').doc(docRef.id).set(
+        {
+          eventId: docRef.id,
+        },
+        { merge: 'true' }
+      )
       db.collection('event').doc(docRef.id).collection('member').doc(obj.userId).set({
         host: obj.host,
         email: obj.email,
         phone: obj.phone,
+        userId: obj.userId,
       })
       saveHostId(obj.userId, docRef)
     })
@@ -131,6 +139,7 @@ export function JoinEvent(obj) {
       name: obj.name,
       phone: obj.phone,
       email: obj.email,
+      userId: obj.userId,
     })
     .then(saveMemberId(obj.userId, obj.eventId))
 }
@@ -178,5 +187,66 @@ export function showEvent(callback) {
     })
     .then((result) => {
       callback(result)
+    })
+}
+/*
+====================================
+render data 到 ProfilePage
+====================================
+*/
+export function showBeHost(Id, callback) {
+  console.log(Id)
+  let beHostEventId = []
+  db.collection('user')
+    .doc(Id)
+    .collection('beHost')
+    .get()
+    .then((item) => {
+      item.forEach((doc) => {
+        beHostEventId.push({
+          eventId: doc.data().eventId,
+        })
+      })
+      return beHostEventId
+    })
+    .then((result) => {
+      callback(result)
+    })
+}
+
+export function showBeHostEvent(Id, callback, array) {
+  let beHostEventList = []
+  db.collection('event')
+    .where('eventId', '==', Id)
+    .get()
+    .then((item) => {
+      console.log(item)
+      item.forEach((doc) => {
+        beHostEventList.push({
+          title: doc.data().title,
+          lat: doc.data().lat,
+          lng: doc.data().lng,
+          startDate: doc.data().startDate,
+          endDate: doc.data().endDate,
+          member_limit: doc.data().memberLimit,
+          status: doc.data().status,
+        })
+      })
+      return beHostEventList
+    })
+    .then((result) => {
+      if (array !== undefined) {
+        console.log(array)
+        console.log(result)
+        let newArray = [...array, result]
+        // array = [...array, newArray]
+        console.log(newArray)
+        callback(newArray)
+      } else {
+        callback(result)
+      }
+    })
+    .catch((error) => {
+      console.log(error)
     })
 }
