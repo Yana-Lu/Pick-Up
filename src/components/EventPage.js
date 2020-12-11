@@ -4,6 +4,7 @@ import { Maps } from './Maps'
 
 export function EventPage(props) {
   console.log(props)
+  console.log(props.uid)
   return (
     <div className={styles.container}>
       <div className={styles.containerLeft}>
@@ -42,7 +43,7 @@ export function EventPage(props) {
       <div className={styles.containerRight}>
         <h2>活動地點</h2>
         <div className={styles.mapContain}>
-          <Maps />
+          <Maps uid={props.uid} />
         </div>
       </div>
     </div>

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 //firebase
-import { showBeHost } from './Firebase'
-import { showBeHostEvent } from './Firebase'
+import { showBeHostEvents } from './Firebase'
+import { showMember } from './Firebase'
 //scss
 import styles from '../scss/ProfilePage.module.scss'
 //button
-import { Button, Col } from 'react-bootstrap'
+import { Button, ButtonToolbar, Col } from 'react-bootstrap'
 export function ProfilePage(props) {
   // console.log(props)
   // console.log(props.userData.displayName)
@@ -19,41 +19,55 @@ export function ProfilePage(props) {
     userEmail.textContent = props.userData.email
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  //會員開團跟團資料
-  const [beHost, setBeHost] = useState([])
+  //會員開團資料及成員資料
   const [beHostEvents, setBeHostEvents] = useState([])
+  const [eventMembers, seteventMembers] = useState([])
 
   let uid = props.userData.uid
   useEffect(() => {
-    showBeHost(uid, setBeHost)
+    showBeHostEvents(uid, setBeHostEvents)
   }, [])
-  console.log(beHost)
-
-  useEffect(() => {
-    for (let i = 0; i < beHost.length; i++) {
-      showBeHostEvent(beHost[i].eventId, setBeHostEvents, beHostEvents)
-      console.log('beHost迴圈')
-    }
-    console.log(beHostEvents)
-  }, [beHost])
   console.log(beHostEvents)
 
+  // useEffect(() => {
+  //   showMember(uid, seteventMembers)
+  // }, [])
+  // console.log(eventMembers)
+
   return (
-    <div className={styles.ProfileContain}>
-      <div className={styles.ProfileData}>
-        <div className={styles.avatar}>
-          <img alt="avatar" className={styles.avatarImg} id="avatarImg"></img>
+    <div className={styles.MainContain}>
+      <div className={styles.ProfileContain}>
+        <div className={styles.ProfileData}>
+          <div className={styles.avatar}>
+            <img alt="avatar" className={styles.avatarImg} id="avatarImg"></img>
+          </div>
+          <div className={styles.userDisplayName} id="userDisplayName"></div>
+          <div className={styles.userEmail} id="userEmail"></div>
         </div>
-        <div className={styles.userDisplayName} id="userDisplayName"></div>
-        <div className={styles.userEmail} id="userEmail"></div>
       </div>
-      <Button
-        variant="default"
-        id="userBeHost"
-        // onClick={showbeHost}
-      >
-        我的開團
-      </Button>
+      <div className={styles.eventsContain}>
+        <ButtonToolbar className={styles.buttons}>
+          <Button
+            className={styles.button}
+            variant="default"
+            id="userBeHost"
+            // onClick={showbeHost}
+          >
+            我的開團
+          </Button>
+          <Button
+            className={styles.button}
+            variant="default"
+            id="userBeHost"
+            // onClick={showbeHost}
+          >
+            我的跟團
+          </Button>
+        </ButtonToolbar>
+        <div className={styles.events}>
+          <div className={styles.event}></div>
+        </div>
+      </div>
     </div>
   )
 }

@@ -31,11 +31,7 @@ export function EventForm(props) {
   }, [])
 
   console.log(events)
-  //從localStorage撈會員資料
-  let user = JSON.parse(localStorage.getItem('user'))
-  console.log(user)
   console.log(props.uid)
-  // console.log(user.uid)
 
   function eventChange(e) {
     console.log(e)
@@ -65,8 +61,6 @@ export function EventForm(props) {
   }
 
   function eventSubmit(e) {
-    // e.preventDefault()
-    // console.log(user.uid)
     //打包表單、經緯度、使用者ID資料
     let obj = {
       title: title,
@@ -79,7 +73,7 @@ export function EventForm(props) {
       endDate: endDate,
       memberLimit: memberLimit,
       status: 'true',
-      userId: user.uid,
+      userId: props.uid,
     }
     // console.log(title, host, email, phone, date, time, memberLimit)
     SetEvent(obj)

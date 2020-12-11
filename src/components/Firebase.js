@@ -20,7 +20,10 @@ export const auth = firebaseSet.auth()
 export const firestore = firebaseSet.firestore()
 firebase.analytics()
 
-//登入功能
+//native登入功能
+//google登入功能
+
+//fb登入功能
 const provider = new firebase.auth.FacebookAuthProvider()
 provider.setCustomParameters({
   prompt: 'select_account',
@@ -35,19 +38,21 @@ export const signInWithFacebook = () =>
         .doc(user.uid)
         .set(
           {
+            userId: user.uid,
             userName: user.displayName,
             email: user.email,
+            beHost: [],
+            beMember: [],
           },
           { merge: true }
         )
         .then(() => {
           console.log(`Hi~${user.displayName}`)
-          localStorage.setItem('user', JSON.stringify(user))
         })
     }
   })
 
-//登出功能
+//fb登出功能
 export const signOutWithFacebook = () =>
   auth
     .signOut()
@@ -63,7 +68,6 @@ export default firebaseSet
 
 //firestore資料存取
 var db = firebase.firestore()
-var eventRef = db.collection('event')
 
 /*
 ====================================
@@ -87,6 +91,8 @@ export function SetEvent(obj) {
       member_limit: obj.memberLimit,
       status: 'true',
       userId: obj.userId,
+      // memberId: [], //建立memberId array
+      members: [], //建立member清單
     })
     .then((docRef) => {
       //存eventId到這個doc裡
@@ -96,13 +102,10 @@ export function SetEvent(obj) {
         },
         { merge: 'true' }
       )
-      db.collection('event').doc(docRef.id).collection('member').doc(obj.userId).set({
-        host: obj.host,
-        email: obj.email,
-        phone: obj.phone,
-        userId: obj.userId,
-      })
       saveHostId(obj.userId, docRef)
+    })
+    .catch(function (error) {
+      console.error('Error adding document: ', error)
     })
 }
 
@@ -112,13 +115,14 @@ function saveHostId(userId, docRef) {
   console.log(userId)
   db.collection('user')
     .doc(userId)
-    .collection('beHost')
-    .doc()
-    .set({
-      eventId: docRef.id,
+    .update({
+      beHost: firebase.firestore.FieldValue.arrayUnion(docRef.id),
     })
     .then(() => {
-      console.log('開團的doc底下存到開團ID了')
+      console.log('開團者ID存到user集合中beHost的array')
+    })
+    .catch(function (error) {
+      console.error('Error setting document: ', error)
     })
 }
 /*
@@ -133,15 +137,27 @@ export function JoinEvent(obj) {
   console.log(obj.phone)
   db.collection('event')
     .doc(obj.eventId)
-    .collection('member')
-    .doc(obj.userId)
-    .set({
-      name: obj.name,
-      phone: obj.phone,
-      email: obj.email,
-      userId: obj.userId,
+    // .collection('member')
+    // .doc(obj.userId)
+    .update({
+      members: firebase.firestore.FieldValue.arrayUnion({
+        name: obj.name,
+        phone: obj.phone,
+        email: obj.email,
+        memberId: obj.userId,
+      }),
     })
+    // .then(() => {
+    //   db.collection('event')
+    //     .doc(obj.eventId)
+    //     .update({
+    //       memberId: firebase.firestore.FieldValue.arrayUnion(obj.userId),
+    //     })
+    // })
     .then(saveMemberId(obj.userId, obj.eventId))
+    .catch(function (error) {
+      console.error('Error setting document: ', error)
+    })
 }
 //save the data of host to user cellection底下的host id doc
 
@@ -149,13 +165,14 @@ function saveMemberId(userId, eventId) {
   console.log(userId)
   db.collection('user')
     .doc(userId)
-    .collection('beMember')
-    .doc()
-    .set({
-      eventId: eventId,
+    .update({
+      beMember: firebase.firestore.FieldValue.arrayUnion(eventId),
     })
     .then(() => {
-      console.log('跟團的doc底下存到開團ID了')
+      console.log('把跟團者Id存到開團ID了')
+    })
+    .catch(function (error) {
+      console.error('Error setting document: ', error)
     })
 }
 /*
@@ -165,7 +182,7 @@ render data 到 eventPage
 */
 export function showEvent(callback) {
   let allEvent = []
-  eventRef
+  db.collection('event')
     .get()
     .then((item) => {
       item.forEach((doc) => {
@@ -188,36 +205,41 @@ export function showEvent(callback) {
     .then((result) => {
       callback(result)
     })
+    .catch(function (error) {
+      console.error('Error getting document: ', error)
+    })
 }
 /*
 ====================================
 render data 到 ProfilePage
 ====================================
 */
-export function showBeHost(Id, callback) {
-  console.log(Id)
-  let beHostEventId = []
-  db.collection('user')
-    .doc(Id)
-    .collection('beHost')
-    .get()
-    .then((item) => {
-      item.forEach((doc) => {
-        beHostEventId.push({
-          eventId: doc.data().eventId,
-        })
-      })
-      return beHostEventId
-    })
-    .then((result) => {
-      callback(result)
-    })
-}
+// export function showBeHost(Id, callback) {
+//   console.log(Id)
+//   let beHostEventId = []
+//   db.collection('user')
+//     .where('userId', '==', Id)
+//     .get()
+//     .then((item) => {
+//       item.forEach((doc) => {
+//         beHostEventId.push({
+//           beHost: doc.data().beHost,
+//         })
+//       })
+//       return beHostEventId
+//     })
+//     .then((result) => {
+//       callback(result)
+//     })
+//     .catch(function (error) {
+//       console.error('Error getting document: ', error)
+//     })
+// }
 
-export function showBeHostEvent(Id, callback, array) {
+export function showBeHostEvents(userId, callback) {
   let beHostEventList = []
   db.collection('event')
-    .where('eventId', '==', Id)
+    .doc()
     .get()
     .then((item) => {
       console.log(item)
@@ -228,25 +250,55 @@ export function showBeHostEvent(Id, callback, array) {
           lng: doc.data().lng,
           startDate: doc.data().startDate,
           endDate: doc.data().endDate,
-          member_limit: doc.data().memberLimit,
+          member_limit: doc.data().member_limit,
+          memberId: doc.data().memberId,
+          eventId: doc.data().eventId,
           status: doc.data().status,
         })
       })
       return beHostEventList
     })
     .then((result) => {
-      if (array !== undefined) {
-        console.log(array)
-        console.log(result)
-        let newArray = [...array, result]
-        // array = [...array, newArray]
-        console.log(newArray)
-        callback(newArray)
-      } else {
-        callback(result)
-      }
+      callback(result)
     })
+    // .then((result) => {
+    //   if (array !== undefined) {
+    //     console.log(array)
+    //     console.log(result)
+    //     let newArray = [...array, result]
+    //     // array = [...array, newArray]
+    //     console.log(newArray)
+    //     callback(newArray)
+    //   } else {
+    //     callback(result)
+    //   }
+    // })
     .catch((error) => {
       console.log(error)
     })
 }
+
+// export function showMember(userId, callback) {
+//   console.log(userId)
+//   let eventMember = []
+//   db.collection('event')
+//     .doc(userId)
+//     .collection('member')
+//     .get()
+//     .then((item) => {
+//       item.forEach((doc) => {
+//         eventMember.push({
+//           email: doc.data().email,
+//           name: doc.data().name,
+//           phone: doc.data().phone,
+//         })
+//       })
+//       return eventMember
+//     })
+//     .then((result) => {
+//       callback(result)
+//     })
+//     .catch(function (error) {
+//       console.error('Error getting document: ', error)
+//     })
+// }

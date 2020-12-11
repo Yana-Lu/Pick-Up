@@ -18,10 +18,8 @@ function App() {
   auth.onAuthStateChanged(function (user) {
     if (user) {
       console.log(auth.currentUser)
-      console.log(auth.currentUser.uid)
       setUid(auth.currentUser.uid)
       setUserData(auth.currentUser)
-      console.log('hi')
       userName.textContent = `Hi~${auth.currentUser.displayName}`
     } else {
       console.log('使用者尚未登入')

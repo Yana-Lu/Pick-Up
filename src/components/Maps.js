@@ -28,6 +28,7 @@ const options = {
 }
 
 export function Maps(props) {
+  console.log(props)
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: `AIzaSyAhDv35adlrxazUwPtZvjU7NE3RAaq3piQ`,
     libraries,
@@ -77,24 +78,15 @@ export function Maps(props) {
     console.log(event.latLng.lng())
   }, [])
 
-  // const mapRef = React.useRef()
-  // const onMapLoad = React.useCallback((map) => {
-  //   mapRef.current = map
-  // }, [])
-
   const [selected1, setSelected1] = useState(null)
   const [selected2, setSelected2] = useState(null)
 
   if (loadError) return 'Error loading maps'
   if (!isLoaded) return 'Loading Maps'
-  // function ShowMarkerData(obj) {
-  //   console.log(obj)
-  // }
 
   function showJoinForm() {
-    // console.log()
-    let user = JSON.parse(localStorage.getItem('user'))
-    if (!user) {
+    // let user = JSON.parse(localStorage.getItem('user'))
+    if (!props.uid) {
       Swal.fire({
         icon: 'warning',
         title: '請先登入喔!',
@@ -105,8 +97,8 @@ export function Maps(props) {
     }
   }
   function showEventForm() {
-    let user = JSON.parse(localStorage.getItem('user'))
-    if (!user) {
+    // let user = JSON.parse(localStorage.getItem('user'))
+    if (!props.uid) {
       Swal.fire({
         icon: 'warning',
         title: '請先登入喔!',
@@ -176,8 +168,8 @@ export function Maps(props) {
           </InfoWindow>
         ) : null}
       </GoogleMap>
-      <JoinForm event={selected1} />
-      <EventForm location={newMarker} />
+      <JoinForm event={selected1} uid={props.uid} />
+      <EventForm location={newMarker} uid={props.uid} />
     </div>
   )
 }

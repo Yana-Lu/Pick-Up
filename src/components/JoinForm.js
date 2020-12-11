@@ -23,10 +23,6 @@ export function JoinForm(props) {
     showEvent(setEvents)
   }, [])
 
-  //從localStorage撈會員資料
-  let user = JSON.parse(localStorage.getItem('user'))
-  console.log(user)
-
   function eventChange(e) {
     console.log(e.target.id)
     console.log(e.target.value)
@@ -47,7 +43,7 @@ export function JoinForm(props) {
       email: email,
       phone: phone,
       eventId: props.event.eventId,
-      userId: user.uid,
+      userId: props.uid,
     }
     // console.log(title, host, email, phone, date, time, memberLimit)
     JoinEvent(obj)
