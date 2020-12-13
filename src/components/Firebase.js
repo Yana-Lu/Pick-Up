@@ -88,11 +88,12 @@ export function SetEvent(obj) {
       lng: obj.lng,
       startDate: obj.startDate.toUTCString(),
       endDate: obj.endDate.toUTCString(),
+      orderByTime: new Date(obj.startDate),
       member_limit: obj.memberLimit,
       status: 'true',
       userId: obj.userId,
-      // memberId: [], //建立memberId array
       members: [], //建立member清單
+      results: [], //建立results清單
     })
     .then((docRef) => {
       //存eventId到這個doc裡
@@ -119,7 +120,7 @@ function saveHostId(userId, docRef) {
       beHost: firebase.firestore.FieldValue.arrayUnion(docRef.id),
     })
     .then(() => {
-      console.log('開團者ID存到user集合中beHost的array')
+      console.log('開團eventId存到user集合中beHost的array')
     })
     .catch(function (error) {
       console.error('Error setting document: ', error)
@@ -169,7 +170,7 @@ function saveMemberId(userId, eventId) {
       beMember: firebase.firestore.FieldValue.arrayUnion(eventId),
     })
     .then(() => {
-      console.log('把跟團者Id存到開團ID了')
+      console.log('把跟團者eventId存到user集合中beMember的array')
     })
     .catch(function (error) {
       console.error('Error setting document: ', error)
@@ -214,32 +215,12 @@ export function showEvent(callback) {
 render data 到 ProfilePage
 ====================================
 */
-// export function showBeHost(Id, callback) {
-//   console.log(Id)
-//   let beHostEventId = []
-//   db.collection('user')
-//     .where('userId', '==', Id)
-//     .get()
-//     .then((item) => {
-//       item.forEach((doc) => {
-//         beHostEventId.push({
-//           beHost: doc.data().beHost,
-//         })
-//       })
-//       return beHostEventId
-//     })
-//     .then((result) => {
-//       callback(result)
-//     })
-//     .catch(function (error) {
-//       console.error('Error getting document: ', error)
-//     })
-// }
-
 export function showBeHostEvents(userId, callback) {
   let beHostEventList = []
+  console.log(userId)
   db.collection('event')
-    .doc()
+    .where('userId', '==', userId)
+    .orderBy('orderByTime', 'asc')
     .get()
     .then((item) => {
       console.log(item)
@@ -248,10 +229,11 @@ export function showBeHostEvents(userId, callback) {
           title: doc.data().title,
           lat: doc.data().lat,
           lng: doc.data().lng,
-          startDate: doc.data().startDate,
-          endDate: doc.data().endDate,
+          //從 DB 拿回來的 UTC時間，轉成GMT+8時區
+          startDate: new Date(doc.data().startDate),
+          endDate: new Date(doc.data().endDate),
           member_limit: doc.data().member_limit,
-          memberId: doc.data().memberId,
+          members: doc.data().members,
           eventId: doc.data().eventId,
           status: doc.data().status,
         })
@@ -261,18 +243,6 @@ export function showBeHostEvents(userId, callback) {
     .then((result) => {
       callback(result)
     })
-    // .then((result) => {
-    //   if (array !== undefined) {
-    //     console.log(array)
-    //     console.log(result)
-    //     let newArray = [...array, result]
-    //     // array = [...array, newArray]
-    //     console.log(newArray)
-    //     callback(newArray)
-    //   } else {
-    //     callback(result)
-    //   }
-    // })
     .catch((error) => {
       console.log(error)
     })
@@ -301,4 +271,110 @@ export function showBeHostEvents(userId, callback) {
 //     .catch(function (error) {
 //       console.error('Error getting document: ', error)
 //     })
+// }
+export function showBeMemberEvents(userId, callback) {
+  let beMemberEventList = []
+  console.log(userId)
+  db.collection('event')
+    .where('memberId', '==', userId)
+    .get()
+    .then((item) => {
+      console.log(item)
+      item.forEach((doc) => {
+        beMemberEventList.push({
+          title: doc.data().title,
+          lat: doc.data().lat,
+          lng: doc.data().lng,
+          //從 DB 拿回來的 UTC時間，轉成GMT+8時區
+          startDate: new Date(doc.data().startDate),
+          endDate: new Date(doc.data().endDate),
+          member_limit: doc.data().member_limit,
+          members: doc.data().members,
+          eventId: doc.data().eventId,
+          status: doc.data().status,
+        })
+      })
+      return beMemberEventList
+    })
+    .then((result) => {
+      callback(result)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+/*
+====================================
+上傳淨灘成果到 Firebase
+====================================
+*/
+export function SaveResult(obj) {
+  console.log(obj.eventId)
+  // let hosteventId = []
+  db.collection('event')
+    .doc(obj.eventId)
+    .update({
+      results: firebase.firestore.FieldValue.arrayUnion({
+        bottle: obj.bottle,
+        bottleCap: obj.bottleCap,
+        foodContainer: obj.foodContainer,
+        noFoodContainer: obj.noFoodContainer,
+        PlasticBag: obj.PlasticBag,
+        foodPackage: obj.foodPackage,
+        straw: obj.straw,
+        drinkCup: obj.drinkCup,
+        tableware: obj.tableware,
+        can: obj.can,
+        aluminumFoilBag: obj.aluminumFoilBag,
+        glassBottle: obj.glassBottle,
+        fishingGear: obj.fishingGear,
+        fishingTool: obj.fishingTool,
+        fishingNet: obj.fishingNet,
+        cigaretteButt: obj.cigaretteButt,
+        toothbrush: obj.toothbrush,
+        syringeneedle: obj.syringeneedle,
+        lighter: obj.lighter,
+        metal: obj.metal,
+        hook: obj.hook,
+      }),
+    })
+    .then(() => {
+      //修改status
+      db.collection('event').doc(obj.eventId).update({
+        status: 'done',
+      })
+    })
+    .catch(function (error) {
+      console.error('Error adding document: ', error)
+    })
+}
+
+// export function ShowResult(callback) {
+// let allEvent = []
+// db.collection('event')
+//   .get()
+//   .then((item) => {
+//     item.forEach((doc) => {
+//       allEvent.push({
+//         eventId: doc.id,
+//         title: doc.data().title,
+//         hostName: doc.data().host,
+//         email: doc.data().email,
+//         phone: doc.data().phone,
+//         startDate: doc.data().startDate,
+//         endDate: doc.data().endDate,
+//         memberLimit: doc.data().member_limit,
+//         lat: doc.data().lat,
+//         lng: doc.data().lng,
+//         status: doc.data().status,
+//       })
+//     })
+//     return allEvent
+//   })
+//   .then((result) => {
+//     callback(result)
+//   })
+//   .catch(function (error) {
+//     console.error('Error getting document: ', error)
+//   })
 // }

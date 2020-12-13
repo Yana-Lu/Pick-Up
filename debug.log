@@ -1,2 +1,5 @@
 [1204/092329.396:ERROR:directory_reader_win.cc(43)] FindFirstFile: ╰参тぃ﹚隔畖 (0x3)
 [1209/171821.216:ERROR:directory_reader_win.cc(43)] FindFirstFile: ╰参тぃ﹚隔畖 (0x3)
+[1213/121043.554:ERROR:directory_reader_win.cc(43)] FindFirstFile: ╰参тぃ﹚隔畖 (0x3)
+[1213/142945.900:ERROR:file_io.cc(90)] ReadExactly: expected 36, observed 0
+[1214/022816.476:ERROR:directory_reader_win.cc(43)] FindFirstFile: ╰参тぃ﹚隔畖 (0x3)

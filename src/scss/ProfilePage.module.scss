@@ -28,18 +28,26 @@
     }
   }
   .eventsContain {
-    margin-top: 20px;
+    margin: 20px auto;
+    text-align: center;
+    width: 80%;
     .buttons {
       border: rgb(46, 46, 46) 1.5px solid;
       border-radius: 0.25rem;
       display: inline-block;
       padding: 3px;
-      .button :hover {
-        background-color: #000000;
-      }
     }
     .events {
-      width: 1200px;
+      display: flex;
+      flex-wrap: wrap;
+      text-align: start;
+      margin-top: 20px;
+    }
+    .followEvents {
+      display: flex;
+      flex-wrap: wrap;
+      text-align: start;
+      margin-top: 20px;
     }
   }
 }
