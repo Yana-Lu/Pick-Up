@@ -7,10 +7,13 @@ import { signInWithFacebook, signOutWithFacebook, auth } from './components/Fire
 import styles from './scss/MainPage.module.scss'
 import { Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Swal from 'sweetalert2'
+import { useHistory } from 'react-router-dom'
 
 //確認登入狀況
 
 function App() {
+  let history = useHistory()
   const [uid, setUid] = useState('')
   const [userData, setUserData] = useState('')
   let userName = document.getElementById('userName')
@@ -39,6 +42,17 @@ function App() {
       signOutBtn.style.display = 'none'
     }
   }, [uid])
+  function toProfilePage() {
+    // let user = JSON.parse(localStorage.getItem('user'))
+    if (!uid) {
+      Swal.fire({
+        icon: 'warning',
+        title: '請先登入喔!',
+      })
+    } else {
+      history.push('/profile')
+    }
+  }
 
   return (
     <div className={styles.App}>
@@ -55,11 +69,11 @@ function App() {
           <Link to="/eventpage">我要參與</Link>
         </div>
         <div className={styles.hiUser}>
-          <Link to="/profile">
-            <div className={styles.userName} id="userName">
-              目前是訪客
-            </div>
-          </Link>
+          {/* <Link to="/profile"> */}
+          <div className={styles.userName} id="userName" onClick={toProfilePage}>
+            目前未登入
+          </div>
+          {/* </Link> */}
         </div>
         <div className={styles.signIn}>
           <Button variant="primary" className={styles.signInBtn} id="signInBtn" onClick={signInWithFacebook}>
