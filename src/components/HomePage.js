@@ -1,21 +1,37 @@
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { EventPage } from './EventPage'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from '../scss/HomePage.module.scss'
 import '../scss/HomePage.css'
 import { Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export function HomePage() {
-  let intros = document.querySelectorAll('.visual')
-  intros[0]?.classList.add('current')
-  function clickBox(boxIndex) {
-    for (let i = 0; i < 3; i++) {
-      intros[i]?.classList.remove('current')
-    }
-    intros[boxIndex]?.classList.add('current')
-  }
+  useEffect(() => {
+    let box1 = document.getElementById('box1')
+    let box2 = document.getElementById('box2')
+    let box3 = document.getElementById('box3')
+    let Intro1 = document.getElementById('Intro1')
+    let Intro2 = document.getElementById('Intro2')
+    let Intro3 = document.getElementById('Intro3')
+    box2?.addEventListener('click', () => {
+      Intro2.style.display = 'block'
+      Intro1.style.display = 'none'
+      Intro3.style.display = 'none'
+    })
+    box3?.addEventListener('click', () => {
+      Intro3.style.display = 'block'
+      Intro1.style.display = 'none'
+      Intro2.style.display = 'none'
+    })
+    box1?.addEventListener('click', () => {
+      Intro1.style.display = 'block'
+      Intro2.style.display = 'none'
+      Intro3.style.display = 'none'
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className={styles.main}>
@@ -66,13 +82,13 @@ export function HomePage() {
           你是否正好要去享受海洋的擁抱呢？能不能順手撿起沙灘上煞風景的垃圾呢？以下小撇步，讓你的行動更有意義：
         </div>
         <div className={styles.boxes}>
-          <div className={styles.box1} onClick={clickBox(0)}>
+          <div className={styles.box1} id="box1">
             <h3>裝備介紹</h3>
           </div>
-          <div className={styles.box2} onClick={clickBox(1)}>
+          <div className={styles.box2} id="box2">
             <h3>安全小叮嚀</h3>
           </div>
-          <div className={styles.box3} onClick={clickBox(2)}>
+          <div className={styles.box3} id="box3">
             <h3>成果上傳</h3>
           </div>
         </div>
