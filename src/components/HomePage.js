@@ -131,10 +131,12 @@ export function HomePage() {
         <div className={styles.title}>
           <h2>參與行動</h2>
         </div>
-        <div className={styles.actionGo}>
-          <h3>你可以選擇兩種不同的方式加入行動</h3>
-          <h3>1.發起行動當主揪</h3>
-          <h3>2.成為開團中的行動成員</h3>
+        <div className={styles.actionGoBG}>
+          <div className={styles.actionGo}>
+            <h3>你可以選擇兩種不同的方式加入行動</h3>
+            <h3>1.發起行動當主揪</h3>
+            <h3>2.成為開團中的行動成員</h3>
+          </div>
         </div>
         <div className={styles.actionStart}>
           <Link to="/eventpage">

@@ -372,7 +372,7 @@
 .actionJoin {
   width: 100vw;
   height: 60vh;
-  background-color: #dee9e7;
+  background-color: #f1faee;
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 20% 5% 50% 25%;
@@ -395,17 +395,31 @@
     }
   }
 
-  .actionGo {
+  .actionGoBG {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 3;
     grid-row-end: 4;
     text-align: center;
-    background-color: #cdeae5;
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
-      rgba(17, 17, 26, 0.1) 0px 16px 56px;
-    h3 {
-      margin-top: 30px;
+    // background-color: white;
+    display: flex;
+    justify-content: center;
+
+    .actionGo {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      width: 45%;
+      background-color: white;
+      box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
+        rgba(17, 17, 26, 0.1) 0px 16px 56px;
+      border-radius: 30px;
+      border: #a8dadc 2px solid;
+
+      h3 {
+        margin-top: 30px;
+        width: 100%;
+      }
     }
   }
   .actionStart {
