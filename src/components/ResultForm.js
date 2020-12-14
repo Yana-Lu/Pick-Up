@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { SaveResult } from './Firebase'
 // import { ShowResult } from './Firebase'
 import { Form, Button, Col } from 'react-bootstrap'
@@ -8,6 +9,7 @@ import Swal from 'sweetalert2'
 import styles from '../scss/ResultForm.module.scss'
 
 export function ResultForm(props) {
+  let history = useHistory()
   const [bottle, setBottle] = useState('')
   const [bottleCap, setBottleCap] = useState('')
   const [foodContainer, setFoodContainer] = useState('')
@@ -90,6 +92,7 @@ export function ResultForm(props) {
   }
 
   function resultSubmit(e) {
+    e.preventDefault()
     //打包表單、經緯度、使用者ID資料
     let obj = {
       eventId: props.eventData,
@@ -115,12 +118,14 @@ export function ResultForm(props) {
       metal: metal,
       hook: hook,
     }
-
     SaveResult(obj)
     Swal.fire({
       icon: 'success',
       title: '上傳成功!',
     })
+    window.setTimeout(() => {
+      history.push('/')
+    }, 2000)
   }
 
   function closePopup() {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import { HomePage } from './components/HomePage'
 import { EventPage } from './components/EventPage'
 import { ProfilePage } from './components/ProfilePage'

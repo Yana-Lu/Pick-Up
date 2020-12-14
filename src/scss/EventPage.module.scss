@@ -65,33 +65,64 @@
     grid-template-rows: 1fr 3fr 5fr 1fr;
     margin-right: 30px;
 
-    .eventHost {
-      background-color: #cbcfbd;
+    .eventHostBG {
       grid-row-start: 2;
-      grid-row-end: 3;
-      .eventStep1 {
-        margin: 10px;
-        h3 {
-          font-size: 1.5rem;
-          line-height: 2rem;
-        }
-      }
-    }
-    .eventJoin {
-      margin-top: 20px;
-      background-color: #f1faee;
-      grid-row-start: 3;
       grid-row-end: 4;
-      .eventStep2 {
-        margin: 10px;
-        h3 {
-          font-size: 1.5rem;
-          line-height: 2rem;
+      .eventHost {
+        // background-color: #cbcfbd;
+        display: block;
+        margin-left: 20px;
+        padding: 10px;
+        border: #a8dadc 2px solid;
+        border-radius: 30px;
+        box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
+        .ifBeHost {
+          text-align: center;
+          cursor: pointer;
+        }
+        .eventStep1 {
+          margin: 10px;
+          display: none;
+          h3 {
+            font-size: 1.5rem;
+            line-height: 2rem;
+          }
         }
       }
-      .eventInfo {
-        background-color: #e8ffe1;
-        margin: 10px;
+
+      .eventJoin {
+        margin-top: 20px;
+        // background-color: #f1faee;
+        // grid-row-start: 3;
+        // grid-row-end: 4;
+        display: block;
+        margin-left: 20px;
+        padding: 10px;
+        border: #a8dadc 2px solid;
+        border-radius: 30px;
+        box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
+        .ifBeMember {
+          text-align: center;
+          cursor: pointer;
+        }
+        .eventStep2 {
+          margin: 10px;
+          display: none;
+          h3 {
+            font-size: 1.5rem;
+            line-height: 2rem;
+          }
+        }
+        .eventInfo {
+          // background-color: #e8ffe1;
+          margin: 10px;
+          display: none;
+          margin-left: 20px;
+          padding: 10px;
+          border: #457b9d 2px solid;
+          border-radius: 30px;
+          box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
+        }
       }
     }
   }

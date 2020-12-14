@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { SetEvent } from './Firebase'
 import { showEvent } from './Firebase'
 import { Form, Button, Col } from 'react-bootstrap'
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2'
 import styles from '../scss/EventPage.module.scss'
 
 export function EventForm(props) {
+  let history = useHistory()
   const [title, setTitle] = useState('')
   const [host, setHost] = useState('')
   const [phone, setPhone] = useState('')
@@ -81,6 +83,9 @@ export function EventForm(props) {
       icon: 'success',
       title: '開團成功!',
     })
+    window.setTimeout(() => {
+      history.push('/eventpage')
+    }, 2000)
   }
 
   function closePopup() {

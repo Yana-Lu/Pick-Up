@@ -6,7 +6,7 @@ import { showBeMemberEvents } from './Firebase'
 //scss
 import styles from '../scss/ProfilePage.module.scss'
 //button
-import { Button, ButtonToolbar, Col } from 'react-bootstrap'
+import { Button, ButtonToolbar } from 'react-bootstrap'
 export function ProfilePage(props) {
   // console.log(props)
   // console.log(props.userData.displayName)
@@ -31,20 +31,25 @@ export function ProfilePage(props) {
     showBeHostEvents(uid, setBeHostEvents)
   }, [uid])
   console.log(beHostEvents)
+
   useEffect(() => {
     showBeMemberEvents(uid, setBeMemberEvents)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   console.log(beMemberEvents)
 
-  //點擊"我的開團"顯示各事件資訊
   let events = document.getElementById('events')
+  let userBeHostBtn = document.getElementById('userBeHost')
+  let followEvents = document.getElementById('followEvents')
+  let userBeMemberBtn = document.getElementById('userBeMember')
 
-  // events?.addEventListener('click', () => {
-  //   events.style.display = 'flex'
-  // })
-  // events?.addEventListener('blur', () => {
-  //   events.style.display = 'none'
-  // })
+  //點擊"我的開團"顯示各事件資訊
+  userBeHostBtn?.addEventListener('click', () => {
+    events.style.display = 'flex'
+  })
+  userBeMemberBtn?.addEventListener('click', () => {
+    events.style.display = 'none'
+  })
 
   function showbeHost(beHostEvents) {
     beHostEvents.forEach((beHostEvent) => {
@@ -108,12 +113,28 @@ export function ProfilePage(props) {
         event?.appendChild(resultFormBtn)
       } else {
         eventStatus.textContent = `活動狀態：活動完成`
+        let showResultBtn = document.createElement('button')
+        showResultBtn.textContent = `點我看活動成果`
+        showResultBtn.style.border = 'gray 1px solid'
+        showResultBtn.style.backgroundColor = 'honeydew'
+        showResultBtn.style.borderRadius = '30px'
+        showResultBtn.style.padding = '.375rem .75rem'
+        // showResultBtn.addEventListener('click', () => {
+        // showResult()
+        // })
         event?.appendChild(eventStatus)
+        event?.appendChild(showResultBtn)
       }
     })
   }
+
   //點擊"我的跟團"顯示各事件資訊
-  let followEvents = document.getElementById('followEvents')
+  userBeMemberBtn?.addEventListener('click', () => {
+    followEvents.style.display = 'flex'
+  })
+  userBeHostBtn?.addEventListener('click', () => {
+    followEvents.style.display = 'none'
+  })
   function showBeMember(beMemberEvents) {
     beMemberEvents.forEach((beMemberEvent) => {
       let event = document.createElement('div')
@@ -192,16 +213,7 @@ export function ProfilePage(props) {
             我的跟團
           </Button>
         </ButtonToolbar>
-        <div className={styles.events} id="events">
-          {/* <div className={styles.event}>
-            <p className={styles.eventTitle}></p>
-            <p className={styles.eventStartDate}></p>
-            <p className={styles.eventEndDate}></p>
-            <p className={styles.eventMumberLimit}></p>
-            <p className={styles.eventMumbers}></p>
-            <p className={styles.eventStatus}></p>
-          </div> */}
-        </div>
+        <div className={styles.events} id="events"></div>
         <div className={styles.followEvents} id="followEvents"></div>
       </div>
       <ResultForm eventData={clickEvent} />

@@ -184,6 +184,7 @@ render data 到 eventPage
 export function showEvent(callback) {
   let allEvent = []
   db.collection('event')
+    .where('status', '==', 'true')
     .get()
     .then((item) => {
       item.forEach((doc) => {
