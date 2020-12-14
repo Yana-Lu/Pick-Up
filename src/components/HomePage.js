@@ -52,7 +52,6 @@ export function HomePage() {
           </div>
           <div className={styles.box3}>
             <p className={styles.box1Word}>你也曾注意到沙灘上的不速之客嗎？</p>
-            <p>有沒有辦法能讓這樣的狀況好轉？</p>
           </div>
         </div>
       </div>
@@ -78,9 +77,9 @@ export function HomePage() {
         <div className={styles.title}>
           <h2>行動介紹</h2>
         </div>
-        <div className={styles.subTitle}>
+        {/* <div className={styles.subTitle}>
           你是否正好要去享受海洋的擁抱呢？能不能順手撿起沙灘上煞風景的垃圾呢？以下小撇步，讓你的行動更有意義：
-        </div>
+        </div> */}
         <div className={styles.boxes}>
           <div className={styles.box1} id="box1">
             <h3>裝備介紹</h3>
@@ -134,8 +133,14 @@ export function HomePage() {
         <div className={styles.actionGoBG}>
           <div className={styles.actionGo}>
             <h3>你可以選擇兩種不同的方式加入行動</h3>
-            <h3>1.發起行動當主揪</h3>
-            <h3>2.成為開團中的行動成員</h3>
+            <div className={styles.actionWay1}>
+              <div className={styles.beHost}></div>
+              <div className={styles.beHostText}>發起行動當主揪</div>
+            </div>
+            <div className={styles.actionWay2}>
+              <div className={styles.beMember}></div>
+              <div className={styles.beMemberText}>跟團加入行動</div>
+            </div>
           </div>
         </div>
         <div className={styles.actionStart}>
