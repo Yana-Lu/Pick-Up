@@ -86,6 +86,8 @@ export function Maps(props) {
       eventInfo.style.display = 'none'
       //清除"我要跟團"InfoBox
       setSelected1(null)
+      //清除"我要開團"InfoBox
+      setSelected2(null)
     } else {
       setNewMarker([])
     }
@@ -179,6 +181,7 @@ export function Maps(props) {
             }}
             onClick={() => {
               setSelected2(marker)
+              eventStep1.style.display = 'block'
               eventStep2.style.display = 'none'
               eventInfo.style.display = 'none'
             }}

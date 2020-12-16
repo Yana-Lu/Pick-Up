@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from '../scss/EventPage.module.scss'
-import { SelectBtn } from './SelectBtn'
+import { EventNPC } from './EventNPC'
 import { Maps } from './Maps'
 //alert樣式
 // import Swal from 'sweetalert2'
@@ -12,7 +12,7 @@ export function EventPage(props) {
   return (
     <div className={styles.container}>
       <div className={styles.containerLeft}>
-        <SelectBtn uid={props.uid} />
+        <EventNPC uid={props.uid} />
       </div>
       <div className={styles.containerRight}>
         <h2>活動地點</h2>

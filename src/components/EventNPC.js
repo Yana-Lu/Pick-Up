@@ -4,7 +4,7 @@ import styles from '../scss/EventPage.module.scss'
 //alert樣式
 import Swal from 'sweetalert2'
 
-export function SelectBtn(props) {
+export function EventNPC(props) {
   console.log(props)
   // console.log(props.uid)
   useEffect(() => {
