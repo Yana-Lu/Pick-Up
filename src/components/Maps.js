@@ -7,6 +7,7 @@ import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps
 import Swal from 'sweetalert2'
 import { JoinForm } from './JoinForm'
 import { EventForm } from './EventForm'
+import { Button } from 'react-bootstrap'
 
 const libraries = ['places']
 const mapContainerStyle = {
@@ -56,12 +57,13 @@ export function Maps(props) {
       hostName: event.hostName,
       email: event.email,
       phone: event.phone,
-      startDate: event.startDate,
-      endDate: event.endDate,
+      startTime: event.startTime,
+      endTime: event.endTime,
       memberLimit: event.memberLimit,
+      members: event.members,
       lat: event.lat,
       lng: event.lng,
-      time: new Date(event.startDate),
+      time: event.startTime,
       status: event.status,
     })
   })
@@ -77,7 +79,7 @@ export function Maps(props) {
         {
           lat: event.latLng.lat(),
           lng: event.latLng.lng(),
-          time: new Date(),
+          time: new Date().getTime(),
         },
       ])
       //開啟開團教學框
@@ -101,20 +103,35 @@ export function Maps(props) {
   //Show the data of marker
   function ShowMarkerData(obj) {
     console.log(obj)
-    let startDateObj = new Date(obj?.startDate)
-    let endDateObj = new Date(obj?.endDate)
-    console.log(obj?.startDate)
-    console.log(startDateObj)
+    //抓日期
+    let startTimeObj = new Date(obj?.startTime)
+    let endTimeObj = new Date(obj?.endTime)
+    let weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
+    // 抓時間
+    let startTimePart = startTimeObj.toTimeString().split(':')
+    let endTimePart = endTimeObj.toTimeString().split(':')
+
     let infoTitle = document.getElementById('infoTitle')
     let infoHost = document.getElementById('infoHost')
     let infoEmail = document.getElementById('infoEmail')
     let infoStartDate = document.getElementById('infoStartDate')
-    let infoEndDate = document.getElementById('infoEndDate')
+    let infoTime = document.getElementById('infoTime')
+    let memberLimit = document.getElementById('memberLimit')
+    let memberNum = document.getElementById('memberNum')
     infoTitle.textContent = `行動主題：${obj?.title}`
     infoHost.textContent = `開團人：${obj?.hostName}`
     infoEmail.textContent = `開團人信箱：${obj?.email}`
-    infoStartDate.textContent = `活動時間：${startDateObj.toLocaleString()}`
-    infoEndDate.textContent = `至：${endDateObj.toLocaleString()}`
+    infoStartDate.textContent = `活動日期：${startTimeObj.getFullYear()}/${
+      startTimeObj.getMonth() + 1
+    }/${startTimeObj.getDate()} ${weekdays[startTimeObj.getDay()]}`
+    infoTime.textContent = `活動時間：${startTimePart[0]}：${startTimePart[1]}~${endTimePart[0]}：${endTimePart[1]}`
+    memberLimit.textContent = `人數上限：${obj?.memberLimit} 人`
+    memberNum.textContent = `目前人數：${obj?.members.length} 人`
+    if (obj?.members.length < obj?.memberLimit) {
+      memberNum.textContent = `目前人數：${obj?.members.length} 人 `
+    } else {
+      memberNum.textContent = `目前人數：${obj?.members.length} 人 (報名已額滿)`
+    }
   }
 
   function showJoinForm() {
@@ -140,6 +157,38 @@ export function Maps(props) {
     }
   }
   console.log(allMarkers)
+  console.log(newMarker)
+  //是否招募已滿判斷
+  function Recruitment(obj) {
+    console.log(obj)
+    console.log(obj.marker.members)
+    console.log(obj.marker.members?.length)
+    console.log(obj.marker.memberLimit)
+    // useEffect(() => {
+    if (obj.marker.members?.length < obj.marker.memberLimit) {
+      console.log('1')
+      return (
+        <InfoWindow position={{ lat: selected1?.lat, lng: selected1?.lng }} onCloseClick={() => setSelected1(null)}>
+          <div>
+            <Button className={styles.openForm} variant="outline-danger" onClick={showJoinForm}>
+              我要跟團
+            </Button>
+          </div>
+        </InfoWindow>
+      )
+    } else {
+      console.log('2')
+      return (
+        <InfoWindow position={{ lat: selected1?.lat, lng: selected1?.lng }} onCloseClick={() => setSelected1(null)}>
+          <div>
+            <h3>報名人數已額滿</h3>
+          </div>
+        </InfoWindow>
+      )
+    }
+    // }, [])
+  }
+
   return (
     <div className={styles.map}>
       <GoogleMap
@@ -152,7 +201,7 @@ export function Maps(props) {
       >
         {allMarkers.map((marker) => (
           <Marker
-            key={marker?.time?.toISOString()}
+            key={marker?.time}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => {
               //清除"我要開團"icon及InfoBox
@@ -168,12 +217,13 @@ export function Maps(props) {
                 eventStep2.style.display = 'block'
                 eventInfo.style.display = 'block'
               }
+              // Recruitment(marker)
             }}
           />
         ))}
         {newMarker.map((marker) => (
           <Marker
-            key={marker?.time?.toISOString()}
+            key={marker?.time}
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
               url: '/location(gray).png',
@@ -187,15 +237,7 @@ export function Maps(props) {
             }}
           />
         ))}
-        {selected1 ? (
-          <InfoWindow position={{ lat: selected1.lat, lng: selected1.lng }} onCloseClick={() => setSelected1(null)}>
-            <div>
-              <h3 className={styles.openForm} onClick={showJoinForm}>
-                我要跟團
-              </h3>
-            </div>
-          </InfoWindow>
-        ) : null}
+        {selected1 ? <Recruitment marker={selected1} /> : null}
 
         {selected2 ? (
           <InfoWindow
@@ -206,15 +248,15 @@ export function Maps(props) {
             }}
           >
             <div>
-              <h3 className={styles.openForm} onClick={showEventForm}>
+              <Button className={styles.openForm} variant="outline-secondary" onClick={showEventForm}>
                 我要開團
-              </h3>
+              </Button>
             </div>
           </InfoWindow>
         ) : null}
       </GoogleMap>
       <JoinForm event={selected1} uid={props.uid} />
-      <EventForm location={newMarker} uid={props.uid} />
+      <EventForm location={newMarker} uid={props.uid} events={events} setEvents={setEvents} />
     </div>
   )
 }

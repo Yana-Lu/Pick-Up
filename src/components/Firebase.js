@@ -86,9 +86,9 @@ export function SetEvent(obj) {
       phone: obj.phone,
       lat: obj.lat,
       lng: obj.lng,
-      startDate: obj.startDate.toUTCString(),
-      endDate: obj.endDate.toUTCString(),
-      orderByTime: new Date(obj.startDate),
+      //時間選擇
+      startTime: obj.startTime,
+      endTime: obj.endTime,
       member_limit: obj.memberLimit,
       status: 'true',
       userId: obj.userId,
@@ -194,9 +194,10 @@ export function showEvent(callback) {
           hostName: doc.data().host,
           email: doc.data().email,
           phone: doc.data().phone,
-          startDate: doc.data().startDate,
-          endDate: doc.data().endDate,
+          startTime: doc.data().startTime,
+          endTime: doc.data().endTime,
           memberLimit: doc.data().member_limit,
+          members: doc.data().members,
           lat: doc.data().lat,
           lng: doc.data().lng,
           status: doc.data().status,
@@ -221,7 +222,7 @@ export function showBeHostEvents(userId, callback) {
   console.log(userId)
   db.collection('event')
     .where('userId', '==', userId)
-    .orderBy('orderByTime', 'asc')
+    .orderBy('startTime', 'asc')
     .get()
     .then((item) => {
       console.log(item)
@@ -230,9 +231,11 @@ export function showBeHostEvents(userId, callback) {
           title: doc.data().title,
           lat: doc.data().lat,
           lng: doc.data().lng,
-          //從 DB 拿回來的 UTC時間，轉成GMT+8時區
-          startDate: new Date(doc.data().startDate),
-          endDate: new Date(doc.data().endDate),
+          //從 DB 拿回來的毫秒，轉成字串
+          // startTime: new Date(doc.data().startTime).toString(),
+          // endTime: new Date(doc.data().endTime).toString(),
+          startTime: doc.data().startTime,
+          endTime: doc.data().endTime,
           member_limit: doc.data().member_limit,
           members: doc.data().members,
           eventId: doc.data().eventId,

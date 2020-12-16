@@ -69,10 +69,10 @@ export function EventNPC(props) {
           <p id="infoTitle">行動主題：</p>
           <p id="infoHost">開團人：</p>
           <p id="infoEmail">開團人信箱：</p>
-          <p id="infoStartDate">活動時間：</p>
-          <p id="infoEndDate">至</p>
-          {/* <p id="infoMemgerLimit">人數上限:</p>
-            <p id="infoRest">剩餘名額:</p> */}
+          <p id="infoStartDate">活動日期：</p>
+          <p id="infoTime">活動時間：</p>
+          <p id="memberLimit">人數上限：</p>
+          <p id="memberNum">目前人數：</p>
         </div>
       </div>
     </div>

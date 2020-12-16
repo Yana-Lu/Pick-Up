@@ -16,7 +16,7 @@ import Swal from 'sweetalert2'
 import styles from '../scss/EventPage.module.scss'
 
 export function EventForm(props) {
-  let history = useHistory()
+  // let history = useHistory()
   const [title, setTitle] = useState('')
   const [host, setHost] = useState('')
   const [phone, setPhone] = useState('')
@@ -30,21 +30,19 @@ export function EventForm(props) {
 
   console.log(props)
   //render畫面用
-  const [events, setEvents] = useState([])
+  // const [events, setEvents] = useState([])
 
-  useEffect(() => {
-    showEvent(setEvents)
-  }, [])
+  // useEffect(() => {
+  //   showEvent(setEvents)
+  // }, [])
 
-  console.log(events)
+  console.log(props.events)
   console.log(props.uid)
 
   function eventChange(e) {
     console.log(e)
     console.log(e.target.id)
     console.log(e.target.value)
-    // setLat(props.lat)
-    // setLng(props.lng)
     if (e.target.id === 'event-title-input') {
       setTitle(e.target.value)
     } else if (e.target.id === 'event-name-input') {
@@ -70,14 +68,17 @@ export function EventForm(props) {
   }
   function handleStartTimeChange(e) {
     console.log(e)
-    setStartTime(e)
+    console.log(e.getTime())
+    setStartTime(e.getTime())
   }
   function handleEndTimeChange(e) {
     console.log(e)
-    setEndTime(e)
+    console.log(e.getTime())
+    setEndTime(e.getTime())
   }
 
   function eventSubmit(e) {
+    e.preventDefault()
     //打包表單、經緯度、使用者ID資料
     let obj = {
       title: title,
@@ -87,21 +88,26 @@ export function EventForm(props) {
       lat: props.location[0].lat,
       lng: props.location[0].lng,
       //時間選擇
-      // startDate: eventDate,
-      // endDate: endDate,
+      startTime: startTime,
+      endTime: endTime,
       memberLimit: memberLimit,
       status: 'true',
       userId: props.uid,
     }
+    console.log('submit')
     // console.log(title, host, email, phone, date, time, memberLimit)
     SetEvent(obj)
     Swal.fire({
       icon: 'success',
       title: '開團成功!',
+    }).then(() => {
+      console.log('then')
+      showEvent(props.setEvents)
+      // window.setTimeout(() => {
+      //   console.log('eventpage')
+      //   history.push('/eventpage')
+      // }, 3000)
     })
-    window.setTimeout(() => {
-      history.push('/eventpage')
-    }, 2000)
   }
 
   function closePopup() {
