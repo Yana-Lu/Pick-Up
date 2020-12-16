@@ -16,7 +16,6 @@ import Swal from 'sweetalert2'
 import styles from '../scss/EventPage.module.scss'
 
 export function EventForm(props) {
-  // let history = useHistory()
   const [title, setTitle] = useState('')
   const [host, setHost] = useState('')
   const [phone, setPhone] = useState('')
@@ -28,16 +27,9 @@ export function EventForm(props) {
   const [endTime, setEndTime] = useState(new Date())
   const [memberLimit, setMemberLimit] = useState('')
 
-  console.log(props)
-  //render畫面用
-  // const [events, setEvents] = useState([])
-
-  // useEffect(() => {
-  //   showEvent(setEvents)
-  // }, [])
-
-  console.log(props.events)
-  console.log(props.uid)
+  // console.log(props)
+  // console.log(props.events)
+  // console.log(props.uid)
 
   function eventChange(e) {
     console.log(e)
@@ -103,10 +95,6 @@ export function EventForm(props) {
     }).then(() => {
       console.log('then')
       showEvent(props.setEvents)
-      // window.setTimeout(() => {
-      //   console.log('eventpage')
-      //   history.push('/eventpage')
-      // }, 3000)
     })
   }
 

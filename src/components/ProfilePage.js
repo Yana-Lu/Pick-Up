@@ -69,18 +69,25 @@ export function ProfilePage(props) {
       eventTitle.textContent = `行動主題：${beHostEvent.title}`
       event?.appendChild(eventTitle)
 
-      // let startDayLocal = beHostEvent.startDate.toString()
-      let startDayLocalString = beHostEvent.startDate.toLocaleString()
+      //抓日期
+      let eventStartTimeObj = new Date(beHostEvent?.startTime)
+      let eventEndTimeObj = new Date(beHostEvent?.endTime)
+      let weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
+      // 抓時間
+      let eventStartTimePart = eventStartTimeObj.toTimeString().split(':')
+      let eventEndTimePart = eventEndTimeObj.toTimeString().split(':')
+
       let eventStartDate = document.createElement('p')
       eventStartDate.className = 'eventStartDate'
-      eventStartDate.textContent = `開始時間：${startDayLocalString}`
+      eventStartDate.textContent = `活動日期：${eventStartTimeObj.getFullYear()}/${
+        eventStartTimeObj.getMonth() + 1
+      }/${eventStartTimeObj.getDate()} ${weekdays[eventStartTimeObj.getDay()]}`
       event?.appendChild(eventStartDate)
 
-      let endDayLocalString = beHostEvent.endDate.toLocaleString()
-      let eventEndDate = document.createElement('p')
-      eventEndDate.className = 'eventEndDate'
-      eventEndDate.textContent = `結束時間：${endDayLocalString}`
-      event?.appendChild(eventEndDate)
+      let eventTime = document.createElement('p')
+      eventTime.className = 'eventTime'
+      eventTime.textContent = `活動時間：${eventStartTimePart[0]}：${eventStartTimePart[1]}~${eventEndTimePart[0]}：${eventEndTimePart[1]}`
+      event?.appendChild(eventTime)
 
       let eventMumberLimit = document.createElement('p')
       eventMumberLimit.className = 'eventMumberLimit'
