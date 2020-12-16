@@ -19,7 +19,7 @@ function App() {
   let userName = document.getElementById('userName')
   auth.onAuthStateChanged(function (user) {
     if (user) {
-      console.log(auth.currentUser)
+      // console.log(auth.currentUser)
       setUid(auth.currentUser.uid)
       setUserData(auth.currentUser)
       userName.textContent = `Hi~${auth.currentUser.displayName}`

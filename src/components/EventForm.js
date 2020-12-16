@@ -5,8 +5,11 @@ import { showEvent } from './Firebase'
 import { Form, Button, Col } from 'react-bootstrap'
 // import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Col } from 'react-bootstrap'
 //時間選擇器
-import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import 'date-fns'
+// import Grid from '@material-ui/core/Grid'
+import DateFnsUtils from '@date-io/date-fns'
+import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers'
 //alert樣式
 import Swal from 'sweetalert2'
 //scss
@@ -20,8 +23,9 @@ export function EventForm(props) {
   const [email, setEmail] = useState('')
   // const [date, setDate] = useState('')
   // const [time, setTime] = useState('')
-  const [startDate, setStartDate] = useState(new Date())
-  const [endDate, setEndDate] = useState(new Date())
+  const [eventDate, setEventDate] = useState(new Date())
+  const [startTime, setStartTime] = useState(new Date())
+  const [endTime, setEndTime] = useState(new Date())
   const [memberLimit, setMemberLimit] = useState('')
 
   console.log(props)
@@ -53,13 +57,24 @@ export function EventForm(props) {
       setMemberLimit(e.target.value)
     }
   }
-  function handleStartDateChange(e) {
+  function handleDateChange(e) {
     console.log(e)
-    setStartDate(e)
+    // console.log(e.getTime())
+    // console.log(e.valueOf())
+    console.log(e.getFullYear())
+    console.log(e.getMonth() + 1)
+    console.log(e.getDate())
+    setEventDate(e)
+    setStartTime(new Date(e.getFullYear(), e.getMonth(), e.getDate(), 0, 0))
+    setEndTime(new Date(e.getFullYear(), e.getMonth(), e.getDate(), 0, 0))
   }
-  function handleEndDateChange(e) {
+  function handleStartTimeChange(e) {
     console.log(e)
-    setEndDate(e)
+    setStartTime(e)
+  }
+  function handleEndTimeChange(e) {
+    console.log(e)
+    setEndTime(e)
   }
 
   function eventSubmit(e) {
@@ -71,8 +86,9 @@ export function EventForm(props) {
       phone: phone,
       lat: props.location[0].lat,
       lng: props.location[0].lng,
-      startDate: startDate,
-      endDate: endDate,
+      //時間選擇
+      // startDate: eventDate,
+      // endDate: endDate,
       memberLimit: memberLimit,
       status: 'true',
       userId: props.uid,
@@ -115,33 +131,55 @@ export function EventForm(props) {
             <Form.Label>活動名稱</Form.Label>
             <Form.Control placeholder="請輸入活動名稱" onChange={eventChange} />
           </Form.Group>
-          {/* <Form.Row> */}
           <Form.Group as={Col}>
             <Form.Label>活動時間</Form.Label>
             <div className={styles.startDateNav}></div>
-            <DatePicker
-              class="form-control"
-              className={styles.startDate}
-              selected={startDate}
-              controlId="event-startDate-input"
-              onChange={handleStartDateChange}
-              showTimeSelect
-              dateFormat="Pp"
-            />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                //最小可選日期為明天
+                minDate={new Date().setDate(new Date().getDate() + 1)}
+                autoOk
+                // disablePast
+                disableToolbar
+                variant="inline"
+                format="yyyy/MM/dd"
+                margin="normal"
+                id="date-picker-inline"
+                label="日期"
+                value={eventDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
+            </MuiPickersUtilsProvider>
           </Form.Group>
           <Form.Group as={Col}>
-            <Form.Label>至</Form.Label>
-            <DatePicker
-              class="form-control"
-              className={styles.startDate}
-              selected={endDate}
-              controlId="event-endDate-input"
-              onChange={handleEndDateChange}
-              showTimeSelect
-              dateFormat="Pp"
-            />
+            <div className={styles.startDateNav}></div>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardTimePicker
+                className={styles.startTime}
+                margin="normal"
+                id="time-picker"
+                label="開始時間"
+                value={startTime}
+                onChange={handleStartTimeChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change time',
+                }}
+              />
+              <KeyboardTimePicker
+                margin="normal"
+                id="time-picker"
+                label="結束時間"
+                value={endTime}
+                onChange={handleEndTimeChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change time',
+                }}
+              />
+            </MuiPickersUtilsProvider>
           </Form.Group>
-          {/* </Form.Row> */}
           <Form.Group as={Col} controlId="event-limit-input">
             <Form.Label>人數上限</Form.Label>
             <Form.Control controlId="event-limit-input" placeholder="請輸入參與人數上限" onChange={eventChange} />

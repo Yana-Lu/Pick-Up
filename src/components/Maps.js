@@ -7,8 +7,6 @@ import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps
 import Swal from 'sweetalert2'
 import { JoinForm } from './JoinForm'
 import { EventForm } from './EventForm'
-import { ShowMarkerData } from './EventPage'
-// import { Picker } from 'emoji-mart'
 
 const libraries = ['places']
 const mapContainerStyle = {
@@ -29,6 +27,10 @@ const options = {
 
 export function Maps(props) {
   console.log(props)
+  //抓開/跟團指示的對話框以及事件資訊id
+  let eventStep1 = document.getElementById('eventStep1')
+  let eventStep2 = document.getElementById('eventStep2')
+  let eventInfo = document.getElementById('eventInfo')
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: `AIzaSyAhDv35adlrxazUwPtZvjU7NE3RAaq3piQ`,
     libraries,
@@ -47,7 +49,6 @@ export function Maps(props) {
   //click to choose new location
   const [newMarker, setNewMarker] = useState([])
   let allMarkers = []
-  // function onMapload() {
   events.forEach((event) => {
     allMarkers.push({
       eventId: event.eventId,
@@ -67,15 +68,27 @@ export function Maps(props) {
   console.log(markers)
 
   const onMapClick = useCallback((event) => {
-    setNewMarker(() => [
-      {
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-        time: new Date(),
-      },
-    ])
-    console.log(event.latLng.lat())
-    console.log(event.latLng.lng())
+    //抓開/跟團指示的對話框以及事件資訊id
+    let eventStep1 = document.getElementById('eventStep1')
+    let eventStep2 = document.getElementById('eventStep2')
+    let eventInfo = document.getElementById('eventInfo')
+    if (props.uid) {
+      setNewMarker(() => [
+        {
+          lat: event.latLng.lat(),
+          lng: event.latLng.lng(),
+          time: new Date(),
+        },
+      ])
+      //開啟開團教學框
+      eventStep1.style.display = 'block'
+      eventStep2.style.display = 'none'
+      eventInfo.style.display = 'none'
+      //清除"我要跟團"InfoBox
+      setSelected1(null)
+    } else {
+      setNewMarker([])
+    }
   }, [])
 
   const [selected1, setSelected1] = useState(null)
@@ -83,9 +96,26 @@ export function Maps(props) {
 
   if (loadError) return 'Error loading maps'
   if (!isLoaded) return 'Loading Maps'
+  //Show the data of marker
+  function ShowMarkerData(obj) {
+    console.log(obj)
+    let startDateObj = new Date(obj?.startDate)
+    let endDateObj = new Date(obj?.endDate)
+    console.log(obj?.startDate)
+    console.log(startDateObj)
+    let infoTitle = document.getElementById('infoTitle')
+    let infoHost = document.getElementById('infoHost')
+    let infoEmail = document.getElementById('infoEmail')
+    let infoStartDate = document.getElementById('infoStartDate')
+    let infoEndDate = document.getElementById('infoEndDate')
+    infoTitle.textContent = `行動主題：${obj?.title}`
+    infoHost.textContent = `開團人：${obj?.hostName}`
+    infoEmail.textContent = `開團人信箱：${obj?.email}`
+    infoStartDate.textContent = `活動時間：${startDateObj.toLocaleString()}`
+    infoEndDate.textContent = `至：${endDateObj.toLocaleString()}`
+  }
 
   function showJoinForm() {
-    // let user = JSON.parse(localStorage.getItem('user'))
     if (!props.uid) {
       Swal.fire({
         icon: 'warning',
@@ -97,7 +127,6 @@ export function Maps(props) {
     }
   }
   function showEventForm() {
-    // let user = JSON.parse(localStorage.getItem('user'))
     if (!props.uid) {
       Swal.fire({
         icon: 'warning',
@@ -124,8 +153,19 @@ export function Maps(props) {
             key={marker?.time?.toISOString()}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => {
-              setSelected1(marker)
-              ShowMarkerData(marker)
+              //清除"我要開團"icon及InfoBox
+              setNewMarker([])
+              setSelected2(null)
+              console.log(props.uid)
+              if (props.uid) {
+                //儲存這個點的經緯度到marker並show此事件的Data
+                setSelected1(marker)
+                ShowMarkerData(marker)
+                //關開團教學框，開跟團教學框
+                eventStep1.style.display = 'none'
+                eventStep2.style.display = 'block'
+                eventInfo.style.display = 'block'
+              }
             }}
           />
         ))}
@@ -139,6 +179,8 @@ export function Maps(props) {
             }}
             onClick={() => {
               setSelected2(marker)
+              eventStep2.style.display = 'none'
+              eventInfo.style.display = 'none'
             }}
           />
         ))}
