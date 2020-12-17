@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import { SaveResult } from './Firebase'
-// import { ShowResult } from './Firebase'
+import { showBeHostEvents } from './Firebase'
 import { Form, Button, Col } from 'react-bootstrap'
 //alert樣式
 import Swal from 'sweetalert2'
@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 import styles from '../scss/ResultForm.module.scss'
 
 export function ResultForm(props) {
-  let history = useHistory()
+  // let history = useHistory()
   const [bottle, setBottle] = useState('')
   const [bottleCap, setBottleCap] = useState('')
   const [foodContainer, setFoodContainer] = useState('')
@@ -33,19 +33,11 @@ export function ResultForm(props) {
   const [hook, setHook] = useState('')
 
   console.log(props)
-  //render畫面用
-  // const [results, setResults] = useState([])
-
-  // useEffect(() => {
-  //   ShowResult(setResults)
-  // }, [])
-
-  // console.log(results)
 
   function resultChange(e) {
-    console.log(e)
-    console.log(e.target.id)
-    console.log(e.target.value)
+    // console.log(e)
+    // console.log(e.target.id)
+    // console.log(e.target.value)
     if (e.target.id === 'result-bottle-input') {
       setBottle(e.target.value)
     } else if (e.target.id === 'result-bottleCap-input') {
@@ -95,7 +87,7 @@ export function ResultForm(props) {
     e.preventDefault()
     //打包表單、經緯度、使用者ID資料
     let obj = {
-      eventId: props.eventData,
+      eventId: props.eventId,
       bottle: bottle,
       bottleCap: bottleCap,
       foodContainer: foodContainer,
@@ -122,10 +114,10 @@ export function ResultForm(props) {
     Swal.fire({
       icon: 'success',
       title: '上傳成功!',
+    }).then(() => {
+      console.log('then')
+      showBeHostEvents(props.uid, props.setBeHostEvents)
     })
-    window.setTimeout(() => {
-      history.push('/')
-    }, 2000)
   }
 
   function closePopup() {

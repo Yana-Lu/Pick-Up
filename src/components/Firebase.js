@@ -225,7 +225,7 @@ export function showBeHostEvents(userId, callback) {
     .orderBy('startTime', 'asc')
     .get()
     .then((item) => {
-      console.log(item)
+      // console.log(item)
       item.forEach((doc) => {
         beHostEventList.push({
           title: doc.data().title,
@@ -240,12 +240,14 @@ export function showBeHostEvents(userId, callback) {
           members: doc.data().members,
           eventId: doc.data().eventId,
           status: doc.data().status,
+          hostId: doc.data().userId,
         })
       })
       return beHostEventList
     })
     .then((result) => {
       callback(result)
+      console.log(result)
     })
     .catch((error) => {
       console.log(error)
@@ -283,19 +285,19 @@ export function showBeMemberEvents(userId, callback) {
     .where('memberId', '==', userId)
     .get()
     .then((item) => {
-      console.log(item)
+      // console.log(item)
       item.forEach((doc) => {
         beMemberEventList.push({
           title: doc.data().title,
           lat: doc.data().lat,
           lng: doc.data().lng,
-          //從 DB 拿回來的 UTC時間，轉成GMT+8時區
-          startDate: new Date(doc.data().startDate),
-          endDate: new Date(doc.data().endDate),
+          startTime: doc.data().startTime,
+          endTime: doc.data().endTime,
           member_limit: doc.data().member_limit,
           members: doc.data().members,
           eventId: doc.data().eventId,
           status: doc.data().status,
+          hostId: doc.data().userId,
         })
       })
       return beMemberEventList

@@ -255,8 +255,17 @@ export function Maps(props) {
           </InfoWindow>
         ) : null}
       </GoogleMap>
-      <JoinForm event={selected1} uid={props.uid} />
-      <EventForm location={newMarker} uid={props.uid} events={events} setEvents={setEvents} />
+      <JoinForm event={selected1} uid={props.uid} selected1={selected1} setSelected1={setSelected1} />
+      <EventForm
+        location={newMarker}
+        uid={props.uid}
+        events={events}
+        setEvents={setEvents}
+        newMarker={newMarker}
+        setNewMarker={setNewMarker}
+        selected2={selected2}
+        setSelected2={setSelected2}
+      />
     </div>
   )
 }

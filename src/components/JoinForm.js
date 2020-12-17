@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import { JoinEvent } from './Firebase'
 import { showEvent } from './Firebase'
 // import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Col } from 'react-bootstrap'
@@ -10,7 +10,6 @@ import Swal from 'sweetalert2'
 import styles from '../scss/EventPage.module.scss'
 
 export function JoinForm(props) {
-  let history = useHistory()
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
@@ -53,9 +52,16 @@ export function JoinForm(props) {
       icon: 'success',
       title: '跟團成功!',
     })
-    window.setTimeout(() => {
-      history.push('/eventpage')
-    }, 2000)
+      .then(() => {
+        console.log('then')
+        showEvent(props.setEvents)
+      })
+      .then(() => {
+        let closePopup = document.getElementById('joinForm')
+        closePopup.style.display = 'none'
+        props.setSelected1(null)
+        // props.setNewMarker([])
+      })
   }
 
   function closePopup() {

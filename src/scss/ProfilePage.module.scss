@@ -39,9 +39,27 @@
     }
     .events {
       display: none;
-      flex-wrap: wrap;
       text-align: start;
       margin-top: 20px;
+      .eventContain {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        .event {
+          width: 45%;
+          margin: 20px;
+          padding: 20px;
+          border: #a8dadc 2px solid;
+          border-radius: 30px;
+          box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
+          .eventStatusBtn {
+            border: gray 1px solid;
+            background-color: honeydew;
+            border-radius: 30px;
+            padding: 0.375rem 0.75rem;
+          }
+        }
+      }
     }
     .followEvents {
       display: none;

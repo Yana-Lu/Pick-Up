@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import { SetEvent } from './Firebase'
 import { showEvent } from './Firebase'
 import { Form, Button, Col } from 'react-bootstrap'
@@ -27,7 +27,7 @@ export function EventForm(props) {
   const [endTime, setEndTime] = useState(new Date())
   const [memberLimit, setMemberLimit] = useState('')
 
-  // console.log(props)
+  console.log(props)
   // console.log(props.events)
   // console.log(props.uid)
 
@@ -92,10 +92,17 @@ export function EventForm(props) {
     Swal.fire({
       icon: 'success',
       title: '開團成功!',
-    }).then(() => {
-      console.log('then')
-      showEvent(props.setEvents)
     })
+      .then(() => {
+        console.log('then')
+        showEvent(props.setEvents)
+      })
+      .then(() => {
+        let closePopup = document.getElementById('eventForm')
+        closePopup.style.display = 'none'
+        props.setSelected2(null)
+        props.setNewMarker([])
+      })
   }
 
   function closePopup() {
