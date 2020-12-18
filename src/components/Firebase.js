@@ -138,8 +138,6 @@ export function JoinEvent(obj) {
   console.log(obj.phone)
   db.collection('event')
     .doc(obj.eventId)
-    // .collection('member')
-    // .doc(obj.userId)
     .update({
       members: firebase.firestore.FieldValue.arrayUnion({
         name: obj.name,
@@ -182,12 +180,11 @@ render data 到 eventPage
 ====================================
 */
 export function showEvent(callback) {
-  let allEvent = []
   db.collection('event')
     .where('status', '==', 'true')
-    .get()
-    .then((item) => {
-      item.forEach((doc) => {
+    .onSnapshot((querySnapshot) => {
+      let allEvent = []
+      querySnapshot.forEach((doc) => {
         allEvent.push({
           eventId: doc.id,
           title: doc.data().title,
@@ -203,13 +200,26 @@ export function showEvent(callback) {
           status: doc.data().status,
         })
       })
-      return allEvent
-    })
-    .then((result) => {
-      callback(result)
-    })
-    .catch(function (error) {
-      console.error('Error getting document: ', error)
+      console.log(callback)
+      callback(allEvent)
+      // .then((item) => {
+      //   item.forEach((doc) => {
+      //     allEvent.push({
+      //       eventId: doc.id,
+      //       title: doc.data().title,
+      //       hostName: doc.data().host,
+      //       email: doc.data().email,
+      //       phone: doc.data().phone,
+      //       startTime: doc.data().startTime,
+      //       endTime: doc.data().endTime,
+      //       memberLimit: doc.data().member_limit,
+      //       members: doc.data().members,
+      //       lat: doc.data().lat,
+      //       lng: doc.data().lng,
+      //       status: doc.data().status,
+      //     })
+      //   })
+      //   return allEvent
     })
 }
 /*

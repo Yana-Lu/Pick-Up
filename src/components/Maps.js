@@ -40,7 +40,10 @@ export function Maps(props) {
   const [events, setEvents] = useState([])
 
   useEffect(() => {
-    showEvent(setEvents)
+    function setEventsInMap(data) {
+      setEvents(data)
+    }
+    showEvent(setEventsInMap)
   }, [])
 
   console.log(events)
@@ -68,6 +71,7 @@ export function Maps(props) {
     })
   })
   console.log(markers)
+  console.log(allMarkers)
 
   const onMapClick = useCallback((event) => {
     //抓開/跟團指示的對話框以及事件資訊id
@@ -94,13 +98,16 @@ export function Maps(props) {
       setNewMarker([])
     }
   }, [])
-
+  //點擊icon時存該點data
+  //跟團
   const [selected1, setSelected1] = useState(null)
+  //開團
   const [selected2, setSelected2] = useState(null)
 
   if (loadError) return 'Error loading maps'
   if (!isLoaded) return 'Loading Maps'
   //Show the data of marker
+
   function ShowMarkerData(obj) {
     console.log(obj)
     //抓日期
@@ -161,12 +168,11 @@ export function Maps(props) {
   //是否招募已滿判斷
   function Recruitment(obj) {
     console.log(obj)
-    console.log(obj.marker.members)
-    console.log(obj.marker.members?.length)
-    console.log(obj.marker.memberLimit)
+    // console.log(obj.marker.members)
+    // console.log(obj.marker.members?.length)
+    // console.log(obj.marker.memberLimit)
     // useEffect(() => {
     if (obj.marker.members?.length < obj.marker.memberLimit) {
-      console.log('1')
       return (
         <InfoWindow position={{ lat: selected1?.lat, lng: selected1?.lng }} onCloseClick={() => setSelected1(null)}>
           <div>
@@ -208,6 +214,7 @@ export function Maps(props) {
               setNewMarker([])
               setSelected2(null)
               console.log(props.uid)
+              console.log(marker)
               if (props.uid) {
                 //儲存這個點的經緯度到marker並show此事件的Data
                 setSelected1(marker)
@@ -255,7 +262,15 @@ export function Maps(props) {
           </InfoWindow>
         ) : null}
       </GoogleMap>
-      <JoinForm event={selected1} uid={props.uid} selected1={selected1} setSelected1={setSelected1} />
+      <JoinForm
+        event={selected1}
+        uid={props.uid}
+        events={events}
+        setEvents={setEvents}
+        selected1={selected1}
+        setSelected1={setSelected1}
+        ShowMarkerData={ShowMarkerData}
+      />
       <EventForm
         location={newMarker}
         uid={props.uid}

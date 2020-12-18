@@ -17,13 +17,6 @@ export function JoinForm(props) {
   console.log(props)
   //render畫面用
 
-  // eslint-disable-next-line no-unused-vars
-  const [events, setEvents] = useState([])
-
-  useEffect(() => {
-    showEvent(setEvents)
-  }, [])
-
   function eventChange(e) {
     console.log(e.target.id)
     console.log(e.target.value)
@@ -36,6 +29,7 @@ export function JoinForm(props) {
     }
   }
 
+  const [thisEvendId, setThisEventId] = useState('')
   function handleSubmit(e) {
     e.preventDefault()
     //打包表單
@@ -47,22 +41,29 @@ export function JoinForm(props) {
       userId: props.uid,
     }
     // console.log(title, host, email, phone, date, time, memberLimit)
+    console.log('JoinDatasubmit')
     JoinEvent(obj)
+    //在selected1被存成null前把eventId存下來
+    setThisEventId(props.selected1.eventId)
     Swal.fire({
       icon: 'success',
       title: '跟團成功!',
+    }).then(() => {
+      let closePopup = document.getElementById('joinForm')
+      closePopup.style.display = 'none'
+      props.setSelected1(null)
+      // props.setNewMarker([])
     })
-      .then(() => {
-        console.log('then')
-        showEvent(props.setEvents)
-      })
-      .then(() => {
-        let closePopup = document.getElementById('joinForm')
-        closePopup.style.display = 'none'
-        props.setSelected1(null)
-        // props.setNewMarker([])
-      })
   }
+
+  //改變"想要跟團"的參加人數資訊
+  useEffect(() => {
+    for (let i = 0; i < props.events.length; i++) {
+      if (props.events[i].eventId === thisEvendId) {
+        props.ShowMarkerData(props.events[i])
+      }
+    }
+  }, [props.events])
 
   function closePopup() {
     let closePopup = document.getElementById('joinForm')

@@ -22,7 +22,7 @@ export function EventForm(props) {
   const [email, setEmail] = useState('')
   // const [date, setDate] = useState('')
   // const [time, setTime] = useState('')
-  const [eventDate, setEventDate] = useState(new Date())
+  const [eventDate, setEventDate] = useState(new Date().setDate(new Date().getDate() + 1))
   const [startTime, setStartTime] = useState(new Date())
   const [endTime, setEndTime] = useState(new Date())
   const [memberLimit, setMemberLimit] = useState('')
@@ -93,10 +93,9 @@ export function EventForm(props) {
       icon: 'success',
       title: '開團成功!',
     })
-      .then(() => {
-        console.log('then')
-        showEvent(props.setEvents)
-      })
+      // .then(() => {
+      //   showEvent(props.setEvents)
+      // })
       .then(() => {
         let closePopup = document.getElementById('eventForm')
         closePopup.style.display = 'none'
