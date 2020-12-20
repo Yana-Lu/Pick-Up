@@ -4,11 +4,14 @@ import { HomePage } from './components/HomePage'
 import { EventPage } from './components/EventPage'
 import { ProfilePage } from './components/ProfilePage'
 import { signInWithFacebook, signOutWithFacebook, auth } from './components/Firebase'
+import { useHistory } from 'react-router-dom'
+//UI
 import styles from './scss/MainPage.module.scss'
 import { Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Swal from 'sweetalert2'
-import { useHistory } from 'react-router-dom'
+import Fade from 'react-reveal/Fade'
+// import { gsap, TweenLite } from 'gsap'
 
 //確認登入狀況
 
@@ -22,7 +25,7 @@ function App() {
       // console.log(auth.currentUser)
       setUid(auth.currentUser.uid)
       setUserData(auth.currentUser)
-      userName.textContent = `Hi~${auth.currentUser.displayName}`
+      userName.textContent = `${auth.currentUser.displayName}`
     } else {
       console.log('使用者尚未登入')
     }
@@ -56,37 +59,44 @@ function App() {
 
   return (
     <div className={styles.App}>
-      <header className={styles.header}>
-        <div className={styles.logo}>
-          <Link to="/">
-            <div className={styles.image} />
-            {/* <p>PICK UP</p> */}
-          </Link>
-        </div>
-        <div className={styles.motive}>動機緣由</div>
-        <div className={styles.actionIntro}>行動介紹</div>
-        <div className={styles.startAction}>
-          <Link to="/eventpage">我要參與</Link>
-        </div>
-        <div className={styles.hiUser}>
-          {/* <Link to="/profile"> */}
-          <div className={styles.userName} id="userName" onClick={toProfilePage}>
-            目前未登入
+      <section className={styles.landing}>
+        <nav className={styles.header}>
+          <div className={styles.logo}>
+            <Link to="/">
+              <div className={styles.image} />
+              {/* <p>PICK UP</p> */}
+            </Link>
           </div>
-          {/* </Link> */}
-        </div>
-        <div className={styles.signIn}>
-          <Button variant="primary" className={styles.signInBtn} id="signInBtn" onClick={signInWithFacebook}>
-            登入
-          </Button>
-          <Button variant="success" className={styles.signOutBtn} id="signOutBtn" onClick={signOutWithFacebook}>
-            登出
-          </Button>
-        </div>
-      </header>
-      <Route path="/" exact component={HomePage} />
+          {/* <div className={styles.motive}>動機緣由</div>
+          <div className={styles.actionIntro}>行動介紹</div> */}
+          <ul className={styles.navLinks}>
+            <li className={styles.startAction}>
+              <Link to="/eventpage">我要參與</Link>
+            </li>
+            <li className={styles.hiUser}>
+              {/* <Link to="/profile"> */}
+              <div className={styles.userName} id="userName" onClick={toProfilePage}>
+                目前未登入
+              </div>
+              {/* </Link> */}
+            </li>
+            <li className={styles.signIn}>
+              <Button variant="default" className={styles.signInBtn} id="signInBtn" onClick={signInWithFacebook}>
+                登入
+              </Button>
+              <Button variant="default" className={styles.signOutBtn} id="signOutBtn" onClick={signOutWithFacebook}>
+                登出
+              </Button>
+            </li>
+          </ul>
+        </nav>
+        <Fade top>
+          <div className={styles.bigText}>Pick up for the future.</div>
+        </Fade>
+      </section>
       <Route path="/eventpage" exact component={() => <EventPage uid={uid} />} />
       <Route path="/profile" exact component={() => <ProfilePage userData={userData} />} />
+      <Route path="/" exact component={HomePage} />
     </div>
   )
 }
