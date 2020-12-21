@@ -1,3 +1,7 @@
+h2,
+h3 {
+  font-weight: 600;
+}
 .eventFormBG {
   display: none;
   position: fixed;
@@ -64,6 +68,7 @@
     display: grid;
     grid-template-rows: 1fr 3fr 5fr 1fr;
     margin-right: 30px;
+    margin-top: 80px;
 
     .eventHostBG {
       grid-row-start: 2;
@@ -74,11 +79,23 @@
         margin-left: 20px;
         padding: 10px;
         border: #a8dadc 2px solid;
-        border-radius: 30px;
+        border-radius: 5px;
         box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
         .ifBeHost {
-          text-align: center;
+          display: flex;
           cursor: pointer;
+          align-items: center;
+          justify-content: center;
+          .ifBeHostImg {
+            width: 50px;
+            height: 50px;
+            background-image: url('./../images/raiseHand.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+          .ifBeHostText {
+            text-align: center;
+          }
         }
         .eventStep1 {
           margin: 10px;
@@ -99,11 +116,23 @@
         margin-left: 20px;
         padding: 10px;
         border: #a8dadc 2px solid;
-        border-radius: 30px;
+        border-radius: 5px;
         box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
         .ifBeMember {
-          text-align: center;
+          display: flex;
           cursor: pointer;
+          align-items: center;
+          justify-content: center;
+          .ifBeMemberImg {
+            width: 50px;
+            height: 50px;
+            background-image: url('./../images/highFive.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+          .ifBeMemberText {
+            text-align: center;
+          }
         }
         .eventStep2 {
           margin: 10px;
@@ -120,7 +149,7 @@
           margin-left: 20px;
           padding: 10px;
           border: #457b9d 2px solid;
-          border-radius: 30px;
+          border-radius: 5px;
           box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
         }
       }
@@ -131,6 +160,7 @@
     height: 100vh;
     display: grid;
     grid-template-rows: 1fr 3fr 5fr 1fr;
+    margin-top: 80px;
 
     h2 {
       display: flex;

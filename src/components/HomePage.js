@@ -6,6 +6,7 @@ import styles from '../scss/HomePage.module.scss'
 import '../scss/HomePage.css'
 import { Button } from 'react-bootstrap'
 import Fade from 'react-reveal/Fade'
+import Jump from 'react-reveal/Fade'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export function HomePage() {
@@ -46,7 +47,11 @@ export function HomePage() {
           <div className={styles.title}>
             <h2>Pick Up 的起點</h2>
           </div>
-          <p>台灣是海島國家，海洋的一切與我們息息相關。海洋不曾言語，卻能透過其他方式告訴我們許多訊息。</p>
+          <p className={styles.subTitle}>
+            台灣是海島國家，身為島國的人民，海洋與我們息息相關，但我們卻少有機會好好親近與了解。
+            <br />
+            海洋不曾言語，卻能透過其他方式表達，走趟海攤讀一讀其中的訊息吧。
+          </p>
           <div className={styles.boxes}>
             <div className={styles.box1}>
               <div className={styles.img}></div>
@@ -107,41 +112,65 @@ export function HomePage() {
               <h3>安全小叮嚀</h3>
             </div>
             <div className={styles.box3} id="box3">
-              <h3>成果上傳</h3>
+              <h3>活動執行</h3>
             </div>
           </div>
           <div className={styles.actionIntroContent}>
             <div className={styles.Intro1} id="Intro1">
-              <div className={styles.innerIntro}>
-                <h3>行動100%裝備，愛海洋也要愛自己。</h3>
-                <div className={styles.IntroImg1}></div>
-              </div>
+              <Jump>
+                <div className={styles.innerIntro}>
+                  <p className={styles.subTitle}>
+                    服裝建議以透氣、舒適，方便戶外活動的衣物為佳，建議可參考天氣預報調整服裝。
+                  </p>
+                  <div className={styles.IntroImg1}></div>
+                  <p>圖片來源：台灣環境資訊協會《淨灘手冊》</p>
+                </div>
+              </Jump>
             </div>
             <div className={styles.Intro2} id="Intro2">
-              <div className={styles.innerIntro}>
-                <h3>注意事項</h3>
-                <p>1. 做好防曬措施，並隨時補充水分。</p>
-                <p>2. 穿戴手套與包腳鞋，避免被尖銳物刺傷。</p>
-                <p>3. 隨時注意潮水之變化。</p>
-                <p>4. 避免踩踏傷害海濱之動植物。</p>
-                <p>5. 廢棄物請自行打包帶離海邊，或者於事前聯繫當地清潔隊協助清運，事後依約定之位置集中堆放。</p>
-                {/* <div className={styles.IntroImg2}></div> */}
-              </div>
+              <Jump>
+                <div className={styles.innerIntro}>
+                  <div className={styles.IntroTitle}>
+                    <div className={styles.noticeImg}></div>
+                    <h3>注意事項</h3>
+                  </div>
+                  <br />
+                  <p>做好防曬措施，並隨時補充水分。</p>
+                  <br />
+                  <p>穿戴手套與包腳鞋，避免徒手撿拾廢棄物，勿伸手到看不淸楚的位置撈廢棄物。</p>
+                  <br />
+                  <p>
+                    隨時注意潮水及天氣變化，如果聽到雷聲，應盡速離開沙灘、空曠地區，移動時也優先離開海水可觸及、或已潮濕的海灘範圍。
+                  </p>
+                  <br />
+                  <p>避免踩踏傷害海濱之動植物及危險物品。</p>
+                  <br />
+                  <p>廢棄物請自行打包帶離海邊，或者於事前聯繫當地清潔隊協助清運，事後依約定之位置集中堆放。</p>
+                  {/* <div className={styles.IntroImg2}></div> */}
+                </div>
+              </Jump>
             </div>
             <div className={styles.Intro3} id="Intro3">
-              <div className={styles.innerIntro}>
-                <div className={styles.beCareful}>
-                  <h3>加入海洋廢棄物監測計畫</h3>
-                  <p>監測主要目的是全球倡議與環境教育呼籲人類應對全球的海灘上的廢棄物有更全盤與準確的掌握。</p>
-                  <p>必須認清的現實是，響應淨灘行動並不能確保這塊海灘會自動變乾淨。</p>
-                  <p>所有類型的汙染都必須由汙染源著手改善，因此自己國家丟出的廢棄物還是得要自己想辦法從源頭解決。</p>
-                  <p>定期監測在地海灘的廢棄物能讓關心的人更靠近問題的核心。</p>
-                  <p style={{ fontWeight: '700' }}>
-                    請登記表格中19項廢棄物的數量，沒有被列出的物品不用登記(但還是要撿喔)。
-                  </p>
+              <Jump>
+                <div className={styles.innerIntro}>
+                  <div className={styles.actionStep}>
+                    <div className={styles.IntroTitle}>
+                      <div className={styles.stepImg}></div>
+                      <h3>執行步驟</h3>
+                    </div>
+                    <p>淨灘目標物以不可分解的人造廢棄物為主，貝殼、漂流木、生 物屍體等可天然分解者不撿。</p>
+                    <p>撿拾廢棄物時，應全程穿戴手套，盡量使用夾子來夾取廢棄物。</p>
+                    <p>眼手合一，若要用手拿取廢棄物，不論是否穿戴手套，皆須看清楚廢棄物的樣貌再拿取。</p>
+                    <p>
+                      仔細注意所撿拾的廢棄物是否具有危險性，如：玻璃等易碎物品類、尖銳物品（鐵釘、刀具、針頭、魚鉤、假餌）、易爆物（信號彈、未爆彈）、壓縮氣體類、農藥類、大件網具等，屬於較具危險性的物品。
+                    </p>
+                    <p style={{ fontWeight: '700' }}>
+                      淨灘完成後登記表格中19項廢棄物的數量，沒有被列出的物品不用登記(但還是要撿喔)。
+                    </p>
+                  </div>
+                  <div className={styles.IntroImg3}></div>
                 </div>
-                <div className={styles.IntroImg3}></div>
-              </div>
+              </Jump>
             </div>
           </div>
         </div>
@@ -152,27 +181,31 @@ export function HomePage() {
             <h2>參與行動</h2>
           </div>
           <div className={styles.actionGoBG}>
-            <div className={styles.actionGo}>
-              <h3>你可以選擇兩種不同的方式加入行動</h3>
-              <div className={styles.actionWay1}>
-                <div className={styles.beHost}></div>
-                <div className={styles.beHostText}>發起行動當主揪</div>
+            <Fade top>
+              <div className={styles.actionGo}>
+                <h3>你可以選擇兩種不同的方式加入行動</h3>
+                <div className={styles.actionWay1}>
+                  <div className={styles.beHost}></div>
+                  <div className={styles.beHostText}>開團發起行動</div>
+                </div>
+                <div className={styles.actionWay2}>
+                  <div className={styles.beMember}></div>
+                  <div className={styles.beMemberText}>跟團加入行動</div>
+                </div>
+                <div className={styles.actionStart}>
+                  <Link to="/eventpage">
+                    <Button className={styles.actionStartBtn} variant="default">
+                      我要參與
+                    </Button>
+                  </Link>
+                </div>
               </div>
-              <div className={styles.actionWay2}>
-                <div className={styles.beMember}></div>
-                <div className={styles.beMemberText}>跟團加入行動</div>
-              </div>
-            </div>
-          </div>
-          <div className={styles.actionStart}>
-            <Link to="/eventpage">
-              <Button variant="primary">我要參與</Button>
-            </Link>
+            </Fade>
           </div>
         </div>
       </div>
       <Route path="/eventpage" exact component={EventPage} />
-      <div className={styles.footer}></div>
+      <div className={styles.footer}>Pick Up All Rights Reserved</div>
     </div>
   )
 }
