@@ -5,6 +5,7 @@ import React, { useEffect } from 'react'
 import styles from '../scss/HomePage.module.scss'
 import '../scss/HomePage.css'
 import { Button } from 'react-bootstrap'
+import Fade from 'react-reveal/Fade'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export function HomePage() {
@@ -35,20 +36,32 @@ export function HomePage() {
 
   return (
     <div className={styles.main}>
+      <section className={styles.landing}>
+        <Fade top>
+          <div className={styles.bigText}>Pick up for the future.</div>
+        </Fade>
+      </section>
       <div className={styles.mainBG1}>
         <div className={styles.motive}>
           <div className={styles.title}>
-            <h2>123123123</h2>
+            <h2>Pick Up 的起點</h2>
           </div>
+          <p>台灣是海島國家，海洋的一切與我們息息相關。海洋不曾言語，卻能透過其他方式告訴我們許多訊息。</p>
           <div className={styles.boxes}>
             <div className={styles.box1}>
-              <p className={styles.box1Word}>美麗的沙灘</p>
+              <div className={styles.img}></div>
+              <p className={styles.box1Word1}>無人的沙灘</p>
+              <p className={styles.box1Word2}>休閒放鬆的好去處</p>
             </div>
             <div className={styles.box2}>
-              <p className={styles.box1Word}>走近一看，才發現有好多訪客</p>
+              <div className={styles.img}></div>
+              <p className={styles.box2Word1}>走近一看</p>
+              <p className={styles.box2Word2}>沙灘上五顏六色的各式物品</p>
             </div>
             <div className={styles.box3}>
-              <p className={styles.box1Word}>你也曾注意到沙灘上的不速之客嗎？</p>
+              <div className={styles.img}></div>
+              <p className={styles.box3Word1}>還有無辜的受害者</p>
+              <p className={styles.box3Word2}>被廢棄魚網纏住的海洋生物</p>
             </div>
           </div>
         </div>
@@ -56,17 +69,19 @@ export function HomePage() {
       <div className={styles.mainBG2}>
         <div className={styles.forWhat}>
           <div className={styles.title}>
-            <h2>Pick Up 什麼？</h2>
+            <h2>Pick Up 想做的事</h2>
           </div>
           <div className={styles.intro1}>
-            <p>先來看看海灘上色彩繽紛的物品</p>
-            {/* </div> */}
-            {/* <div className={styles.intro2}> */}
-            <p>想想看，</p>
-            <p>海灘上各式各樣的生活用品，是誰所使用的</p>
-            <p>是大海嗎？還是大海裡的生物？</p>
-            <p className={styles.highlight}>透過活動過程，檢視流入自然環境的人造用品</p>
-            <p className={styles.highlight}>反思生活的方式並減少一次性用品的用量</p>
+            <p className={styles.highlight}>
+              參與淨灘活動並不難，透過 Pick Up 可以發起或參與活動，一同拾起沙灘上的不速之客。
+            </p>
+            <br />
+            <p>
+              但淨灘所拾起的垃圾僅是流入自然環境中的一部分，更重要的是減少垃圾產生。
+              <br />
+              <br />
+              希望透過淨灘活動及親身體驗，讓更多人了解垃圾減量、減少使用一次性產品的重要。
+            </p>
           </div>
           <div className={styles.introImgs}>
             <div className={styles.introImg1}></div>
@@ -131,30 +146,33 @@ export function HomePage() {
           </div>
         </div>
       </div>
-      <div className={styles.actionJoin}>
-        <div className={styles.title}>
-          <h2>參與行動</h2>
-        </div>
-        <div className={styles.actionGoBG}>
-          <div className={styles.actionGo}>
-            <h3>你可以選擇兩種不同的方式加入行動</h3>
-            <div className={styles.actionWay1}>
-              <div className={styles.beHost}></div>
-              <div className={styles.beHostText}>發起行動當主揪</div>
-            </div>
-            <div className={styles.actionWay2}>
-              <div className={styles.beMember}></div>
-              <div className={styles.beMemberText}>跟團加入行動</div>
+      <div className={styles.mainBG4}>
+        <div className={styles.actionJoin}>
+          <div className={styles.title}>
+            <h2>參與行動</h2>
+          </div>
+          <div className={styles.actionGoBG}>
+            <div className={styles.actionGo}>
+              <h3>你可以選擇兩種不同的方式加入行動</h3>
+              <div className={styles.actionWay1}>
+                <div className={styles.beHost}></div>
+                <div className={styles.beHostText}>發起行動當主揪</div>
+              </div>
+              <div className={styles.actionWay2}>
+                <div className={styles.beMember}></div>
+                <div className={styles.beMemberText}>跟團加入行動</div>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={styles.actionStart}>
-          <Link to="/eventpage">
-            <Button variant="primary">我要參與</Button>
-          </Link>
+          <div className={styles.actionStart}>
+            <Link to="/eventpage">
+              <Button variant="primary">我要參與</Button>
+            </Link>
+          </div>
         </div>
       </div>
       <Route path="/eventpage" exact component={EventPage} />
+      <div className={styles.footer}></div>
     </div>
   )
 }
