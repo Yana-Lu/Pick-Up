@@ -18,13 +18,13 @@ export function StatusAndBtn(props) {
   if (props.status === 'true') {
     return (
       <div>
-        <p className={styles.eventStatus}>活動狀態：開放報名中</p>
+        <p className={styles.eventStatus}>行動狀態：開放報名中</p>
       </div>
     )
   } else if (props.status === 'false' && props.eventData.hostId === props.uid) {
     return (
       <div>
-        <p className={styles.eventStatus}>活動狀態：活動已舉辦，待成果上傳</p>
+        <p className={styles.eventStatus}>行動狀態：行動已執行，待成果上傳</p>
         <div className={styles.eventStatusBtns}>
           <Button
             variant="outline-primary"
@@ -32,7 +32,7 @@ export function StatusAndBtn(props) {
             id="uploadResultBtn"
             onClick={showResultForm}
           >
-            上傳活動成果
+            上傳行動成果
           </Button>
           <ResultForm uid={props.uid} eventId={props.eventData.eventId} />
         </div>
@@ -41,7 +41,7 @@ export function StatusAndBtn(props) {
   } else {
     return (
       <div>
-        <p className={styles.eventStatus}>活動狀態：活動完成</p>
+        <p className={styles.eventStatus}>行動狀態：已完成</p>
         <div className={styles.eventStatusBtns}>
           <Button
             variant="outline-success"
@@ -49,7 +49,7 @@ export function StatusAndBtn(props) {
             id="showResultBtn"
             onClick={showResultPopUp}
           >
-            看活動成果
+            看行動成果
           </Button>
           <Result uid={props.uid} eventId={props.eventData.eventId} />
         </div>

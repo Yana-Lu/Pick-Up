@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 // import { useHistory } from 'react-router-dom'
 import { JoinEvent } from './Firebase'
-import { showEvent } from './Firebase'
+// import { showEvent } from './Firebase'
 // import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Col } from 'react-bootstrap'
 import { Form, Button, Col } from 'react-bootstrap'
 //alert樣式
@@ -63,6 +63,7 @@ export function JoinForm(props) {
         props.ShowMarkerData(props.events[i])
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.events])
 
   function closePopup() {

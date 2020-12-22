@@ -17,6 +17,7 @@ export function Result(props) {
     } catch (err) {
       console.log(err.message)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid])
   let obj = results[0]
   useEffect(() => {
