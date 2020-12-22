@@ -50,7 +50,7 @@ export function HomePage() {
           <p className={styles.subTitle}>
             台灣是海島國家，身為島國的人民，海洋與我們息息相關，但我們卻少有機會好好親近與了解。
             <br />
-            海洋不曾言語，卻能透過其他方式表達，走趟海攤讀一讀其中的訊息吧。
+            海洋不曾言語，卻能透過其他方式表達，走一趟海灘聽取其中的訊息吧。
           </p>
           <div className={styles.boxes}>
             <div className={styles.box1}>
