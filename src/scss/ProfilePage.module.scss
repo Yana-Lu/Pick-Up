@@ -49,23 +49,29 @@
           width: 45%;
           margin: 20px;
           padding: 20px;
-          border: #a8dadc 2px solid;
-          border-radius: 30px;
+          // border: #a8dadc 2px solid;
+          background-color: #cedbdbbd;
+          border-radius: 5px;
           box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
-          .eventStatusBtn {
-            border: gray 1px solid;
-            background-color: honeydew;
-            border-radius: 30px;
-            padding: 0.375rem 0.75rem;
+          .eventStatusBtns {
+            display: flex;
+            justify-content: center;
+            .eventStatusBtn {
+              // border: gray 2px solid;
+              font-weight: 600;
+              // background-color: honeydew;
+              border-radius: 5px;
+              padding: 0.375rem 0.75rem;
+            }
+          }
+          &:hover {
+            background-color: rgb(222, 235, 222);
           }
         }
       }
     }
-    .followEvents {
-      display: none;
-      flex-wrap: wrap;
-      text-align: start;
-      margin-top: 20px;
+    .showUp {
+      display: flex;
     }
   }
 }

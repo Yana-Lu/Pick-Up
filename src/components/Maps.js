@@ -97,6 +97,7 @@ export function Maps(props) {
     } else {
       setNewMarker([])
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   //點擊icon時存該點data
   //跟團

@@ -95,8 +95,12 @@ function App() {
           </li>
         </ul>
       </nav>
-      <Route path="/eventpage" exact component={() => <EventPage uid={uid} />} />
-      <Route path="/profile" exact component={() => <ProfilePage userData={userData} />} />
+      <Route path="/eventpage" exact>
+        <EventPage uid={uid} />
+      </Route>
+      <Route path="/profile" exact>
+        <ProfilePage userData={userData} />
+      </Route>
       <Route path="/" exact component={HomePage} />
     </div>
   )

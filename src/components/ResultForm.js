@@ -115,8 +115,8 @@ export function ResultForm(props) {
       icon: 'success',
       title: '上傳成功!',
     }).then(() => {
-      console.log('then')
       showBeHostEvents(props.uid, props.setBeHostEvents)
+      closePopup()
     })
   }
 
@@ -129,6 +129,7 @@ export function ResultForm(props) {
     <div className={styles.resultFormBG} id="resultForm">
       <div className={styles.resultFormOut}>
         <Form className={styles.resultForm} onSubmit={resultSubmit}>
+          <h3>填寫行動成果</h3>
           <Form.Row as={Col}>
             <Form.Group as={Col} controlId="result-bottle-input">
               <Form.Label>寶特瓶</Form.Label>

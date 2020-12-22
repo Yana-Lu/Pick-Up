@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 // import { useHistory } from 'react-router-dom'
 import { SetEvent } from './Firebase'
-import { showEvent } from './Firebase'
+// import { showEvent } from './Firebase'
 import { Form, Button, Col } from 'react-bootstrap'
 // import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Col } from 'react-bootstrap'
 //時間選擇器
@@ -113,6 +113,7 @@ export function EventForm(props) {
     <div className={styles.eventFormBG} id="eventForm">
       <div className={styles.eventFormOut}>
         <Form className={styles.eventForm} onSubmit={eventSubmit}>
+          <h3>填寫開團資料</h3>
           <Form.Row as={Col}>
             <Form.Group as={Col} controlId="event-name-input">
               <Form.Label>姓名</Form.Label>

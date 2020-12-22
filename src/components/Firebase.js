@@ -364,33 +364,42 @@ export function SaveResult(obj) {
       console.error('Error adding document: ', error)
     })
 }
-
-// export function ShowResult(callback) {
-// let allEvent = []
-// db.collection('event')
-//   .get()
-//   .then((item) => {
-//     item.forEach((doc) => {
-//       allEvent.push({
-//         eventId: doc.id,
-//         title: doc.data().title,
-//         hostName: doc.data().host,
-//         email: doc.data().email,
-//         phone: doc.data().phone,
-//         startDate: doc.data().startDate,
-//         endDate: doc.data().endDate,
-//         memberLimit: doc.data().member_limit,
-//         lat: doc.data().lat,
-//         lng: doc.data().lng,
-//         status: doc.data().status,
-//       })
-//     })
-//     return allEvent
-//   })
-//   .then((result) => {
-//     callback(result)
-//   })
-//   .catch(function (error) {
-//     console.error('Error getting document: ', error)
-//   })
-// }
+/*
+====================================
+render 淨灘成果到 ProfilePage
+====================================
+*/
+export function showResults(userId, callback) {
+  let Results = []
+  db.collection('event')
+    .where('userId', '==', userId)
+    .where('status', '==', 'done')
+    .get()
+    .then((item) => {
+      item.forEach((doc) => {
+        Results.push({
+          title: doc.data().title,
+          lat: doc.data().lat,
+          lng: doc.data().lng,
+          //從 DB 拿回來的毫秒，轉成字串
+          // startTime: new Date(doc.data().startTime).toString(),
+          // endTime: new Date(doc.data().endTime).toString(),
+          startTime: doc.data().startTime,
+          endTime: doc.data().endTime,
+          member_limit: doc.data().member_limit,
+          members: doc.data().members,
+          eventId: doc.data().eventId,
+          status: doc.data().status,
+          hostId: doc.data().userId,
+          results: doc.data().results,
+        })
+      })
+      return Results
+    })
+    .then((result) => {
+      callback(result)
+    })
+    .catch(function (error) {
+      console.error('Error getting document: ', error)
+    })
+}

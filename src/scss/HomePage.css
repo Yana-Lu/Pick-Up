@@ -20,7 +20,7 @@
   background-size: contain;
   background-repeat: no-repeat;
 }
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0px;
   height: 0px;
-} */
+}

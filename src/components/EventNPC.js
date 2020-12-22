@@ -38,6 +38,7 @@ export function EventNPC(props) {
       eventStep2.style.display = 'none'
       eventInfo.style.display = 'none'
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div className={styles.eventHostBG}>

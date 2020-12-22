@@ -25,6 +25,8 @@ export function ProfilePage(props) {
   //會員開團資料及成員資料
   const [beHostEvents, setBeHostEvents] = useState([])
   const [beMemberEvents, setBeMemberEvents] = useState([])
+  const [showBeHost, setShowBeHost] = useState(true)
+  const [showBeMember, setShowBeMember] = useState(false)
   // console.log(props.userData.uid)
   useEffect(() => {
     try {
@@ -43,27 +45,6 @@ export function ProfilePage(props) {
     }
   }, [uid])
   // console.log(beMemberEvents)
-
-  let events = document.getElementById('events')
-  let userBeHostBtn = document.getElementById('userBeHost')
-  let followEvents = document.getElementById('followEvents')
-  let userBeMemberBtn = document.getElementById('userBeMember')
-
-  //點擊"我的開團"顯示各事件資訊
-  userBeHostBtn?.addEventListener('click', () => {
-    events.style.display = 'flex'
-  })
-  userBeMemberBtn?.addEventListener('click', () => {
-    events.style.display = 'none'
-  })
-
-  //點擊"我的跟團"顯示各事件資訊
-  userBeMemberBtn?.addEventListener('click', () => {
-    followEvents.style.display = 'flex'
-  })
-  userBeHostBtn?.addEventListener('click', () => {
-    followEvents.style.display = 'none'
-  })
   return (
     <div className={styles.MainContain}>
       <div className={styles.ProfileContain}>
@@ -77,14 +58,30 @@ export function ProfilePage(props) {
       </div>
       <div className={styles.eventsContain}>
         <ButtonToolbar className={styles.buttons}>
-          <Button className={styles.button} variant="default" id="userBeHost">
+          <Button
+            className={styles.button}
+            variant="default"
+            id="userBeHost"
+            onClick={() => {
+              setShowBeHost(true)
+              setShowBeMember(false)
+            }}
+          >
             我的開團
           </Button>
-          <Button className={styles.button} variant="default" id="userBeMember">
+          <Button
+            className={styles.button}
+            variant="default"
+            id="userBeMember"
+            onClick={() => {
+              setShowBeHost(false)
+              setShowBeMember(true)
+            }}
+          >
             我的跟團
           </Button>
         </ButtonToolbar>
-        <div className={styles.events} id="events">
+        <div className={`${styles.events} ${showBeHost ? styles.showUp : ''}`} id="events">
           <ProfilePageBeHost
             uid={props.userData.uid}
             events={beHostEvents}
@@ -92,7 +89,7 @@ export function ProfilePage(props) {
             setBeHostEvents={setBeHostEvents}
           />
         </div>
-        <div className={styles.events} id="followEvents">
+        <div className={`${styles.events} ${showBeMember ? styles.showUp : ''}`} id="followEvents">
           <ProfilePageBeMember uid={props.userData.uid} events={beMemberEvents} />
         </div>
       </div>
