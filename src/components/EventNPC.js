@@ -15,14 +15,19 @@ export function EventNPC(props) {
     let ifBeMember = document.getElementById('ifBeMember')
     let eventStep2 = document.getElementById('eventStep2')
     let eventInfo = document.getElementById('eventInfo')
-    mapContain?.addEventListener('click', () => {
+    console.log(props.uid)
+    function alert() {
       if (!props.uid) {
+        console.log('1')
         Swal.fire({
           icon: 'warning',
-          title: '請先登入喔!',
+          // title: '請先登入喔!',
+          title: '1',
         })
       }
-    })
+    }
+
+    mapContain?.addEventListener('click', alert)
 
     ifBeHost?.addEventListener('click', () => {
       eventStep1.style.display = 'block'
@@ -38,8 +43,11 @@ export function EventNPC(props) {
       eventStep2.style.display = 'none'
       eventInfo.style.display = 'none'
     })
+    return function cleanup() {
+      mapContain.removeEventListener('click', alert)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [props.uid])
   return (
     <div className={styles.eventHostBG}>
       <div className={styles.eventHost}>

@@ -92,6 +92,7 @@ export function SetEvent(obj) {
       member_limit: obj.memberLimit,
       status: 'true',
       userId: obj.userId,
+      memberId: [], //建立memberId陣列
       members: [], //建立member清單
       results: [], //建立results清單
     })
@@ -146,13 +147,13 @@ export function JoinEvent(obj) {
         memberId: obj.userId,
       }),
     })
-    // .then(() => {
-    //   db.collection('event')
-    //     .doc(obj.eventId)
-    //     .update({
-    //       memberId: firebase.firestore.FieldValue.arrayUnion(obj.userId),
-    //     })
-    // })
+    .then(() => {
+      db.collection('event')
+        .doc(obj.eventId)
+        .update({
+          memberId: firebase.firestore.FieldValue.arrayUnion(obj.userId),
+        })
+    })
     .then(saveMemberId(obj.userId, obj.eventId))
     .catch(function (error) {
       console.error('Error setting document: ', error)
@@ -228,14 +229,12 @@ render data 到 ProfilePage
 ====================================
 */
 export function showBeHostEvents(userId, callback) {
-  let beHostEventList = []
   console.log(userId)
   db.collection('event')
     .where('userId', '==', userId)
     .orderBy('startTime', 'asc')
-    .get()
-    .then((item) => {
-      // console.log(item)
+    .onSnapshot((item) => {
+      let beHostEventList = []
       item.forEach((doc) => {
         beHostEventList.push({
           title: doc.data().title,
@@ -251,17 +250,14 @@ export function showBeHostEvents(userId, callback) {
           eventId: doc.data().eventId,
           status: doc.data().status,
           hostId: doc.data().userId,
+          results: doc.data().results,
         })
       })
-      return beHostEventList
+      callback(beHostEventList)
     })
-    .then((result) => {
-      callback(result)
-      console.log(result)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  // .catch((error) => {
+  //   console.log(error)
+  // })
 }
 
 // export function showMember(userId, callback) {
@@ -289,16 +285,15 @@ export function showBeHostEvents(userId, callback) {
 //     })
 // }
 export function showBeMemberEvents(userId, callback) {
-  let beMemberEventList = []
   console.log(userId)
   db.collection('event')
-    .where('memberId', '==', userId)
-    .get()
-    .then((item) => {
-      // console.log(item)
+    .where('memberId', 'array-contains', userId)
+    .onSnapshot((item) => {
+      let beMemberEventList = []
       item.forEach((doc) => {
         beMemberEventList.push({
           title: doc.data().title,
+          host: doc.data().host,
           lat: doc.data().lat,
           lng: doc.data().lng,
           startTime: doc.data().startTime,
@@ -308,16 +303,14 @@ export function showBeMemberEvents(userId, callback) {
           eventId: doc.data().eventId,
           status: doc.data().status,
           hostId: doc.data().userId,
+          results: doc.data().results,
         })
       })
-      return beMemberEventList
+      callback(beMemberEventList)
     })
-    .then((result) => {
-      callback(result)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  // .catch((error) => {
+  //   console.log(error)
+  // })
 }
 /*
 ====================================
@@ -369,15 +362,13 @@ export function SaveResult(obj) {
 render 淨灘成果到 ProfilePage
 ====================================
 */
-export function showResults(userId, callback) {
-  let Results = []
+export function showResults(callback) {
   db.collection('event')
-    .where('userId', '==', userId)
     .where('status', '==', 'done')
-    .get()
-    .then((item) => {
+    .onSnapshot((item) => {
+      let allResults = []
       item.forEach((doc) => {
-        Results.push({
+        allResults.push({
           title: doc.data().title,
           lat: doc.data().lat,
           lng: doc.data().lng,
@@ -394,12 +385,9 @@ export function showResults(userId, callback) {
           results: doc.data().results,
         })
       })
-      return Results
+      callback(allResults)
     })
-    .then((result) => {
-      callback(result)
-    })
-    .catch(function (error) {
-      console.error('Error getting document: ', error)
-    })
+  // .catch(function (error) {
+  //   console.error('Error getting document: ', error)
+  // })
 }

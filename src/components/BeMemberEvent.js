@@ -11,6 +11,7 @@ export function BeMemberEvent(props) {
   const memberList = (
     <div>
       <p className={styles.eventTitle}>行動主題：{props.event.title}</p>
+      <p className={styles.eventHost}>主辦人：{props.event.host}</p>
       <p className={styles.eventStartDate}>
         活動日期：{new Date(props.event.startTime).getFullYear()}/{new Date(props.event.startTime).getMonth() + 1}/
         {new Date(props.event.startTime).getDate()} {weekdays[new Date(props.event.startTime).getDay()]}

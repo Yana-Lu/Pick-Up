@@ -6,20 +6,20 @@ import { Button } from 'react-bootstrap'
 
 export function Result(props) {
   console.log(props)
-  // let eventId = props.eventId
+  let eventId = props.eventId //顯示點擊到的 event result
   let uid = props.uid
-  const [results, setResults] = useState([])
+  const [allResults, setAllResults] = useState([])
   //render result
   useEffect(() => {
     try {
-      showResults(uid, setResults)
-      console.log(results)
+      showResults(setAllResults)
+      console.log(allResults)
     } catch (err) {
       console.log(err.message)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid])
-  let obj = results[0]
+  let obj = allResults[0]
   useEffect(() => {
     try {
       let resultTitle = document.getElementById('resultTitle')

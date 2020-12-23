@@ -35,7 +35,7 @@ export function ProfilePage(props) {
       console.log(err.message)
     }
   }, [uid])
-  // console.log(beHostEvents)
+  console.log(beHostEvents)
 
   useEffect(() => {
     try {
@@ -44,7 +44,7 @@ export function ProfilePage(props) {
       console.log(err.message)
     }
   }, [uid])
-  // console.log(beMemberEvents)
+  console.log(beMemberEvents)
   return (
     <div className={styles.MainContain}>
       <div className={styles.ProfileContain}>

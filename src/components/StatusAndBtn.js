@@ -15,10 +15,16 @@ export function StatusAndBtn(props) {
     let closePopup = document.getElementById('resultForm')
     closePopup.style.display = 'block'
   }
-  if (props.status === 'true') {
+  if (props.status === 'true' && props.eventData.member_limit > props.eventData.members.length) {
     return (
       <div>
         <p className={styles.eventStatus}>行動狀態：開放報名中</p>
+      </div>
+    )
+  } else if (props.status === 'true' && props.eventData.member_limit <= props.eventData.members.length) {
+    return (
+      <div>
+        <p className={styles.eventStatus}>行動狀態：報名人數已額滿</p>
       </div>
     )
   } else if (props.status === 'false' && props.eventData.hostId === props.uid) {
@@ -51,7 +57,7 @@ export function StatusAndBtn(props) {
           >
             看行動成果
           </Button>
-          <Result uid={props.uid} eventId={props.eventData.eventId} />
+          <Result uid={props.uid} eventId={props.eventData.eventId} eventData={props.eventData} />
         </div>
       </div>
     )

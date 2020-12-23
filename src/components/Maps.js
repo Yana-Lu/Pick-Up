@@ -73,32 +73,38 @@ export function Maps(props) {
   console.log(markers)
   console.log(allMarkers)
 
-  const onMapClick = useCallback((event) => {
-    //抓開/跟團指示的對話框以及事件資訊id
-    let eventStep1 = document.getElementById('eventStep1')
-    let eventStep2 = document.getElementById('eventStep2')
-    let eventInfo = document.getElementById('eventInfo')
-    if (props.uid) {
-      setNewMarker(() => [
-        {
-          lat: event.latLng.lat(),
-          lng: event.latLng.lng(),
-          time: new Date().getTime(),
-        },
-      ])
-      //開啟開團教學框
-      eventStep1.style.display = 'block'
-      eventStep2.style.display = 'none'
-      eventInfo.style.display = 'none'
-      //清除"我要跟團"InfoBox
-      setSelected1(null)
-      //清除"我要開團"InfoBox
-      setSelected2(null)
-    } else {
-      setNewMarker([])
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const onMapClick = useCallback(
+    (event) => {
+      console.log(props)
+      console.log(props.uid)
+      //抓開/跟團指示的對話框以及事件資訊id
+      let eventStep1 = document.getElementById('eventStep1')
+      let eventStep2 = document.getElementById('eventStep2')
+      let eventInfo = document.getElementById('eventInfo')
+      if (props.uid) {
+        console.log(props.uid)
+        setNewMarker(() => [
+          {
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng(),
+            time: new Date().getTime(),
+          },
+        ])
+        //開啟開團教學框
+        eventStep1.style.display = 'block'
+        eventStep2.style.display = 'none'
+        eventInfo.style.display = 'none'
+        //清除"我要跟團"InfoBox
+        setSelected1(null)
+        //清除"我要開團"InfoBox
+        setSelected2(null)
+      } else {
+        setNewMarker([])
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    },
+    [props.uid]
+  )
   //點擊icon時存該點data
   //跟團
   const [selected1, setSelected1] = useState(null)
@@ -143,6 +149,7 @@ export function Maps(props) {
   }
 
   function showJoinForm() {
+    console.log(props.uid)
     if (!props.uid) {
       Swal.fire({
         icon: 'warning',
@@ -154,6 +161,7 @@ export function Maps(props) {
     }
   }
   function showEventForm() {
+    console.log(props.uid)
     if (!props.uid) {
       Swal.fire({
         icon: 'warning',
