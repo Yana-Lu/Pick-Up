@@ -228,6 +228,7 @@ export function showEvent(callback) {
 render data 到 ProfilePage
 ====================================
 */
+
 export function showBeHostEvents(userId, callback) {
   console.log(userId)
   db.collection('event')
@@ -253,6 +254,8 @@ export function showBeHostEvents(userId, callback) {
           results: doc.data().results,
         })
       })
+      console.log(alert)
+      console.dir(callback)
       callback(beHostEventList)
     })
   // .catch((error) => {
@@ -288,12 +291,15 @@ export function showBeMemberEvents(userId, callback) {
   console.log(userId)
   db.collection('event')
     .where('memberId', 'array-contains', userId)
+    // .orderBy('startTime', 'asc')
     .onSnapshot((item) => {
       let beMemberEventList = []
       item.forEach((doc) => {
         beMemberEventList.push({
           title: doc.data().title,
           host: doc.data().host,
+          email: doc.data().email,
+          phone: doc.data().phone,
           lat: doc.data().lat,
           lng: doc.data().lng,
           startTime: doc.data().startTime,

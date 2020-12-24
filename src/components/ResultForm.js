@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 // import { useHistory } from 'react-router-dom'
 import { SaveResult } from './Firebase'
 import { showBeHostEvents } from './Firebase'
@@ -33,7 +33,7 @@ export function ResultForm(props) {
   const [hook, setHook] = useState('')
 
   console.log(props)
-
+  // const [showResultForm, setShowResultForm] = useState(false)
   function resultChange(e) {
     // console.log(e)
     // console.log(e.target.id)
@@ -115,18 +115,13 @@ export function ResultForm(props) {
       icon: 'success',
       title: '上傳成功!',
     }).then(() => {
-      showBeHostEvents(props.uid, props.setBeHostEvents)
-      closePopup()
+      showBeHostEvents(props.uid, props.setBeHostEvents, 'hihi')
+      props.handleShowResultForm(false)
     })
   }
-
-  function closePopup() {
-    let closePopup = document.getElementById('resultForm')
-    closePopup.style.display = 'none'
-  }
-
   return (
-    <div className={styles.resultFormBG} id="resultForm">
+    <div className={`${styles.resultFormBG} ${props.showResultForm ? styles.showResultForm : ''}`}>
+      {/* <div className={`${styles.resultFormBG}`}> */}
       <div className={styles.resultFormOut}>
         <Form className={styles.resultForm} onSubmit={resultSubmit}>
           <h3>填寫行動成果</h3>
@@ -232,7 +227,12 @@ export function ResultForm(props) {
             <Button variant="outline-success" type="submit">
               上傳成果
             </Button>
-            <Button variant="default" id="closePopup" onClick={closePopup}>
+            <Button
+              variant="default"
+              onClick={() => {
+                props.handleShowResultForm(false)
+              }}
+            >
               關閉
             </Button>
           </div>

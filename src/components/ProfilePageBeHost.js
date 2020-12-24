@@ -4,7 +4,7 @@ import { BeHostEvent } from './BeHostEvent'
 //scss
 import styles from '../scss/ProfilePage.module.scss'
 export function ProfilePageBeHost(props) {
-  // console.log(props)
+  console.log(props)
   const events = props.events
   // console.log(events)
   // let uid = props.uid

@@ -1,6 +1,8 @@
 import React from 'react'
 //scss
 import styles from '../scss/ProfilePage.module.scss'
+//memberDataBtn
+import { MemberDataBtn } from './MemberDataBtn'
 //StatusAndBtn
 import { StatusAndBtn } from './StatusAndBtn'
 export function BeHostEvent(props) {
@@ -23,13 +25,13 @@ export function BeHostEvent(props) {
       </p>
       <p className={styles.eventMumberLimit}>人數上限：{props.event.member_limit} 人</p>
       <p className={styles.eventMumbers}>參加人數：{props.event.members.length} 人</p>
-      {/* <p className={styles.eventStatus}>活動狀態：{props.event.status}</p> */}
     </div>
   )
 
   return (
     <div className={styles.event}>
       {eventList}
+      {/* <MemberDataBtn eventData={props.event} /> */}
       <StatusAndBtn
         eventData={props.event}
         status={props.event.status}

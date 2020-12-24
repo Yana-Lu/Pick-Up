@@ -30,6 +30,7 @@ export function ProfilePage(props) {
   // console.log(props.userData.uid)
   useEffect(() => {
     try {
+      console.dir(setBeHostEvents)
       showBeHostEvents(uid, setBeHostEvents)
     } catch (err) {
       console.log(err.message)

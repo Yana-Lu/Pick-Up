@@ -40,10 +40,10 @@ export function Maps(props) {
   const [events, setEvents] = useState([])
 
   useEffect(() => {
-    function setEventsInMap(data) {
+    function saveEventsInMap(data) {
       setEvents(data)
     }
-    showEvent(setEventsInMap)
+    showEvent(saveEventsInMap)
   }, [])
 
   console.log(events)
