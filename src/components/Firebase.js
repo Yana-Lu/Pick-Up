@@ -229,7 +229,7 @@ render data 到 ProfilePage
 ====================================
 */
 
-export function showBeHostEvents(userId, callback) {
+export function showBeHostEvents(userId, callback, alert) {
   console.log(userId)
   db.collection('event')
     .where('userId', '==', userId)

@@ -2,12 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
+import ScrollToTop from './components/ScrollToTop'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Switch } from 'react-router-dom'
 // import BootstrapBtn from './BootstrapBtn'
 
 ReactDOM.render(
   <BrowserRouter>
+    <ScrollToTop />
     <Switch>
       <App />
     </Switch>

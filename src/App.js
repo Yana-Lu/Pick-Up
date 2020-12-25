@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Route, Link } from 'react-router-dom'
+// import { Route, Link } from 'react-router-dom'
+import { Router, Route, Link } from 'react-router-dom'
+import ScrollToTop from './components/ScrollToTop'
 import { HomePage } from './components/HomePage'
 import { EventPage } from './components/EventPage'
 import { ProfilePage } from './components/ProfilePage'
@@ -95,6 +97,7 @@ function App() {
           </li>
         </ul>
       </nav>
+      {/* <Router> */}
       <Route path="/eventpage" exact>
         <EventPage uid={uid} />
       </Route>
@@ -102,6 +105,8 @@ function App() {
         <ProfilePage userData={userData} />
       </Route>
       <Route path="/" exact component={HomePage} />
+      {/* <ScrollToTop /> */}
+      {/* </Router> */}
     </div>
   )
 }

@@ -42,7 +42,7 @@ export function StatusAndBtn(props) {
   } else if (props.status === 'true' && props.eventData.member_limit <= props.eventData.members.length) {
     return (
       <div>
-        <p className={styles.eventStatus}>行動狀態：報名人數已額滿</p>
+        <p className={styles.eventStatus}>行動狀態：行動未執行，報名人數已額滿</p>
       </div>
     )
   } else if (props.status === 'false' && props.uid === props.eventData.hostId) {

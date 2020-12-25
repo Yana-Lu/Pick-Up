@@ -1,7 +1,7 @@
+import React, { useEffect, useRef } from 'react'
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { EventPage } from './EventPage'
-import React, { useEffect } from 'react'
 import styles from '../scss/HomePage.module.scss'
 import '../scss/HomePage.css'
 import { Button } from 'react-bootstrap'
@@ -34,9 +34,14 @@ export function HomePage() {
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+  function scrollToTop() {
+    // window.scrollTo({ top: 0, behavior: 'smooth' })
+    const target = document.querySelector('#target')
+    target.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
-    <div className={styles.main}>
+    <div className={styles.main} id="target">
       <section className={styles.landing}>
         <Fade top>
           <div className={styles.bigText}>Pick up for the future.</div>
@@ -205,6 +210,7 @@ export function HomePage() {
         </div>
       </div>
       <Route path="/eventpage" exact component={EventPage} />
+      <div onClick={scrollToTop}>click me to top!</div>
       <div className={styles.footer}>Pick Up All Rights Reserved</div>
     </div>
   )

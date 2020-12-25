@@ -8,7 +8,9 @@ import { Maps } from './Maps'
 export function EventPage(props) {
   console.log(props)
   // console.log(props.uid)
-
+  // if (this.props.location.pathname !== props.location.pathname) {
+  //   document.getElementById('page').scrollTo(0, 0)
+  // }
   return (
     <div className={styles.container}>
       <div className={styles.containerLeft}>

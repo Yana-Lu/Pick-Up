@@ -196,7 +196,7 @@ export function Maps(props) {
       return (
         <InfoWindow position={{ lat: selected1?.lat, lng: selected1?.lng }} onCloseClick={() => setSelected1(null)}>
           <div>
-            <h3>報名人數已額滿</h3>
+            <p style={{ fontSize: '1rem', margin: '0' }}>報名人數已額滿</p>
           </div>
         </InfoWindow>
       )

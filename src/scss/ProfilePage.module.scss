@@ -36,6 +36,13 @@
       border-radius: 0.25rem;
       display: inline-block;
       padding: 3px;
+      .button {
+        font-weight: 600;
+        // &:focus {
+        //   outline: 0;
+        //   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        // }
+      }
     }
     .events {
       display: none;
@@ -53,6 +60,62 @@
           background-color: #cedbdbbd;
           border-radius: 5px;
           box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
+          .eventMembers {
+            display: flex;
+            flex-wrap: wrap;
+            .memberBtns {
+              margin-left: 10px;
+              .memberBtn {
+                cursor: pointer;
+              }
+              &:hover {
+                color: #e63946;
+              }
+            }
+            .memberBG {
+              display: none;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100vw;
+              height: 100vh;
+              background: rgba(0, 0, 0, 0.5);
+              z-index: 100;
+
+              .memberDataOut {
+                background-color: #f3f3f3;
+                border-radius: 10px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 35%;
+                h3 {
+                  padding-bottom: 15px;
+                  border-bottom: 0.5px solid gray;
+                }
+                .memberDataContain {
+                  margin: 30px 30px 0 30px;
+                  .memberDatas:not(:last-child) {
+                    border-bottom: rgb(163, 163, 163) 1px solid;
+                    .memberData {
+                      p {
+                        margin: 1rem 0;
+                      }
+                    }
+                  }
+                  .btns {
+                    display: flex;
+                    justify-content: center;
+                    height: 40px;
+                  }
+                }
+              }
+            }
+            .showMemberDatas {
+              display: flex;
+            }
+          }
           .eventStatusBtns {
             display: flex;
             justify-content: center;

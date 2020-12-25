@@ -31,7 +31,7 @@ export function BeHostEvent(props) {
   return (
     <div className={styles.event}>
       {eventList}
-      {/* <MemberDataBtn eventData={props.event} /> */}
+      <MemberDataBtn eventData={props.event} />
       <StatusAndBtn
         eventData={props.event}
         status={props.event.status}
