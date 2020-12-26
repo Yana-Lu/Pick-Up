@@ -12,18 +12,24 @@
   display: flex;
   justify-content: center;
   .bigText {
-    font-weight: 600;
-    margin-top: 250px;
-    // top: 30%;
-    // left: 50%;
-    // margin-left: -331px;
-    font-size: 3rem;
+    letter-spacing: 0.2rem;
+    font-family: Khula;
+    font-size: 4em;
+    text-align: center;
+    height: 200px;
+    width: 600px;
+    display: flex;
+    color: white;
+    margin: auto;
+    span {
+      width: 55%;
+    }
   }
 }
 .mainBG1 {
   width: 100vw;
   height: 850px;
-  background-color: rgba(255, 255, 255, 0.6);
+  // background-color: rgba(255, 255, 255, 0.6);
   background-repeat: no-repeat;
   background-size: cover;
   height: 950px;
@@ -54,7 +60,7 @@
       text-align: center;
     }
     p {
-      width: 75%;
+      // width: 75%;
       font-size: 20px;
       font-weight: 600;
     }
@@ -64,197 +70,207 @@
       position: relative;
       display: flex;
       justify-content: center;
-      .box1 {
-        width: 30%;
-        height: 70%;
-        margin: 20px;
-        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
-          rgba(17, 17, 26, 0.1) 0px 16px 56px;
-        transition: all ease-in-out 0.5s;
-        .img {
-          width: 100%;
-          min-height: 100%;
-          display: block;
-          background-image: url('./../images/beach.jpg');
-          background-size: cover;
-          background-repeat: no-repeat;
-        }
-        .box1Word1 {
-          position: absolute;
-          bottom: 30px;
-          left: 30px;
-          color: #fff;
-          transition: all ease-in-out 0.5s;
-          font-family: 'Noto Sans', sans-serif;
-          font-size: 1.5rem;
-        }
-        .box1Word2 {
-          position: absolute;
-          display: none;
-          left: 30px;
-          right: 30px;
-          color: #fff;
-          font-family: 'Sanchez', serif;
-          font-size: 1rem;
-        }
+      overflow: hidden;
+      // .box1 {
+      //   width: 30%;
+      //   height: 70%;
+      //   margin: 20px;
+      //   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+      //   transition: all ease-in-out 0.5s;
+      //   border-radius: 5px;
+      //   .img {
+      //     width: 100%;
+      //     min-height: 100%;
+      //     display: block;
+      //     background-image: url('./../images/beach.jpg');
+      //     background-size: cover;
+      //     background-repeat: no-repeat;
+      //     border-radius: 5px;
+      //   }
+      //   .box1Word1 {
+      //     position: absolute;
+      //     bottom: 30px;
+      //     left: 30px;
+      //     color: #fff;
+      //     transition: all ease-in-out 0.5s;
+      //     font-family: 'Noto Sans', sans-serif;
+      //     font-size: 1.5rem;
+      //   }
 
-        &:hover {
-          background-color: rgb(24, 40, 40);
-          .img {
-            opacity: 0.6;
-          }
-          .box1Word1 {
-            bottom: 40%;
-          }
-          .box1Word2 {
-            display: block;
-            animation-name: slide-up;
-            animation-duration: 0.5s;
-            animation-timing-function: ease-in-out;
-            animation-delay: 0.2s;
-            animation-fill-mode: forwards;
-            opacity: 0;
-          }
-        }
-      }
-      @keyframes slide-up {
-        0% {
-          bottom: 0;
-          opacity: 0;
-        }
-        100% {
-          bottom: 30%;
-          opacity: 1;
-        }
-      }
+      //   .box1Word2 {
+      //     position: absolute;
+      //     display: none;
+      //     left: 30px;
+      //     right: 30px;
+      //     color: #fff;
+      //     font-family: 'Sanchez', serif;
+      //     font-size: 1rem;
+      //   }
 
-      .box2 {
-        width: 30%;
-        height: 70%;
-        margin: 20px;
-        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
-          rgba(17, 17, 26, 0.1) 0px 16px 56px;
-        transition: all ease-in-out 0.5s;
-        .img {
-          width: 100%;
-          min-height: 100%;
-          display: block;
-          background-image: url('./../images/trash2.jpg');
-          background-size: cover;
-          background-repeat: no-repeat;
-        }
-        .box2Word1 {
-          position: absolute;
-          bottom: 30px;
-          left: 36%;
-          color: #fff;
-          transition: all ease-in-out 0.5s;
-          font-family: 'Noto Sans', sans-serif;
-          font-size: 1.5rem;
-        }
-        .box2Word2 {
-          position: absolute;
-          display: none;
-          left: 36%;
-          right: 30px;
-          color: #fff;
-          font-family: 'Sanchez', serif;
-          font-size: 1rem;
-        }
+      //   &:hover {
+      //     background-color: rgb(24, 40, 40);
+      //     .img {
+      //       opacity: 0.6;
+      //     }
+      //     .box1Word1 {
+      //       bottom: 40%;
+      //     }
 
-        &:hover {
-          background-color: rgb(24, 40, 40);
-          .img {
-            opacity: 0.6;
-          }
-          .box2Word1 {
-            bottom: 40%;
-          }
-          .box2Word2 {
-            display: block;
-            animation-name: slide-up;
-            animation-duration: 0.5s;
-            animation-timing-function: ease-in-out;
-            animation-delay: 0.2s;
-            animation-fill-mode: forwards;
-            opacity: 0;
-          }
-        }
-      }
-      @keyframes slide-up {
-        0% {
-          bottom: 0;
-          opacity: 0;
-        }
-        100% {
-          bottom: 30%;
-          opacity: 1;
-        }
-      }
+      //     .box1Word2 {
+      //       display: block;
+      //       animation-name: slide-up;
+      //       animation-duration: 0.5s;
+      //       animation-timing-function: ease-in-out;
+      //       animation-delay: 0.2s;
+      //       animation-fill-mode: forwards;
+      //       opacity: 0;
+      //     }
+      //   }
+      // }
+      // @keyframes slide-up {
+      //   0% {
+      //     bottom: 0;
+      //     opacity: 0;
+      //   }
+      //   100% {
+      //     bottom: 30%;
+      //     opacity: 1;
+      //   }
+      // }
 
-      .box3 {
-        width: 30%;
-        height: 70%;
-        margin: 20px;
-        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
-          rgba(17, 17, 26, 0.1) 0px 16px 56px;
-        transition: all ease-in-out 0.5s;
-        .img {
-          width: 100%;
-          min-height: 100%;
-          display: block;
-          background-image: url('./../images/poorCrab.jpg');
-          background-size: cover;
-          background-repeat: no-repeat;
-        }
-        .box3Word1 {
-          position: absolute;
-          bottom: 30px;
-          left: 70%;
-          color: #fff;
-          transition: all ease-in-out 0.5s;
-          font-family: 'Noto Sans', sans-serif;
-          font-size: 1.5rem;
-        }
-        .box3Word2 {
-          position: absolute;
-          display: none;
-          left: 70%;
-          right: 30px;
-          color: #fff;
-          font-family: 'Sanchez', serif;
-          font-size: 1rem;
-        }
+      // .box2 {
+      //   width: 30%;
+      //   height: 70%;
+      //   margin: 20px;
+      //   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+      //   transition: all ease-in-out 0.5s;
+      //   border-radius: 5px;
+      //   overflow: hidden;
+      //   .img {
+      //     width: 100%;
+      //     min-height: 100%;
+      //     display: block;
+      //     background-image: url('./../images/trash2.jpg');
+      //     background-size: cover;
+      //     background-repeat: no-repeat;
+      //     border-radius: 5px;
+      //     overflow: hidden;
+      //   }
+      //   .box2Word1 {
+      //     position: absolute;
+      //     bottom: 30px;
+      //     left: 36%;
+      //     color: #fff;
+      //     transition: all ease-in-out 0.5s;
+      //     font-family: 'Noto Sans', sans-serif;
+      //     font-size: 1.5rem;
+      //     overflow: hidden;
+      //   }
+      //   .box2Word2 {
+      //     position: absolute;
+      //     display: none;
+      //     left: 36%;
+      //     right: 30px;
+      //     color: #fff;
+      //     font-family: 'Sanchez', serif;
+      //     font-size: 1rem;
+      //     overflow: hidden;
+      //   }
 
-        &:hover {
-          background-color: rgb(24, 40, 40);
-          .img {
-            opacity: 0.6;
-          }
-          .box3Word1 {
-            bottom: 40%;
-          }
-          .box3Word2 {
-            display: block;
-            animation-name: slide-up;
-            animation-duration: 0.5s;
-            animation-timing-function: ease-in-out;
-            animation-delay: 0.2s;
-            animation-fill-mode: forwards;
-            opacity: 0;
-          }
-        }
-      }
-      @keyframes slide-up {
-        0% {
-          bottom: 0;
-          opacity: 0;
-        }
-        100% {
-          bottom: 30%;
-          opacity: 1;
-        }
-      }
+      //   &:hover {
+      //     background-color: rgb(24, 40, 40);
+      //     .img {
+      //       opacity: 0.6;
+      //     }
+      //     .box2Word1 {
+      //       bottom: 40%;
+      //     }
+      //     .box2Word2 {
+      //       display: block;
+      //       animation-name: slide-up;
+      //       animation-duration: 0.5s;
+      //       animation-timing-function: ease-in-out;
+      //       animation-delay: 0.2s;
+      //       animation-fill-mode: forwards;
+      //       opacity: 0;
+      //     }
+      //   }
+      // }
+      // @keyframes slide-up {
+      //   0% {
+      //     bottom: 0;
+      //     opacity: 0;
+      //   }
+      //   100% {
+      //     bottom: 30%;
+      //     opacity: 1;
+      //   }
+      // }
+
+      // .box3 {
+      //   width: 30%;
+      //   height: 70%;
+      //   margin: 20px;
+      //   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+      //   transition: all ease-in-out 0.5s;
+      //   border-radius: 5px;
+      //   .img {
+      //     width: 100%;
+      //     min-height: 100%;
+      //     display: block;
+      //     background-image: url('./../images/poorCrab.jpg');
+      //     background-size: cover;
+      //     background-repeat: no-repeat;
+      //     border-radius: 5px;
+      //   }
+      //   .box3Word1 {
+      //     position: absolute;
+      //     bottom: 30px;
+      //     left: 70%;
+      //     color: #fff;
+      //     transition: all ease-in-out 0.5s;
+      //     font-family: 'Noto Sans', sans-serif;
+      //     font-size: 1.5rem;
+      //   }
+      //   .box3Word2 {
+      //     position: absolute;
+      //     display: none;
+      //     left: 70%;
+      //     right: 30px;
+      //     color: #fff;
+      //     font-family: 'Sanchez', serif;
+      //     font-size: 1rem;
+      //   }
+
+      //   &:hover {
+      //     background-color: rgb(24, 40, 40);
+      //     .img {
+      //       opacity: 0.6;
+      //     }
+      //     .box3Word1 {
+      //       bottom: 40%;
+      //     }
+      //     .box3Word2 {
+      //       display: block;
+      //       animation-name: slide-up;
+      //       animation-duration: 0.5s;
+      //       animation-timing-function: ease-in-out;
+      //       animation-delay: 0.2s;
+      //       animation-fill-mode: forwards;
+      //       opacity: 0;
+      //     }
+      //   }
+      // }
+      // @keyframes slide-up {
+      //   0% {
+      //     bottom: 0;
+      //     opacity: 0;
+      //   }
+      //   100% {
+      //     bottom: 30%;
+      //     opacity: 1;
+      //   }
+      // }
     }
   }
 }
@@ -355,7 +371,7 @@
 }
 .mainBG3 {
   width: 100vw;
-  height: 1500px;
+  height: 1400px;
 
   .actionIntro {
     max-width: 1200px;
@@ -366,10 +382,10 @@
 
     .title {
       width: 100%;
-      margin-top: 60px;
+      margin-top: 100px;
       display: flex;
       align-items: center;
-
+      flex-wrap: wrap;
       h2 {
         width: 60%;
         text-align: center;
@@ -378,67 +394,86 @@
         padding-bottom: 10px;
         margin: 0 auto;
       }
+      p {
+        width: 100%;
+        font-size: 1.5rem;
+        text-align: center;
+      }
     }
+    // .subTitle {
+    //   text-align: center;
+
+    //   // width: 75%;
+    //   font-size: 1.5rem;
+    //   font-weight: 600;
+    // }
 
     .boxes {
       width: 100%;
-      height: 300px;
+      // height: 300px;
       display: flex;
       align-items: center;
       font-weight: 600;
       justify-content: center;
+      height: 200px;
       .box1 {
-        width: 300px;
-        height: 250px;
+        width: 200px;
+        height: 200px;
         margin: 10px 30px;
         box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
           rgba(17, 17, 26, 0.1) 0px 16px 56px;
         cursor: pointer;
         background-color: #fff1f1;
-        text-align: center;
+        display: flex;
+        justify-content: center;
         align-items: center;
         background-image: url('./../images/equipment.png');
         background-size: contain;
         background-repeat: no-repeat;
-        &:hover {
-          border: solid 2px rgba(17, 17, 26, 0.1);
-        }
+        // &:focus {
+        //   border: solid 3px rgba(17, 17, 26, 0.1);
+        //   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        // }
       }
       .box2 {
-        width: 300px;
-        height: 250px;
+        width: 200px;
+        height: 200px;
         margin: 10px 30px;
         box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
           rgba(17, 17, 26, 0.1) 0px 16px 56px;
         cursor: pointer;
         background-color: #fff1f1;
-        text-align: center;
+        display: flex;
+        justify-content: center;
         align-items: center;
         background-image: url('./../images/safe.png');
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        &:hover {
-          border: solid 2px rgba(17, 17, 26, 0.1);
-        }
+        // &:hover {
+        //   border: solid 3px rgba(17, 17, 26, 0.1);
+        //   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        // }
       }
       .box3 {
-        width: 300px;
-        height: 250px;
+        width: 200px;
+        height: 200px;
         margin: 10px 30px;
         box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
           rgba(17, 17, 26, 0.1) 0px 16px 56px;
         cursor: pointer;
         background-color: #fff1f1;
-        text-align: center;
+        display: flex;
+        justify-content: center;
         align-items: center;
         background-image: url('./../images/checkMark.png');
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        &:hover {
-          border: solid 2px rgba(17, 17, 26, 0.1);
-        }
+        // &:hover {
+        //   border: solid 3px rgba(17, 17, 26, 0.1);
+        //   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+        // }
       }
     }
     .actionIntroContent {
@@ -468,6 +503,9 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+            margin-bottom: 5px;
           }
         }
         @keyframes scale-up-hor-center {
@@ -700,6 +738,22 @@
 .toTopBtn {
   width: 50px;
   height: 50px;
+  position: fixed;
+  z-index: 200;
+  bottom: 30px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #2f4f4f;
+  background-color: #f1faee;
+  border-radius: 5px;
+  border: 2px solid #2f4f4f;
+  &:hover {
+    color: #ec9a9a;
+  }
 }
 .footer {
   width: 100vw;

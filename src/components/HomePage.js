@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { EventPage } from './EventPage'
+// import { HomePageKeyText } from './HomePageKeyText'
 import styles from '../scss/HomePage.module.scss'
 import '../scss/HomePage.css'
 import { Button } from 'react-bootstrap'
@@ -39,13 +40,74 @@ export function HomePage() {
     const target = document.querySelector('#target')
     target.scrollIntoView({ behavior: 'smooth' })
   }
+  useEffect(() => {
+    consoleText(['Future.', 'Earth.', 'Love.'], 'text', ['skyblue', 'aquamarine', '#ec9a9a'])
 
+    // function([string1, string2],target id,[color1,color2])
+    consoleText(['Future.', 'Earth.', 'Love.'], 'text', ['skyblue', 'aquamarine', '#ec9a9a'])
+
+    function consoleText(words, id, colors) {
+      if (colors === undefined) colors = ['#fff']
+      let visible = true
+      let con = document.getElementById('console')
+      let letterCount = 1
+      let x = 1
+      let waiting = false
+      let target = document.getElementById(id)
+      target.setAttribute('style', 'color:' + colors[0])
+      window.setInterval(function () {
+        if (letterCount === 0 && waiting === false) {
+          waiting = true
+          target.innerHTML = words[0].substring(0, letterCount)
+          window.setTimeout(function () {
+            let usedColor = colors.shift()
+            colors.push(usedColor)
+            let usedWord = words.shift()
+            words.push(usedWord)
+            x = 1
+            target.setAttribute('style', 'color:' + colors[0])
+            letterCount += x
+            waiting = false
+          }, 1000)
+        } else if (letterCount === words[0].length + 1 && waiting === false) {
+          waiting = true
+          window.setTimeout(function () {
+            x = -1
+            letterCount += x
+            waiting = false
+          }, 1000)
+        } else if (waiting === false) {
+          target.innerHTML = words[0].substring(0, letterCount)
+          letterCount += x
+        }
+      }, 120)
+      window.setInterval(function () {
+        if (visible === true) {
+          con.className = 'console-underscore hidden'
+          visible = false
+        } else {
+          con.className = 'console-underscore'
+
+          visible = true
+        }
+      }, 400)
+    }
+  }, [])
   return (
     <div className={styles.main} id="target">
       <section className={styles.landing}>
-        <Fade top>
+        <div className={styles.bigText}>
+          <span>For the</span>
+          <div class="console-container">
+            <span id="text"></span>
+            <div class="console-underscore" id="console">
+              &#95;
+            </div>
+          </div>
+        </div>
+        {/* <Fade top>
           <div className={styles.bigText}>Pick up for the future.</div>
-        </Fade>
+        </Fade> */}
       </section>
       <div className={styles.mainBG1}>
         <div className={styles.motive}>
@@ -58,21 +120,27 @@ export function HomePage() {
             海洋不曾言語，卻能透過其他方式表達，走一趟海灘聽取其中的訊息吧。
           </p>
           <div className={styles.boxes}>
-            <div className={styles.box1}>
-              <div className={styles.img}></div>
-              <p className={styles.box1Word1}>無人的沙灘</p>
-              <p className={styles.box1Word2}>休閒放鬆的好去處</p>
-            </div>
-            <div className={styles.box2}>
-              <div className={styles.img}></div>
-              <p className={styles.box2Word1}>走近一看</p>
-              <p className={styles.box2Word2}>沙灘上五顏六色的各式物品</p>
-            </div>
-            <div className={styles.box3}>
-              <div className={styles.img}></div>
-              <p className={styles.box3Word1}>還有無辜的受害者</p>
-              <p className={styles.box3Word2}>被廢棄魚網纏住的海洋生物</p>
-            </div>
+            <figure class="hero-grid effect-move">
+              <div class="hero-grid-image1 effect-image"></div>
+              <figcaption class="hero-grid-content">
+                <p class="hero-grid-title effect-target">無人的沙灘</p>
+                <p class="hero-grid-text effect-target effect-text">休閒放鬆的好去處</p>
+              </figcaption>
+            </figure>
+            <figure class="hero-grid effect-move">
+              <div class="hero-grid-image2 effect-image"></div>
+              <figcaption class="hero-grid-content">
+                <p class="hero-grid-title effect-target">走近一看</p>
+                <p class="hero-grid-text effect-target effect-text">沙灘上五顏六色的各式物品</p>
+              </figcaption>
+            </figure>
+            <figure class="hero-grid effect-move">
+              <div class="hero-grid-image3 effect-image"></div>
+              <figcaption class="hero-grid-content">
+                <p class="hero-grid-title effect-target">還有無辜的受害者</p>
+                <p class="hero-grid-text effect-target effect-text">被廢棄魚網纏住的海洋生物</p>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -105,7 +173,9 @@ export function HomePage() {
         <div className={styles.actionIntro}>
           <div className={styles.title}>
             <h2>行動介紹</h2>
+            <p>點擊以下圖示看介紹內容。</p>
           </div>
+          {/* <p>點擊以下圖示看介紹內容。</p> */}
           {/* <div className={styles.subTitle}>
           你是否正好要去享受海洋的擁抱呢？能不能順手撿起沙灘上煞風景的垃圾呢？以下小撇步，讓你的行動更有意義：
         </div> */}
@@ -210,7 +280,9 @@ export function HomePage() {
         </div>
       </div>
       <Route path="/eventpage" exact component={EventPage} />
-      <div onClick={scrollToTop}>click me to top!</div>
+      <div className={styles.toTopBtn} onClick={scrollToTop}>
+        ▲
+      </div>
       <div className={styles.footer}>Pick Up All Rights Reserved</div>
     </div>
   )

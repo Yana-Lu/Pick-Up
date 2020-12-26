@@ -1,6 +1,3 @@
-/* .hideUp {
-  top: -80px;
-} */
 .Intro > .current {
   display: block;
   opacity: 1;
@@ -23,4 +20,191 @@
 ::-webkit-scrollbar {
   width: 0px;
   height: 0px;
+}
+
+/*==============================================================
+key visual big text
+================================================================*/
+
+@import url(https://fonts.googleapis.com/css?family=Khula:700);
+body {
+  background-color: #112233;
+}
+.hidden {
+  opacity: 0;
+}
+
+.console-container {
+  letter-spacing: 0.2rem;
+  font-family: Khula;
+  font-size: 1em;
+  text-align: center;
+  height: 200px;
+  width: 45%;
+  display: block;
+  /* position: absolute; */
+  color: white;
+  /* top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; */
+  margin: auto;
+}
+.console-underscore {
+  letter-spacing: 0.2rem;
+  display: inline-block;
+  position: relative;
+  top: -0.14em;
+  left: 10px;
+}
+
+/*==============================================================
+Start for Pick Up
+================================================================*/
+.container {
+  width: 100%;
+  height: 70%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-grid {
+  position: relative;
+  float: left;
+  overflow: hidden;
+  background: #252525;
+  cursor: pointer;
+  width: 30%;
+  height: 70%;
+  margin: 20px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  transition: all ease-in-out 0.5s;
+  border-radius: 5px;
+  /* margin: 20px;
+  max-width: 400px;
+  max-height: 300px; */
+}
+.hero-grid-image1 {
+  background-image: url('./../images/beach.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.hero-grid-image2 {
+  background-image: url('./../images/trash2.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.hero-grid-image3 {
+  background-image: url('./../images/poorCrab.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero-grid-image1,
+.hero-grid-image2,
+.hero-grid-image3 {
+  position: relative;
+  display: block;
+  min-height: 100%;
+  max-width: 100%;
+  opacity: 0.2;
+}
+
+.hero-grid-content {
+  padding: 2em;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1.25em;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.hero-grid-content::before,
+.hero-grid-content::after {
+  pointer-events: none;
+}
+
+.hero-grid-title {
+  letter-spacing: -1px;
+  font-weight: 300;
+  margin: 0;
+  padding: 0.25em 0;
+  line-height: 1;
+}
+
+.hero-grid-title span {
+  font-weight: 800;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 0.5em;
+  padding: 0.5em;
+  background: #fff;
+  color: #000;
+}
+
+.hero-grid h2,
+.hero-grid p {
+  margin: 0;
+}
+
+.hero-grid p {
+  letter-spacing: 1px;
+  font-size: 68.5%;
+  height: 2.25em;
+  overflow: hidden;
+}
+
+.hero-grid-image1,
+.hero-grid-image2,
+.hero-grid-image3 {
+  max-width: none;
+  width: -webkit-calc(100% + 50px);
+  width: calc(100% + 50px);
+  opacity: 0.2;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: translate3d(-40px, 0, 0);
+  transform: translate3d(-40px, 0, 0);
+}
+
+.effect-target {
+  -webkit-transform: translate3d(0, 40px, 0);
+  transform: translate3d(0, 40px, 0);
+}
+
+.effect-target {
+  -webkit-transition: -webkit-transform 0.35s;
+  transition: transform 0.35s;
+}
+
+.effect-text {
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  -webkit-transition: opacity 0.2s, -webkit-transform 0.35s;
+  transition: opacity 0.2s, transform 0.35s;
+}
+
+.effect-move:hover .effect-image,
+.effect-move:hover .effect-text {
+  opacity: 1;
+}
+
+.effect-move:hover .effect-target,
+.effect-move:hover .effect-image {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.effect-move:hover .effect-text {
+  -webkit-transition-delay: 0.05s;
+  transition-delay: 0.05s;
+  -webkit-transition-duration: 0.35s;
+  transition-duration: 0.35s;
 }
