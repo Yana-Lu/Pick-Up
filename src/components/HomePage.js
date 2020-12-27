@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { EventPage } from './EventPage'
@@ -11,6 +11,7 @@ import Jump from 'react-reveal/Fade'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export function HomePage() {
+  const [showResultCategory, setShowResultCategory] = useState(false)
   useEffect(() => {
     let box1 = document.getElementById('box1')
     let box2 = document.getElementById('box2')
@@ -18,6 +19,7 @@ export function HomePage() {
     let Intro1 = document.getElementById('Intro1')
     let Intro2 = document.getElementById('Intro2')
     let Intro3 = document.getElementById('Intro3')
+
     box2?.addEventListener('click', () => {
       Intro2.style.display = 'block'
       Intro1.style.display = 'none'
@@ -105,9 +107,6 @@ export function HomePage() {
             </div>
           </div>
         </div>
-        {/* <Fade top>
-          <div className={styles.bigText}>Pick up for the future.</div>
-        </Fade> */}
       </section>
       <div className={styles.mainBG1}>
         <div className={styles.motive}>
@@ -175,10 +174,6 @@ export function HomePage() {
             <h2>行動介紹</h2>
             <p>點擊以下圖示看介紹內容。</p>
           </div>
-          {/* <p>點擊以下圖示看介紹內容。</p> */}
-          {/* <div className={styles.subTitle}>
-          你是否正好要去享受海洋的擁抱呢？能不能順手撿起沙灘上煞風景的垃圾呢？以下小撇步，讓你的行動更有意義：
-        </div> */}
           <div className={styles.boxes}>
             <div className={styles.box1} id="box1">
               <h3>裝備介紹</h3>
@@ -192,7 +187,7 @@ export function HomePage() {
           </div>
           <div className={styles.actionIntroContent}>
             <div className={styles.Intro1} id="Intro1">
-              <Jump>
+              <Fade>
                 <div className={styles.innerIntro}>
                   <p className={styles.subTitle}>
                     服裝建議以透氣、舒適，方便戶外活動的衣物為佳，建議可參考天氣預報調整服裝。
@@ -200,10 +195,10 @@ export function HomePage() {
                   <div className={styles.IntroImg1}></div>
                   <p>圖片來源：台灣環境資訊協會《淨灘手冊》</p>
                 </div>
-              </Jump>
+              </Fade>
             </div>
             <div className={styles.Intro2} id="Intro2">
-              <Jump>
+              <Fade>
                 <div className={styles.innerIntro}>
                   <div className={styles.IntroTitle}>
                     <div className={styles.noticeImg}></div>
@@ -223,10 +218,10 @@ export function HomePage() {
                   <p>廢棄物請自行打包帶離海邊，或者於事前聯繫當地清潔隊協助清運，事後依約定之位置集中堆放。</p>
                   {/* <div className={styles.IntroImg2}></div> */}
                 </div>
-              </Jump>
+              </Fade>
             </div>
             <div className={styles.Intro3} id="Intro3">
-              <Jump>
+              <Fade>
                 <div className={styles.innerIntro}>
                   <div className={styles.actionStep}>
                     <div className={styles.IntroTitle}>
@@ -243,9 +238,16 @@ export function HomePage() {
                       淨灘完成後登記表格中廢棄物的數量，沒有被列出的物品不用登記(但還是要撿喔)。
                     </p>
                   </div>
-                  <div className={styles.IntroImg3}></div>
+                  <div
+                    className={styles.IntroImg3}
+                    onClick={() => {
+                      setShowResultCategory(true)
+                    }}
+                  >
+                    <p>*點圖放大</p>
+                  </div>
                 </div>
-              </Jump>
+              </Fade>
             </div>
           </div>
         </div>
@@ -276,6 +278,21 @@ export function HomePage() {
                 </div>
               </div>
             </Fade>
+          </div>
+        </div>
+      </div>
+      <div className={`${styles.resultCategoryBG} ${showResultCategory ? styles.showResultCategory : ''}`}>
+        <div className={styles.resultCategory}>
+          <div className={styles.resultCategoryImg} />
+          <div className={styles.btnContainer}>
+            <Button
+              variant="default"
+              onClick={() => {
+                setShowResultCategory(false)
+              }}
+            >
+              關閉
+            </Button>
           </div>
         </div>
       </div>

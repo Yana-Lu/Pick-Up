@@ -21,8 +21,8 @@ export function EventNPC(props) {
         console.log('1')
         Swal.fire({
           icon: 'warning',
-          // title: '請先登入喔!',
-          title: '1',
+          title: '請先登入喔!',
+          // title: '1',
         })
       }
     }

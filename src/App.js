@@ -30,6 +30,7 @@ function App() {
       userName.textContent = `${auth.currentUser.displayName}`
     } else {
       console.log('使用者尚未登入')
+      userName.style = 'cursor: default'
     }
   })
 
@@ -48,12 +49,7 @@ function App() {
     }
   }, [uid])
   function toProfilePage() {
-    if (!uid) {
-      Swal.fire({
-        icon: 'warning',
-        title: '請先登入喔!',
-      })
-    } else {
+    if (uid) {
       history.push('/profile')
     }
   }

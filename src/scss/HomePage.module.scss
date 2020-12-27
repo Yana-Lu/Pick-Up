@@ -371,7 +371,7 @@
 }
 .mainBG3 {
   width: 100vw;
-  height: 1400px;
+  height: 1200px;
 
   .actionIntro {
     max-width: 1200px;
@@ -382,10 +382,11 @@
 
     .title {
       width: 100%;
-      margin-top: 100px;
+      margin-top: 10%;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
+      height: 10%;
       h2 {
         width: 60%;
         text-align: center;
@@ -398,6 +399,8 @@
         width: 100%;
         font-size: 1.5rem;
         text-align: center;
+        color: gray;
+        margin-top: 1rem;
       }
     }
     // .subTitle {
@@ -420,29 +423,31 @@
         width: 200px;
         height: 200px;
         margin: 10px 30px;
+        border-radius: 5px;
         box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
           rgba(17, 17, 26, 0.1) 0px 16px 56px;
         cursor: pointer;
-        background-color: #fff1f1;
+        background-color: #b4dcdd;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-image: url('./../images/equipment.png');
+        background-image: url('./../images/tong.png');
         background-size: contain;
         background-repeat: no-repeat;
-        // &:focus {
-        //   border: solid 3px rgba(17, 17, 26, 0.1);
-        //   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-        // }
+        &:hover {
+          border: solid 3px rgba(17, 17, 26, 0.1);
+          box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        }
       }
       .box2 {
         width: 200px;
         height: 200px;
         margin: 10px 30px;
+        border-radius: 5px;
         box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
           rgba(17, 17, 26, 0.1) 0px 16px 56px;
         cursor: pointer;
-        background-color: #fff1f1;
+        background-color: #fff5f5;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -450,30 +455,31 @@
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        // &:hover {
-        //   border: solid 3px rgba(17, 17, 26, 0.1);
-        //   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-        // }
+        &:hover {
+          border: solid 3px rgba(17, 17, 26, 0.1);
+          box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        }
       }
       .box3 {
         width: 200px;
         height: 200px;
         margin: 10px 30px;
+        border-radius: 5px;
         box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px,
           rgba(17, 17, 26, 0.1) 0px 16px 56px;
         cursor: pointer;
-        background-color: #fff1f1;
+        background-color: #d2fadb;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-image: url('./../images/checkMark.png');
+        background-image: url('./../images/check.png');
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        // &:hover {
-        //   border: solid 3px rgba(17, 17, 26, 0.1);
-        //   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-        // }
+        &:hover {
+          border: solid 3px rgba(17, 17, 26, 0.1);
+          box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        }
       }
     }
     .actionIntroContent {
@@ -495,10 +501,11 @@
           font-weight: 600;
           .subTitle {
             font-size: 1.5rem;
+            line-height: 5rem;
           }
           .IntroImg1 {
             width: 100%;
-            height: 100%;
+            height: 80%;
             background-image: url('./../images/requipments.jpg');
             background-size: contain;
             background-repeat: no-repeat;
@@ -530,6 +537,7 @@
           .IntroTitle {
             display: flex;
             flex-wrap: wrap;
+            margin-top: 5%;
             .noticeImg {
               width: 50px;
               height: 50px;
@@ -563,6 +571,7 @@
           flex-wrap: wrap;
           .actionStep {
             width: 45%;
+            margin-top: 5%;
             .IntroTitle {
               display: flex;
               flex-wrap: wrap;
@@ -588,10 +597,19 @@
           }
           .IntroImg3 {
             width: 52%;
-            height: 100%;
+            height: 85%;
             background-image: url(./../images/form1.png);
             background-repeat: no-repeat;
-            margin-left: 10px;
+            background-size: contain;
+            margin: 5% 0 0 20px;
+            cursor: pointer;
+            display: grid;
+            grid-template-rows: 9.5fr 0.5fr;
+            p {
+              grid-row-start: 2;
+              grid-row-end: 3;
+              text-align: center;
+            }
           }
         }
       }
@@ -734,6 +752,57 @@
       }
     }
   }
+}
+.resultCategoryBG {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  animation: scale-up-top 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  .resultCategory {
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 740px;
+    height: 800px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .resultCategoryImg {
+      width: 90%;
+      height: 90%;
+      background-image: url('./../images/form1.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin: 20px auto 0 auto;
+    }
+    .btnContainer {
+      width: 100%;
+    }
+  }
+}
+@keyframes scale-up-top {
+  0% {
+    transform: scale(0.5);
+    transform-origin: 50% 0%;
+  }
+  100% {
+    transform: scale(1);
+    transform-origin: 50% 0%;
+  }
+}
+.showResultCategory {
+  display: block;
 }
 .toTopBtn {
   width: 50px;
