@@ -188,6 +188,7 @@ export function showEvent(callback) {
       querySnapshot.forEach((doc) => {
         allEvent.push({
           eventId: doc.id,
+          hostId: doc.data().userId,
           title: doc.data().title,
           hostName: doc.data().host,
           email: doc.data().email,
@@ -195,6 +196,7 @@ export function showEvent(callback) {
           startTime: doc.data().startTime,
           endTime: doc.data().endTime,
           memberLimit: doc.data().member_limit,
+          memberId: doc.data().memberId,
           members: doc.data().members,
           lat: doc.data().lat,
           lng: doc.data().lng,

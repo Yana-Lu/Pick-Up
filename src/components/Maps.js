@@ -32,6 +32,8 @@ export function Maps(props) {
   let eventStep1 = document.getElementById('eventStep1')
   let eventStep2 = document.getElementById('eventStep2')
   let eventInfo = document.getElementById('eventInfo')
+  let ifBeHost = document.getElementById('ifBeHost')
+  let ifBeMember = document.getElementById('ifBeMember')
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: `AIzaSyAhDv35adlrxazUwPtZvjU7NE3RAaq3piQ`,
     libraries,
@@ -57,6 +59,7 @@ export function Maps(props) {
     allMarkers.push({
       eventId: event.eventId,
       title: event.title,
+      hostId: event.hostId,
       hostName: event.hostName,
       email: event.email,
       phone: event.phone,
@@ -64,6 +67,7 @@ export function Maps(props) {
       endTime: event.endTime,
       memberLimit: event.memberLimit,
       members: event.members,
+      memberId: event.memberId,
       lat: event.lat,
       lng: event.lng,
       time: event.startTime,
@@ -78,9 +82,6 @@ export function Maps(props) {
       console.log(props)
       console.log(props.uid)
       //抓開/跟團指示的對話框以及事件資訊id
-      let eventStep1 = document.getElementById('eventStep1')
-      let eventStep2 = document.getElementById('eventStep2')
-      let eventInfo = document.getElementById('eventInfo')
       if (props.uid) {
         console.log(props.uid)
         setNewMarker(() => [
@@ -94,6 +95,8 @@ export function Maps(props) {
         eventStep1.style.display = 'block'
         eventStep2.style.display = 'none'
         eventInfo.style.display = 'none'
+        ifBeHost.style.backgroundColor = '#add8e6'
+        ifBeMember.style.backgroundColor = ''
         //清除"我要跟團"InfoBox
         setSelected1(null)
         //清除"我要開團"InfoBox
@@ -150,11 +153,17 @@ export function Maps(props) {
 
   function showJoinForm() {
     console.log(props.uid)
-    if (!props.uid) {
-      Swal.fire({
-        icon: 'warning',
-        title: '請先登入喔!',
-      })
+    console.log(selected1)
+    console.log(selected1.memberId)
+    let memberIdArray = selected1.memberId
+    let memberIdArray1 = memberIdArray.filter(function (x) {
+      return x === props.uid
+    })
+    console.log(memberIdArray1)
+    if (memberIdArray1.length === 1) {
+      Swal.fire('不可以重複跟團喔！', '除非你會影分身之術', 'warning')
+    } else if (props.uid === selected1.hostId) {
+      Swal.fire('這是你本人開的團喔！', '', 'warning')
     } else {
       let closePopup = document.getElementById('joinForm')
       closePopup.style.display = 'block'
@@ -232,6 +241,8 @@ export function Maps(props) {
                 eventStep1.style.display = 'none'
                 eventStep2.style.display = 'block'
                 eventInfo.style.display = 'block'
+                ifBeMember.style.backgroundColor = '#add8e6'
+                ifBeHost.style.backgroundColor = ''
               }
               // Recruitment(marker)
             }}

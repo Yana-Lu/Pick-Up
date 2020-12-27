@@ -23,21 +23,9 @@ export function EventForm(props) {
   const [endTime, setEndTime] = useState(new Date().setDate(new Date().getDate() + 1))
   const [memberLimit, setMemberLimit] = useState('')
 
-  // const [phoneValue, setPhoneValue] = useState('')
-
-  // function getValidationState() {
-  //   const length = phoneValue?.length
-  //   if (length > 9) return 'success'
-  //   if (length > 0) return 'error'
-  //   return null
-  // }
-
   //判斷Email格式
   let isEmail = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
   let emailInput = document.getElementById('event-email-input')
-  //判斷手機格式
-  let isMobNumber = /^09\d{8}$/
-  let phoneInput = document.getElementById('event-phone-input')
   useEffect(() => {
     emailInput?.addEventListener('blur', () => {
       if (!isEmail.test(emailInput.value)) {
@@ -45,6 +33,9 @@ export function EventForm(props) {
       }
     })
   }, [emailInput])
+  //判斷手機格式
+  let isMobNumber = /^09\d{8}$/
+  let phoneInput = document.getElementById('event-phone-input')
   useEffect(() => {
     phoneInput?.addEventListener('blur', () => {
       if (!isMobNumber.test(phoneInput.value)) {
@@ -100,9 +91,8 @@ export function EventForm(props) {
       status: 'true',
       userId: props.uid,
     }
-
+    //判斷有沒有輸入內容
     if (host === '') {
-      console.log('123')
       Swal.fire('請輸入姓名')
     } else if (phone === '') {
       Swal.fire('請輸入連絡電話')
@@ -120,6 +110,7 @@ export function EventForm(props) {
         title: '確定要開團嗎？',
         showCancelButton: true,
         confirmButtonText: `確定`,
+        cancelButtonText: `取消`,
       })
         .then((result) => {
           /* Read more about isConfirmed, isDenied below */

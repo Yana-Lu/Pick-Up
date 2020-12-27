@@ -10,6 +10,8 @@ import { ProfilePageBeMember } from './ProfilePageBeMember'
 import styles from '../scss/ProfilePage.module.scss'
 //button
 import { Button, ButtonToolbar } from 'react-bootstrap'
+//Fade
+import Fade from 'react-reveal/Fade'
 export function ProfilePage(props) {
   let uid = props.userData.uid
   //會員資料
@@ -28,6 +30,20 @@ export function ProfilePage(props) {
   const [showBeHost, setShowBeHost] = useState(true)
   const [showBeMember, setShowBeMember] = useState(false)
   // console.log(props.userData.uid)
+  let userBeHost = document.getElementById('userBeHost')
+  let userBeMember = document.getElementById('userBeMember')
+  userBeHost?.addEventListener('click', () => {
+    userBeHost.style.backgroundColor = '#add8e6'
+  })
+  userBeMember?.addEventListener('click', () => {
+    userBeHost.style.backgroundColor = ''
+  })
+  userBeMember?.addEventListener('click', () => {
+    userBeMember.style.backgroundColor = '#add8e6'
+  })
+  userBeHost?.addEventListener('click', () => {
+    userBeMember.style.backgroundColor = ''
+  })
   useEffect(() => {
     try {
       console.dir(setBeHostEvents)
@@ -82,17 +98,19 @@ export function ProfilePage(props) {
             我的跟團
           </Button>
         </ButtonToolbar>
-        <div className={`${styles.events} ${showBeHost ? styles.showUp : ''}`} id="events">
-          <ProfilePageBeHost
-            uid={props.userData.uid}
-            events={beHostEvents}
-            beHostEvents={beHostEvents}
-            setBeHostEvents={setBeHostEvents}
-          />
-        </div>
-        <div className={`${styles.events} ${showBeMember ? styles.showUp : ''}`} id="followEvents">
-          <ProfilePageBeMember uid={props.userData.uid} events={beMemberEvents} />
-        </div>
+        <Fade>
+          <div className={`${styles.events} ${showBeHost ? styles.showUp : ''}`} id="events">
+            <ProfilePageBeHost
+              uid={props.userData.uid}
+              events={beHostEvents}
+              beHostEvents={beHostEvents}
+              setBeHostEvents={setBeHostEvents}
+            />
+          </div>
+          <div className={`${styles.events} ${showBeMember ? styles.showUp : ''}`} id="followEvents">
+            <ProfilePageBeMember uid={props.userData.uid} events={beMemberEvents} />
+          </div>
+        </Fade>
       </div>
     </div>
   )
