@@ -7,7 +7,6 @@ import styles from '../scss/HomePage.module.scss'
 import '../scss/HomePage.css'
 import { Button } from 'react-bootstrap'
 import Fade from 'react-reveal/Fade'
-import Jump from 'react-reveal/Fade'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export function HomePage() {

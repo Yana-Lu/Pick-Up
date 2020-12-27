@@ -32,6 +32,7 @@ export function EventForm(props) {
         Swal.fire('請輸入正確Email格式')
       }
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [emailInput])
   //判斷手機格式
   let isMobNumber = /^09\d{8}$/
@@ -42,6 +43,7 @@ export function EventForm(props) {
         Swal.fire('請輸入正確手機號碼格式')
       }
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phoneInput])
   function eventChange(e) {
     if (e.target.id === 'event-title-input') {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 // import { showResults } from './Firebase'
 //scss
 import styles from '../scss/Result.module.scss'
