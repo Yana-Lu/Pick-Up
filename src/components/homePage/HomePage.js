@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { EventPage } from '../eventPage/EventPage'
-// import { HomePageKeyText } from './HomePageKeyText'
 import styles from './HomePage.module.scss'
 import './HomePage.css'
 import { Button } from 'react-bootstrap'
@@ -12,12 +11,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 export function HomePage() {
   const [showResultCategory, setShowResultCategory] = useState(false)
   useEffect(() => {
-    let box1 = document.getElementById('box1')
-    let box2 = document.getElementById('box2')
-    let box3 = document.getElementById('box3')
-    let Intro1 = document.getElementById('Intro1')
-    let Intro2 = document.getElementById('Intro2')
-    let Intro3 = document.getElementById('Intro3')
+    const box1 = document.getElementById('box1')
+    const box2 = document.getElementById('box2')
+    const box3 = document.getElementById('box3')
+    const Intro1 = document.getElementById('Intro1')
+    const Intro2 = document.getElementById('Intro2')
+    const Intro3 = document.getElementById('Intro3')
 
     box2?.addEventListener('click', () => {
       Intro2.style.display = 'block'
@@ -34,36 +33,33 @@ export function HomePage() {
       Intro2.style.display = 'none'
       Intro3.style.display = 'none'
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   function scrollToTop() {
-    // window.scrollTo({ top: 0, behavior: 'smooth' })
     const target = document.querySelector('#target')
     target.scrollIntoView({ behavior: 'smooth' })
   }
   useEffect(() => {
     consoleText(['Future.', 'Earth.', 'Love.'], 'text', ['skyblue', 'aquamarine', '#ec9a9a'])
 
-    // function([string1, string2],target id,[color1,color2])
     consoleText(['Future.', 'Earth.', 'Love.'], 'text', ['skyblue', 'aquamarine', '#ec9a9a'])
 
     function consoleText(words, id, colors) {
       if (colors === undefined) colors = ['#fff']
       let visible = true
-      let con = document.getElementById('console')
+      const con = document.getElementById('console')
       let letterCount = 1
       let x = 1
       let waiting = false
-      let target = document.getElementById(id)
+      const target = document.getElementById(id)
       target.setAttribute('style', 'color:' + colors[0])
       window.setInterval(function () {
         if (letterCount === 0 && waiting === false) {
           waiting = true
           target.innerHTML = words[0].substring(0, letterCount)
           window.setTimeout(function () {
-            let usedColor = colors.shift()
+            const usedColor = colors.shift()
             colors.push(usedColor)
-            let usedWord = words.shift()
+            const usedWord = words.shift()
             words.push(usedWord)
             x = 1
             target.setAttribute('style', 'color:' + colors[0])
@@ -99,9 +95,9 @@ export function HomePage() {
       <section className={styles.landing}>
         <div className={styles.bigText}>
           <span>For the</span>
-          <div class="console-container">
+          <div className="console-container">
             <span id="text"></span>
-            <div class="console-underscore" id="console">
+            <div className="console-underscore" id="console">
               &#95;
             </div>
           </div>
@@ -118,25 +114,25 @@ export function HomePage() {
             海洋不曾言語，卻能透過其他方式表達，走一趟海灘聽取其中的訊息吧。
           </p>
           <div className={styles.boxes}>
-            <figure class="hero-grid effect-move">
-              <div class="hero-grid-image1 effect-image"></div>
-              <figcaption class="hero-grid-content">
-                <p class="hero-grid-title effect-target">無人的沙灘</p>
-                <p class="hero-grid-text effect-target effect-text">休閒放鬆的好去處</p>
+            <figure className="hero-grid effect-move">
+              <div className="hero-grid-image1 effect-image"></div>
+              <figcaption className="hero-grid-content">
+                <p className="hero-grid-title effect-target">無人的沙灘</p>
+                <p className="hero-grid-text effect-target effect-text">休閒放鬆的好去處</p>
               </figcaption>
             </figure>
-            <figure class="hero-grid effect-move">
-              <div class="hero-grid-image2 effect-image"></div>
-              <figcaption class="hero-grid-content">
-                <p class="hero-grid-title effect-target">走近一看</p>
-                <p class="hero-grid-text effect-target effect-text">沙灘上五顏六色的各式物品</p>
+            <figure className="hero-grid effect-move">
+              <div className="hero-grid-image2 effect-image"></div>
+              <figcaption className="hero-grid-content">
+                <p className="hero-grid-title effect-target">走近一看</p>
+                <p className="hero-grid-text effect-target effect-text">沙灘上五顏六色的各式物品</p>
               </figcaption>
             </figure>
-            <figure class="hero-grid effect-move">
-              <div class="hero-grid-image3 effect-image"></div>
-              <figcaption class="hero-grid-content">
-                <p class="hero-grid-title effect-target">還有無辜的受害者</p>
-                <p class="hero-grid-text effect-target effect-text">被廢棄魚網纏住的海洋生物</p>
+            <figure className="hero-grid effect-move">
+              <div className="hero-grid-image3 effect-image"></div>
+              <figcaption className="hero-grid-content">
+                <p className="hero-grid-title effect-target">還有無辜的受害者</p>
+                <p className="hero-grid-text effect-target effect-text">被廢棄魚網纏住的海洋生物</p>
               </figcaption>
             </figure>
           </div>

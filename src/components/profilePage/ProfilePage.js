@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { showBeHostEvents } from '../Firebase'
 import { showBeMemberEvents } from '../Firebase'
 import { ProfilePageBeHost } from './beHost/ProfilePageBeHost'
@@ -8,16 +9,18 @@ import { Button, ButtonToolbar } from 'react-bootstrap'
 import Fade from 'react-reveal/Fade'
 
 export function ProfilePage(props) {
+  ProfilePage.propTypes = {
+    userData: PropTypes.object,
+  }
   const uid = props.userData.uid
 
   useEffect(() => {
-    let avatarImg = document.getElementById('avatarImg')
-    let userName = document.getElementById('userDisplayName')
-    let userEmail = document.getElementById('userEmail')
+    const avatarImg = document.getElementById('avatarImg')
+    const userName = document.getElementById('userDisplayName')
+    const userEmail = document.getElementById('userEmail')
     avatarImg.src = `${props?.userData?.photoURL}?type=large`
     userName.textContent = props.userData.displayName
     userEmail.textContent = props.userData.email
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid])
 
   const [beHostEvents, setBeHostEvents] = useState([])
@@ -25,8 +28,8 @@ export function ProfilePage(props) {
   const [showBeHost, setShowBeHost] = useState(false)
   const [showBeMember, setShowBeMember] = useState(false)
 
-  let userBeHost = document.getElementById('userBeHost')
-  let userBeMember = document.getElementById('userBeMember')
+  const userBeHost = document.getElementById('userBeHost')
+  const userBeMember = document.getElementById('userBeMember')
   userBeHost?.addEventListener('click', () => {
     userBeHost.style.backgroundColor = '#add8e6'
   })
@@ -41,7 +44,6 @@ export function ProfilePage(props) {
   })
   useEffect(() => {
     try {
-      console.dir(setBeHostEvents)
       showBeHostEvents(uid, setBeHostEvents)
     } catch (err) {
       console.log(err.message)

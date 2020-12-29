@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { SetEvent } from '../../Firebase'
 import 'react-datepicker/dist/react-datepicker.css'
 import 'date-fns'
@@ -18,6 +19,15 @@ export function EventForm(props) {
   const [endTime, setEndTime] = useState(new Date().setDate(new Date().getDate() + 1))
   const [memberLimit, setMemberLimit] = useState('')
 
+  EventForm.propTypes = {
+    location: PropTypes.array,
+    lat: PropTypes.number,
+    lng: PropTypes.number,
+    uid: PropTypes.string,
+    setSelectedNewSite: PropTypes.func,
+    setNewMarker: PropTypes.func,
+  }
+
   const isEmail = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
   const emailInput = document.getElementById('event-email-input')
   useEffect(() => {
@@ -26,7 +36,6 @@ export function EventForm(props) {
         Swal.fire('請輸入正確Email格式')
       }
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [emailInput])
 
   const isMobNumber = /^09\d{8}$/
@@ -37,7 +46,6 @@ export function EventForm(props) {
         Swal.fire('請輸入正確手機號碼格式')
       }
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phoneInput])
   function eventChange(e) {
     if (e.target.id === 'event-title-input') {
@@ -68,7 +76,7 @@ export function EventForm(props) {
   function eventSubmit(e) {
     e.preventDefault()
 
-    let obj = {
+    const obj = {
       title: title,
       host: host,
       email: email,
@@ -108,7 +116,7 @@ export function EventForm(props) {
           }
         })
         .then(() => {
-          let closePopup = document.getElementById('eventForm')
+          const closePopup = document.getElementById('eventForm')
           closePopup.style.display = 'none'
           props.setSelectedNewSite(null)
           props.setNewMarker([])
@@ -117,7 +125,7 @@ export function EventForm(props) {
   }
 
   function closePopup() {
-    let closePopup = document.getElementById('eventForm')
+    const closePopup = document.getElementById('eventForm')
     closePopup.style.display = 'none'
   }
 

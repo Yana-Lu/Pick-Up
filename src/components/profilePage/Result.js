@@ -1,10 +1,16 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from './Result.module.scss'
 import { Button } from 'react-bootstrap'
 
 export function Result(props) {
-  let weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
-  let result = props.eventData.results[0]
+  Result.propTypes = {
+    eventData: PropTypes.object,
+    showResult: PropTypes.bool,
+    handleshowresult: PropTypes.func,
+  }
+  const weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
+  const result = props.eventData.results[0]
   const resultList = (
     <div>
       <div className={styles.resultInfo} id="resultInfo">

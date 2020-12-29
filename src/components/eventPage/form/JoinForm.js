@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { JoinEvent } from '../../Firebase'
 import { Form, Button, Col } from 'react-bootstrap'
 import Swal from 'sweetalert2'
@@ -9,26 +10,33 @@ export function JoinForm(props) {
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
 
-  let isEmail = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
-  let emailInput = document.getElementById('memeber-email-input')
+  JoinForm.propTypes = {
+    event: PropTypes.array,
+    uid: PropTypes.string,
+    selectedEvent: PropTypes.object,
+    setSelectedEvent: PropTypes.func,
+    events: PropTypes.array,
+    ShowMarkerData: PropTypes.func,
+  }
+
+  const isEmail = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
+  const emailInput = document.getElementById('memeber-email-input')
   useEffect(() => {
     emailInput?.addEventListener('blur', () => {
       if (!isEmail.test(emailInput.value)) {
         Swal.fire('請輸入正確Email格式')
       }
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [emailInput])
 
-  let isMobNumber = /^09\d{8}$/
-  let phoneInput = document.getElementById('memeber-phone-input')
+  const isMobNumber = /^09\d{8}$/
+  const phoneInput = document.getElementById('memeber-phone-input')
   useEffect(() => {
     phoneInput?.addEventListener('blur', () => {
       if (!isMobNumber.test(phoneInput.value)) {
         Swal.fire('請輸入正確手機號碼格式')
       }
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phoneInput])
   function eventChange(e) {
     if (e.target.id === 'memeber-name-input') {
@@ -44,7 +52,7 @@ export function JoinForm(props) {
   function handleSubmit(e) {
     e.preventDefault()
 
-    let obj = {
+    const obj = {
       name: name,
       email: email,
       phone: phone,
@@ -73,7 +81,7 @@ export function JoinForm(props) {
           }
         })
         .then(() => {
-          let closePopup = document.getElementById('joinForm')
+          const closePopup = document.getElementById('joinForm')
           closePopup.style.display = 'none'
           props.setSelectedEvent(null)
         })
@@ -86,11 +94,10 @@ export function JoinForm(props) {
         props.ShowMarkerData(props.events[i])
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.events])
 
   function closePopup() {
-    let closePopup = document.getElementById('joinForm')
+    const closePopup = document.getElementById('joinForm')
     closePopup.style.display = 'none'
   }
 

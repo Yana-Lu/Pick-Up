@@ -1,9 +1,15 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from '../ProfilePage.module.scss'
 import { StatusAndBtn } from '../StatusAndBtn'
 
 export function BeMemberEvent(props) {
-  let weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
+  BeMemberEvent.propTypes = {
+    event: PropTypes.array,
+    uid: PropTypes.string,
+  }
+
+  const weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
 
   const memberList = (
     <div>

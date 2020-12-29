@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
+import PropTypes from 'prop-types'
 import { showEvent } from '../../Firebase'
 import styles from './Map.module.scss'
 import MapStyles from './MapStyles'
@@ -37,13 +38,17 @@ export function Maps(props) {
   })
   const [events, setEvents] = useState([])
 
+  Maps.propTypes = {
+    uid: PropTypes.string,
+  }
+
   useEffect(() => {
     function saveEventsInMap(data) {
       setEvents(data)
     }
     showEvent(saveEventsInMap)
   }, [])
-  // const [markers, setMarkers] = useState([])
+
   const [newMarker, setNewMarker] = useState([])
   const allMarkers = []
   events.forEach((event) => {
@@ -89,26 +94,20 @@ export function Maps(props) {
         setNewMarker([])
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [props.uid]
   )
   //點擊icon時存該點data
-  //跟團
   const [selectedEvent, setSelectedEvent] = useState(null)
-  //開團
   const [selectedNewSite, setSelectedNewSite] = useState(null)
 
   if (loadError) return 'Error loading maps'
   if (!isLoaded) return 'Loading Maps'
-  //Show the data of marker
 
   function ShowMarkerData(obj) {
-    console.log(obj)
-    //抓日期
     const startTimeObj = new Date(obj?.startTime)
     const endTimeObj = new Date(obj?.endTime)
     const weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
-    // 抓時間
+
     const startTimePart = startTimeObj.toTimeString().split(':')
     const endTimePart = endTimeObj.toTimeString().split(':')
 
@@ -136,14 +135,10 @@ export function Maps(props) {
   }
 
   function showJoinForm() {
-    // console.log(props.uid)
-    // console.log(selectedEvent)
-    // console.log(selectedEvent.memberId)
     const memberIdArray = selectedEvent.memberId
     const memberIdArray1 = memberIdArray.filter(function (x) {
       return x === props.uid
     })
-    console.log(memberIdArray1)
     if (memberIdArray1.length === 1) {
       Swal.fire('不可以重複跟團喔！', '除非你會影分身之術', 'warning')
     } else if (props.uid === selectedEvent.hostId) {
@@ -154,7 +149,6 @@ export function Maps(props) {
     }
   }
   function showEventForm() {
-    console.log(props.uid)
     if (!props.uid) {
       Swal.fire({
         icon: 'warning',
@@ -165,14 +159,7 @@ export function Maps(props) {
       closePopup.style.display = 'block'
     }
   }
-  console.log(allMarkers)
-  console.log(newMarker)
-  //是否招募已滿判斷
   function Recruitment(obj) {
-    console.log(obj)
-    // console.log(obj.marker.members)
-    // console.log(obj.marker.members?.length)
-    // console.log(obj.marker.memberLimit)
     if (obj.marker.members?.length < obj.marker.memberLimit) {
       return (
         <InfoWindow
@@ -202,24 +189,15 @@ export function Maps(props) {
 
   return (
     <div className={styles.map}>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={8}
-        center={center}
-        options={options}
-        onClick={onMapClick}
-        // onLoad={onMapLoad}
-      >
+      <GoogleMap mapContainerStyle={mapContainerStyle} zoom={8} center={center} options={options} onClick={onMapClick}>
         {allMarkers.map((marker) => (
           <Marker
             key={marker?.time}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => {
-              //清除"我要開團"icon及InfoBox
+              //清除"我要開團"InfoBox及icon
               setNewMarker([])
               setSelectedNewSite(null)
-              console.log(props.uid)
-              console.log(marker)
               if (props.uid) {
                 //儲存這個點的經緯度到marker並show此事件的Data
                 setSelectedEvent(marker)
@@ -231,7 +209,6 @@ export function Maps(props) {
                 ifBeMember.style.backgroundColor = '#add8e6'
                 ifBeHost.style.backgroundColor = ''
               }
-              // Recruitment(marker)
             }}
           />
         ))}

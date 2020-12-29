@@ -14,7 +14,6 @@ function App() {
   const [hide, setHide] = useState(false)
   const [uid, setUid] = useState('')
   const [userData, setUserData] = useState('')
-  // const [userName, setUserName] = useState('使用者尚未登入')
   const [showSignInBtn, setShowSignInBtn] = useState(true)
   const [showSignOutBtn, setShowSignOutBtn] = useState(false)
   const userName = document.getElementById('userName')
@@ -70,7 +69,6 @@ function App() {
             <Button
               variant="default"
               className={`${styles.signInBtn} ${showSignInBtn ? '' : styles.signInBtnHideUp}`}
-              // id="signInBtn"
               onClick={signInWithFacebook}
             >
               登入
@@ -78,7 +76,6 @@ function App() {
             <Button
               variant="default"
               className={`${styles.signOutBtn} ${showSignOutBtn ? '' : styles.signOutBtnHideUp}`}
-              // id="signOutBtn"
               onClick={signOutWithFacebook}
             >
               登出

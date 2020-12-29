@@ -1,11 +1,18 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from '../ProfilePage.module.scss'
 import { Button } from 'react-bootstrap'
 
 export function MemberDatas(props) {
+  MemberDatas.propTypes = {
+    eventData: PropTypes.object,
+    showMemberDatas: PropTypes.bool,
+    handleShowMemberDatas: PropTypes.func,
+  }
+
   const datas = props.eventData.members
   const memberDatas = datas.map((data) => (
-    <div className={styles.memberDatas}>
+    <div className={styles.memberDatas} key={data.eventId}>
       <div className={styles.memberData}>
         <p className={styles.memberName}>姓名：{data.name}</p>
         <p className={styles.memberEmail}>信箱：{data.email}</p>

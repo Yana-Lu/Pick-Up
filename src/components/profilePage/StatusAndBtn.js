@@ -11,17 +11,8 @@ export function StatusAndBtn(props) {
   const [showResult, setShowResult] = useState(false)
 
   useEffect(() => {
-    try {
-      function saveResultsInProfile(result) {
-        setAllResults(result)
-      }
-      showResults(saveResultsInProfile)
-      console.log(allResults)
-    } catch (err) {
-      console.log(err.message)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.uid])
+    showResults(setAllResults)
+  }, [])
   const handleShowResultForm = () => {
     setShowResultForm(false)
   }
@@ -91,6 +82,7 @@ export function StatusAndBtn(props) {
         </div>
         <Result
           uid={props.uid}
+          allResults={allResults}
           eventId={props.eventData.eventId}
           eventData={props.eventData}
           showResult={showResult}

@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { SaveResult } from '../../Firebase'
 import { showBeHostEvents } from '../../Firebase'
 import { Form, Button, Col } from 'react-bootstrap'
 import Swal from 'sweetalert2'
 import styles from './ResultForm.module.scss'
+import { propTypes } from 'react-bootstrap/esm/Image'
 
 export function ResultForm(props) {
   const [bottle, setBottle] = useState('')
@@ -28,6 +30,13 @@ export function ResultForm(props) {
   const [metal, setMetal] = useState('')
   const [hook, setHook] = useState('')
 
+  ResultForm.propTypes = {
+    eventId: PropTypes.string,
+    uid: PropTypes.string,
+    setBeHostEvents: PropTypes.func,
+    handleShowResultForm: PropTypes.func,
+    showResultForm: propTypes.bool,
+  }
   function resultChange(e) {
     if (e.target.id === 'result-bottle-input') {
       setBottle(e.target.value)
@@ -77,7 +86,7 @@ export function ResultForm(props) {
   function resultSubmit(e) {
     e.preventDefault()
 
-    let obj = {
+    const obj = {
       eventId: props.eventId,
       bottle: bottle,
       bottleCap: bottleCap,

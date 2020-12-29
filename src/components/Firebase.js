@@ -47,7 +47,9 @@ export const signOutWithFacebook = () =>
     .then(function () {
       window.location.reload()
     })
-    .catch(function (error) {})
+    .catch(function () {
+      window.alert('登入失敗')
+    })
 export default firebaseSet
 
 const db = firebase.firestore()
@@ -148,7 +150,7 @@ export function showEvent(callback) {
   db.collection('event')
     .where('status', '==', 'true')
     .onSnapshot((querySnapshot) => {
-      let allEvent = []
+      const allEvent = []
       querySnapshot.forEach((doc) => {
         allEvent.push({
           eventId: doc.id,
@@ -181,7 +183,7 @@ export function showBeHostEvents(userId, callback) {
     .where('userId', '==', userId)
     .orderBy('startTime', 'asc')
     .onSnapshot((item) => {
-      let beHostEventList = []
+      const beHostEventList = []
       item.forEach((doc) => {
         beHostEventList.push({
           title: doc.data().title,
@@ -206,7 +208,7 @@ export function showBeMemberEvents(userId, callback) {
     .where('memberId', 'array-contains', userId)
     // .orderBy('startTime', 'asc')
     .onSnapshot((item) => {
-      let beMemberEventList = []
+      const beMemberEventList = []
       item.forEach((doc) => {
         beMemberEventList.push({
           title: doc.data().title,
@@ -279,7 +281,7 @@ export function showResults(callback) {
   db.collection('event')
     .where('status', '==', 'done')
     .onSnapshot((item) => {
-      let allResults = []
+      const allResults = []
       item.forEach((doc) => {
         allResults.push({
           title: doc.data().title,

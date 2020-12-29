@@ -1,16 +1,21 @@
 import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import styles from './EventPage.module.scss'
 import Fade from 'react-reveal/Fade'
 import Swal from 'sweetalert2'
 
 export function EventNPC(props) {
   useEffect(() => {
-    let mapContain = document.getElementById('mapContain')
-    let ifBeHost = document.getElementById('ifBeHost')
-    let eventStep1 = document.getElementById('eventStep1')
-    let ifBeMember = document.getElementById('ifBeMember')
-    let eventStep2 = document.getElementById('eventStep2')
-    let eventInfo = document.getElementById('eventInfo')
+    const mapContain = document.getElementById('mapContain')
+    const ifBeHost = document.getElementById('ifBeHost')
+    const eventStep1 = document.getElementById('eventStep1')
+    const ifBeMember = document.getElementById('ifBeMember')
+    const eventStep2 = document.getElementById('eventStep2')
+    const eventInfo = document.getElementById('eventInfo')
+
+    EventNPC.propTypes = {
+      uid: PropTypes.string,
+    }
 
     function alert() {
       if (!props.uid) {
@@ -44,7 +49,6 @@ export function EventNPC(props) {
     return function cleanup() {
       mapContain.removeEventListener('click', alert)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.uid])
   return (
     <div className={styles.eventHostBG}>
@@ -74,7 +78,7 @@ export function EventNPC(props) {
           <br />
           <h3>點擊該座標</h3>
           <br />
-          <h3>點擊"我要開團"</h3>
+          <h3>點擊我要開團</h3>
           <br />
           <h3>填好完整資料並點擊開團按鈕</h3>
         </div>
@@ -84,7 +88,7 @@ export function EventNPC(props) {
         <div className={styles.eventStep2} id="eventStep2">
           <h3>點擊地圖上想跟團的座標</h3>
           <br />
-          <h3>點擊"我想跟團"</h3>
+          <h3>點擊我想跟團</h3>
           <br />
           <h3>填好完整資料並點擊跟團按鈕</h3>
 

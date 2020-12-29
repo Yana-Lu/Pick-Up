@@ -1,9 +1,17 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from '../ProfilePage.module.scss'
 import { MemberDataBtn } from './MemberDataBtn'
 import { StatusAndBtn } from '../StatusAndBtn'
 export function BeHostEvent(props) {
-  let weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
+  BeHostEvent.propTypes = {
+    event: PropTypes.array,
+    uid: PropTypes.string,
+    beHostEvents: PropTypes.array,
+    setBeHostEvents: PropTypes.func,
+  }
+
+  const weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
 
   const eventList = (
     <div>
