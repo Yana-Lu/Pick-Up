@@ -1,17 +1,14 @@
 @import '~bootstrap/scss/bootstrap';
-* {
-  h2 {
-    font-weight: 600;
-  }
-  h3 {
-    font-weight: 600;
-  }
-}
 body {
   background-color: #f1faee4f;
+  font-weight: 600;
+}
+h2,
+h3,
+p {
+  font-weight: 600;
 }
 .header {
-  // min-height: 80px;
   width: 100%;
   height: 80px;
   display: flex;
@@ -23,7 +20,6 @@ body {
   box-sizing: border-box;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   background-color: rgba(255, 255, 255, 0.863);
-  // justify-content: space-between;
 
   .logo {
     width: 150px;
@@ -67,7 +63,6 @@ body {
         position: relative;
         transition: all 280ms ease-in-out;
         width: 0;
-        // background-color: #2f4f4f;
       }
 
       &:hover:after,
@@ -100,7 +95,6 @@ body {
       display: flex;
       .profile {
         .profileIcon {
-          background-image: url('./../images/member.png');
           background-size: contain;
           background-repeat: no-repeat;
           width: 4vw;
@@ -115,18 +109,20 @@ body {
         letter-spacing: 1px;
         color: #182828;
       }
-      &:hover {
-        box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
-          rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+      .signInBtnHideUp {
+        display: none;
       }
 
       .signOutBtn {
-        display: none;
+        display: block;
         line-height: 1;
         font-weight: 600;
         box-sizing: border-box;
         letter-spacing: 1px;
         color: #182828;
+      }
+      .signOutBtnHideUp {
+        display: none;
       }
       &:hover {
         box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,

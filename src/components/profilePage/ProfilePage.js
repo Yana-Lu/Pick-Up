@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from 'react'
-//firebase
-import { showBeHostEvents } from './Firebase'
-import { showBeMemberEvents } from './Firebase'
-//beHost data
-import { ProfilePageBeHost } from './ProfilePageBeHost'
-//beMember data
-import { ProfilePageBeMember } from './ProfilePageBeMember'
-//scss
-import styles from '../scss/ProfilePage.module.scss'
-//button
+import { showBeHostEvents } from '../Firebase'
+import { showBeMemberEvents } from '../Firebase'
+import { ProfilePageBeHost } from './beHost/ProfilePageBeHost'
+import { ProfilePageBeMember } from './beMember/ProfilePageBeMember'
+import styles from './ProfilePage.module.scss'
 import { Button, ButtonToolbar } from 'react-bootstrap'
-//Fade
 import Fade from 'react-reveal/Fade'
+
 export function ProfilePage(props) {
-  let uid = props.userData.uid
-  //會員資料
+  const uid = props.userData.uid
+
   useEffect(() => {
     let avatarImg = document.getElementById('avatarImg')
     let userName = document.getElementById('userDisplayName')
@@ -24,12 +19,12 @@ export function ProfilePage(props) {
     userEmail.textContent = props.userData.email
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [uid])
-  //會員開團資料及成員資料
+
   const [beHostEvents, setBeHostEvents] = useState([])
   const [beMemberEvents, setBeMemberEvents] = useState([])
-  const [showBeHost, setShowBeHost] = useState(true)
+  const [showBeHost, setShowBeHost] = useState(false)
   const [showBeMember, setShowBeMember] = useState(false)
-  // console.log(props.userData.uid)
+
   let userBeHost = document.getElementById('userBeHost')
   let userBeMember = document.getElementById('userBeMember')
   userBeHost?.addEventListener('click', () => {
@@ -52,7 +47,6 @@ export function ProfilePage(props) {
       console.log(err.message)
     }
   }, [uid])
-  console.log(beHostEvents)
 
   useEffect(() => {
     try {
@@ -61,7 +55,7 @@ export function ProfilePage(props) {
       console.log(err.message)
     }
   }, [uid])
-  console.log(beMemberEvents)
+
   return (
     <div className={styles.MainContain}>
       <div className={styles.ProfileContain}>

@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { ResultForm } from './ResultForm'
+import { showResults } from '../Firebase'
+import { ResultForm } from './beHost/ResultForm'
 import { Result } from './Result'
-import { showResults } from './Firebase'
-//scss
-import styles from '../scss/ProfilePage.module.scss'
+import styles from './ProfilePage.module.scss'
 import { Button } from 'react-bootstrap'
+
 export function StatusAndBtn(props) {
-  console.log(props)
   const [allResults, setAllResults] = useState([])
   const [showResultForm, setShowResultForm] = useState(false)
   const [showResult, setShowResult] = useState(false)
-  // const events = props.beHostEvents
+
   useEffect(() => {
     try {
       function saveResultsInProfile(result) {
@@ -29,10 +28,7 @@ export function StatusAndBtn(props) {
   const handleshowresult = () => {
     setShowResult(false)
   }
-  // function showResultForm() {
-  //   let closePopup = document.getElementById('resultForm')
-  //   closePopup.style.display = 'block'
-  // }
+
   if (props.status === 'true' && props.eventData.member_limit > props.eventData.members.length) {
     return (
       <div>
@@ -93,7 +89,6 @@ export function StatusAndBtn(props) {
             看行動成果
           </Button>
         </div>
-        {/* {result} */}
         <Result
           uid={props.uid}
           eventId={props.eventData.eventId}

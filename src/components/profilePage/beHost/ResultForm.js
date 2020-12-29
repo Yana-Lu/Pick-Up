@@ -1,15 +1,11 @@
 import React, { useState } from 'react'
-// import { useHistory } from 'react-router-dom'
-import { SaveResult } from './Firebase'
-import { showBeHostEvents } from './Firebase'
+import { SaveResult } from '../../Firebase'
+import { showBeHostEvents } from '../../Firebase'
 import { Form, Button, Col } from 'react-bootstrap'
-//alert樣式
 import Swal from 'sweetalert2'
-//scss
-import styles from '../scss/ResultForm.module.scss'
+import styles from './ResultForm.module.scss'
 
 export function ResultForm(props) {
-  // let history = useHistory()
   const [bottle, setBottle] = useState('')
   const [bottleCap, setBottleCap] = useState('')
   const [foodContainer, setFoodContainer] = useState('')
@@ -32,12 +28,7 @@ export function ResultForm(props) {
   const [metal, setMetal] = useState('')
   const [hook, setHook] = useState('')
 
-  console.log(props)
-  // const [showResultForm, setShowResultForm] = useState(false)
   function resultChange(e) {
-    // console.log(e)
-    // console.log(e.target.id)
-    // console.log(e.target.value)
     if (e.target.id === 'result-bottle-input') {
       setBottle(e.target.value)
     } else if (e.target.id === 'result-bottleCap-input') {
@@ -85,7 +76,7 @@ export function ResultForm(props) {
 
   function resultSubmit(e) {
     e.preventDefault()
-    //打包表單、經緯度、使用者ID資料
+
     let obj = {
       eventId: props.eventId,
       bottle: bottle,
@@ -121,7 +112,6 @@ export function ResultForm(props) {
   }
   return (
     <div className={`${styles.resultFormBG} ${props.showResultForm ? styles.showResultForm : ''}`}>
-      {/* <div className={`${styles.resultFormBG}`}> */}
       <div className={styles.resultFormOut}>
         <Form className={styles.resultForm} onSubmit={resultSubmit}>
           <h3>填寫行動成果</h3>

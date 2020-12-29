@@ -38,10 +38,9 @@
       padding: 3px;
       .button {
         font-weight: 600;
-        // &:focus {
-        //   outline: 0;
-        //   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        // }
+        &:focus {
+          box-shadow: none;
+        }
       }
     }
     .events {
@@ -52,11 +51,11 @@
         width: 100%;
         display: flex;
         flex-wrap: wrap;
+        // justify-content: center;
         .event {
-          width: 45%;
-          margin: 20px;
+          width: 44%;
+          margin: 3%;
           padding: 20px;
-          // border: #a8dadc 2px solid;
           background-color: #cedbdbbd;
           border-radius: 5px;
           box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
@@ -120,9 +119,7 @@
             display: flex;
             justify-content: center;
             .eventStatusBtn {
-              // border: gray 2px solid;
               font-weight: 600;
-              // background-color: honeydew;
               border-radius: 5px;
               padding: 0.375rem 0.75rem;
             }

@@ -1,13 +1,8 @@
 import React, { useState } from 'react'
 import { MemberDatas } from './MemberDatas'
-// import { ResultForm } from './ResultForm'
-// import { Result } from './Result'
-// import { showResults } from './Firebase'
-//scss
-import styles from '../scss/ProfilePage.module.scss'
+import styles from '../ProfilePage.module.scss'
+
 export function MemberDataBtn(props) {
-  console.log(props)
-  console.log(props.eventData.members.length)
   const [showMemberDatas, setshowMemberDatas] = useState(false)
 
   const handleShowMemberDatas = () => {

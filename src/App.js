@@ -1,51 +1,37 @@
 import React, { useState, useEffect, useRef } from 'react'
-// import { Route, Link } from 'react-router-dom'
 import { Route, Link } from 'react-router-dom'
-// import ScrollToTop from './components/ScrollToTop'
-import { HomePage } from './components/HomePage'
-import { EventPage } from './components/EventPage'
-import { ProfilePage } from './components/ProfilePage'
+import { HomePage } from './components/homePage/HomePage'
+import { EventPage } from './components/eventPage/EventPage'
+import { ProfilePage } from './components/profilePage/ProfilePage'
 import { signInWithFacebook, signOutWithFacebook, auth } from './components/Firebase'
 import { useHistory } from 'react-router-dom'
-//UI
-import './scss/HomePage.css'
 import styles from './scss/MainPage.module.scss'
 import { Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-// import Swal from 'sweetalert2'
-// import Fade from 'react-reveal/Fade'
-// import { gsap, TweenLite } from 'gsap'
 
-//確認登入狀況
 function App() {
-  let history = useHistory()
+  const history = useHistory()
+  const [hide, setHide] = useState(false)
   const [uid, setUid] = useState('')
   const [userData, setUserData] = useState('')
-  let userName = document.getElementById('userName')
-  let [hide, setHide] = useState(false)
+  // const [userName, setUserName] = useState('使用者尚未登入')
+  const [showSignInBtn, setShowSignInBtn] = useState(true)
+  const [showSignOutBtn, setShowSignOutBtn] = useState(false)
+  const userName = document.getElementById('userName')
   auth.onAuthStateChanged(function (user) {
     if (user) {
       setUid(auth.currentUser.uid)
       setUserData(auth.currentUser)
       userName.textContent = `${auth.currentUser.displayName}`
     } else {
-      console.log('使用者尚未登入')
       userName.style = 'cursor: default'
     }
   })
 
   useEffect(() => {
-    let signInBtn = document.getElementById('signInBtn')
-    let signOutBtn = document.getElementById('signOutBtn')
-
     if (uid) {
-      //顯示使用者名字
-      signInBtn.style.display = 'none'
-      signOutBtn.style.display = 'block'
-    } else {
-      console.log('使用者尚未登入')
-      signInBtn.style.display = 'block'
-      signOutBtn.style.display = 'none'
+      setShowSignInBtn(false)
+      setShowSignOutBtn(true)
     }
   }, [uid])
   function toProfilePage() {
@@ -53,19 +39,16 @@ function App() {
       history.push('/profile')
     }
   }
-  // 滾動出現Header
-  const headRef = useRef(null)
 
+  const headRef = useRef(null)
   const scrollevent = (value) => {
-    // let st = value.scrollTop
-    // console.log(value.scrollTop)
     if (value.scrollTop > 80) {
       setHide(true)
     } else {
       setHide(false)
     }
   }
-  // console.log(lastScroll)
+
   return (
     <div className={styles.App} onScroll={(e) => scrollevent(e.target)}>
       <nav className={`${styles.header}  ${hide ? styles.hideUp : ''}`} ref={headRef}>
@@ -84,16 +67,25 @@ function App() {
             </div>
           </li>
           <li className={styles.signIn}>
-            <Button variant="default" className={styles.signInBtn} id="signInBtn" onClick={signInWithFacebook}>
+            <Button
+              variant="default"
+              className={`${styles.signInBtn} ${showSignInBtn ? '' : styles.signInBtnHideUp}`}
+              // id="signInBtn"
+              onClick={signInWithFacebook}
+            >
               登入
             </Button>
-            <Button variant="default" className={styles.signOutBtn} id="signOutBtn" onClick={signOutWithFacebook}>
+            <Button
+              variant="default"
+              className={`${styles.signOutBtn} ${showSignOutBtn ? '' : styles.signOutBtnHideUp}`}
+              // id="signOutBtn"
+              onClick={signOutWithFacebook}
+            >
               登出
             </Button>
           </li>
         </ul>
       </nav>
-      {/* <Router> */}
       <Route path="/eventpage" exact>
         <EventPage uid={uid} />
       </Route>
@@ -101,8 +93,6 @@ function App() {
         <ProfilePage userData={userData} />
       </Route>
       <Route path="/" exact component={HomePage} />
-      {/* <ScrollToTop /> */}
-      {/* </Router> */}
     </div>
   )
 }

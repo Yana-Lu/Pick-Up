@@ -13,7 +13,7 @@
 .IntroImg1 {
   width: 100%;
   height: 100%;
-  background-image: url('./../images/requipments.jpg');
+  background-image: url('../../images/requipments.jpg');
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -27,9 +27,9 @@ key visual big text
 ================================================================*/
 
 @import url(https://fonts.googleapis.com/css?family=Khula:700);
-body {
+/* body {
   background-color: #112233;
-}
+} */
 .hidden {
   opacity: 0;
 }
@@ -87,17 +87,17 @@ Start for Pick Up
   max-height: 300px; */
 }
 .hero-grid-image1 {
-  background-image: url('./../images/beach.jpg');
+  background-image: url('../../images/beach.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
 .hero-grid-image2 {
-  background-image: url('./../images/trash2.jpg');
+  background-image: url('../../images/trash2.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
 .hero-grid-image3 {
-  background-image: url('./../images/poorCrab.jpg');
+  background-image: url('../../images/poorCrab.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }

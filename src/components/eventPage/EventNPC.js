@@ -1,13 +1,9 @@
 import React, { useEffect } from 'react'
-import styles from '../scss/EventPage.module.scss'
+import styles from './EventPage.module.scss'
 import Fade from 'react-reveal/Fade'
-
-//alert樣式
 import Swal from 'sweetalert2'
 
 export function EventNPC(props) {
-  console.log(props)
-  // console.log(props.uid)
   useEffect(() => {
     let mapContain = document.getElementById('mapContain')
     let ifBeHost = document.getElementById('ifBeHost')
@@ -15,14 +11,12 @@ export function EventNPC(props) {
     let ifBeMember = document.getElementById('ifBeMember')
     let eventStep2 = document.getElementById('eventStep2')
     let eventInfo = document.getElementById('eventInfo')
-    console.log(props.uid)
+
     function alert() {
       if (!props.uid) {
-        console.log('1')
         Swal.fire({
           icon: 'warning',
           title: '請先登入喔!',
-          // title: '1',
         })
       }
     }
@@ -93,15 +87,16 @@ export function EventNPC(props) {
           <h3>點擊"我想跟團"</h3>
           <br />
           <h3>填好完整資料並點擊跟團按鈕</h3>
-        </div>
-        <div className={styles.eventInfo} id="eventInfo">
-          <p id="infoTitle">行動主題：</p>
-          <p id="infoHost">開團人：</p>
-          <p id="infoEmail">開團人信箱：</p>
-          <p id="infoStartDate">活動日期：</p>
-          <p id="infoTime">活動時間：</p>
-          <p id="memberLimit">人數上限：</p>
-          <p id="memberNum">目前人數：</p>
+
+          <div className={styles.eventInfo} id="eventInfo">
+            <p id="infoTitle">行動主題：</p>
+            <p id="infoHost">開團人：</p>
+            <p id="infoEmail">開團人信箱：</p>
+            <p id="infoStartDate">活動日期：</p>
+            <p id="infoTime">活動時間：</p>
+            <p id="memberLimit">人數上限：</p>
+            <p id="memberNum">目前人數：</p>
+          </div>
         </div>
       </Fade>
     </div>

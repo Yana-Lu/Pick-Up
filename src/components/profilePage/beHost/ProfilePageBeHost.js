@@ -1,14 +1,8 @@
 import React from 'react'
-//beHost data
 import { BeHostEvent } from './BeHostEvent'
-//scss
-import styles from '../scss/ProfilePage.module.scss'
+import styles from '../ProfilePage.module.scss'
 export function ProfilePageBeHost(props) {
-  console.log(props)
   const events = props.events
-  // console.log(events)
-  // let uid = props.uid
-
   const beHostEvents = events.map((event) => (
     <BeHostEvent
       uid={props.uid}

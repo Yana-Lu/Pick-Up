@@ -64,7 +64,6 @@ p {
   display: none;
 }
 .container {
-  // margin-top: 30px;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -80,11 +79,11 @@ p {
       display: flex;
       flex-wrap: wrap;
       .eventHost {
-        // background-color: #cbcfbd;
         display: block;
         width: 45%;
         padding: 10px;
         border: #a8dadc 2px solid;
+        background-color: #ffffff;
         border-radius: 5px;
         box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
         .ifBeHost {
@@ -95,7 +94,7 @@ p {
           .ifBeHostImg {
             width: 50px;
             height: 50px;
-            background-image: url('./../images/raiseHand.png');
+            background-image: url('../../images/raiseHand.png');
             background-repeat: no-repeat;
             background-size: cover;
             margin-right: 10px;
@@ -110,6 +109,7 @@ p {
         display: block;
         width: 45%;
         padding: 10px;
+        background-color: #ffffff;
         border: #a8dadc 2px solid;
         border-radius: 5px;
         box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
@@ -121,7 +121,7 @@ p {
           .ifBeMemberImg {
             width: 50px;
             height: 50px;
-            background-image: url('./../images/highFive.png');
+            background-image: url('../../images/highFive.png');
             background-repeat: no-repeat;
             background-size: cover;
             margin-right: 10px;
@@ -133,17 +133,25 @@ p {
       }
       .eventStep1 {
         margin-top: 30px;
-        width: 100%;
+        padding: 10px;
+        width: 92%;
         display: none;
+        background-color: #eaf4f7;
+        border-radius: 5px;
+        box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
         h3 {
           font-size: 1.5rem;
           line-height: 2rem;
         }
       }
       .eventStep2 {
-        width: 100%;
+        width: 92%;
         display: none;
         margin-top: 30px;
+        padding: 10px;
+        background-color: #eaf4f7;
+        border-radius: 5px;
+        box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
         h3 {
           font-size: 1.5rem;
           line-height: 2rem;
@@ -151,7 +159,7 @@ p {
       }
       .eventInfo {
         margin-top: 20px;
-        width: 93%;
+        width: 100%;
         display: none;
         padding: 10px;
         background-color: #d6ecf3;

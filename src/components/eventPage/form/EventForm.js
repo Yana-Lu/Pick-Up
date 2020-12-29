@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { SetEvent } from './Firebase'
-import { Form, Button, Col } from 'react-bootstrap'
-//時間選擇器
+import { SetEvent } from '../../Firebase'
 import 'react-datepicker/dist/react-datepicker.css'
 import 'date-fns'
 import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers'
-//alert樣式
+import { Form, Button, Col } from 'react-bootstrap'
 import Swal from 'sweetalert2'
-// import { makeStyles } from '@material-ui/core/styles'
-// import Alert from '@material-ui/lab/Alert'
-//scss
-import styles from '../scss/EventPage.module.scss'
+import styles from '../EventPage.module.scss'
 
 export function EventForm(props) {
   const [title, setTitle] = useState('')
@@ -23,9 +18,8 @@ export function EventForm(props) {
   const [endTime, setEndTime] = useState(new Date().setDate(new Date().getDate() + 1))
   const [memberLimit, setMemberLimit] = useState('')
 
-  //判斷Email格式
-  let isEmail = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
-  let emailInput = document.getElementById('event-email-input')
+  const isEmail = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
+  const emailInput = document.getElementById('event-email-input')
   useEffect(() => {
     emailInput?.addEventListener('blur', () => {
       if (!isEmail.test(emailInput.value)) {
@@ -34,9 +28,9 @@ export function EventForm(props) {
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [emailInput])
-  //判斷手機格式
-  let isMobNumber = /^09\d{8}$/
-  let phoneInput = document.getElementById('event-phone-input')
+
+  const isMobNumber = /^09\d{8}$/
+  const phoneInput = document.getElementById('event-phone-input')
   useEffect(() => {
     phoneInput?.addEventListener('blur', () => {
       if (!isMobNumber.test(phoneInput.value)) {
@@ -52,7 +46,6 @@ export function EventForm(props) {
       setHost(e.target.value)
     } else if (e.target.id === 'event-phone-input') {
       setPhone(e.target.value)
-      // setPhoneValue(e.target.value)
     } else if (e.target.id === 'event-email-input') {
       setEmail(e.target.value)
     } else {
@@ -61,7 +54,6 @@ export function EventForm(props) {
   }
 
   function handleDateChange(e) {
-    // console.log(e)
     setEventDate(e)
     setStartTime(new Date(e.getFullYear(), e.getMonth(), e.getDate(), 0, 0))
     setEndTime(new Date(e.getFullYear(), e.getMonth(), e.getDate(), 0, 0))
@@ -75,9 +67,6 @@ export function EventForm(props) {
 
   function eventSubmit(e) {
     e.preventDefault()
-    //打包表單、經緯度、使用者ID資料
-    console.log(typeof host)
-    console.log(host.value)
 
     let obj = {
       title: title,
@@ -86,14 +75,13 @@ export function EventForm(props) {
       phone: phone,
       lat: props.location[0].lat,
       lng: props.location[0].lng,
-      //時間選擇
       startTime: startTime,
       endTime: endTime,
       memberLimit: memberLimit,
       status: 'true',
       userId: props.uid,
     }
-    //判斷有沒有輸入內容
+
     if (host === '') {
       Swal.fire('請輸入姓名')
     } else if (phone === '') {
@@ -104,7 +92,7 @@ export function EventForm(props) {
       Swal.fire('請輸入活動名稱')
     } else if (startTime === endTime) {
       Swal.fire('請確認活動時間')
-    } else if (memberLimit === '') {
+    } else if (memberLimit === '' || memberLimit <= 0) {
       Swal.fire('請輸入人數上限')
     } else {
       SetEvent(obj)
@@ -115,7 +103,6 @@ export function EventForm(props) {
         cancelButtonText: `取消`,
       })
         .then((result) => {
-          /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             Swal.fire('開團成功!', '', 'success')
           }
@@ -123,7 +110,7 @@ export function EventForm(props) {
         .then(() => {
           let closePopup = document.getElementById('eventForm')
           closePopup.style.display = 'none'
-          props.setSelected2(null)
+          props.setSelectedNewSite(null)
           props.setNewMarker([])
         })
     }
@@ -144,11 +131,7 @@ export function EventForm(props) {
               <Form.Label>姓名</Form.Label>
               <Form.Control type="text" placeholder="範例：宮城獅" onChange={eventChange} />
             </Form.Group>
-            <Form.Group
-              // validationState={getValidationState()}
-              as={Col}
-              controlId="event-phone-input"
-            >
+            <Form.Group as={Col} controlId="event-phone-input">
               <Form.Label>連絡電話</Form.Label>
               <Form.Control type="text" placeholder="範例：0912345678" onChange={eventChange} />
             </Form.Group>
@@ -166,10 +149,8 @@ export function EventForm(props) {
             <div className={styles.startDateNav}></div>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
-                //最小可選日期為明天
                 minDate={new Date().setDate(new Date().getDate() + 1)}
                 autoOk
-                // disablePast
                 disableToolbar
                 variant="inline"
                 format="yyyy/MM/dd"

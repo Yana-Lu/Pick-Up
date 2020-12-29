@@ -1,12 +1,10 @@
 import React from 'react'
-import styles from '../scss/EventPage.module.scss'
+import styles from './EventPage.module.scss'
 import { EventNPC } from './EventNPC'
-import { Maps } from './Maps'
+import { Maps } from './map/Maps'
 import Fade from 'react-reveal/Fade'
 
 export function EventPage(props) {
-  console.log(props)
-
   return (
     <div className={styles.container}>
       <div className={styles.containerLeft}>

@@ -1,11 +1,8 @@
 import React from 'react'
-// import { showResults } from './Firebase'
-//scss
-import styles from '../scss/Result.module.scss'
+import styles from './Result.module.scss'
 import { Button } from 'react-bootstrap'
 
 export function Result(props) {
-  console.log(props)
   let weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
   let result = props.eventData.results[0]
   const resultList = (

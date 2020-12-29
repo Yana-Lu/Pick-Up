@@ -5,7 +5,6 @@ import App from './App'
 import ScrollToTop from './components/ScrollToTop'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Switch } from 'react-router-dom'
-// import BootstrapBtn from './BootstrapBtn'
 
 ReactDOM.render(
   <BrowserRouter>

@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { showEvent } from './Firebase'
-import styles from '../scss/Map.module.scss'
+import { showEvent } from '../../Firebase'
+import styles from './Map.module.scss'
 import MapStyles from './MapStyles'
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
-// import { Data } from '@react-google-maps/api'
 import Swal from 'sweetalert2'
-import { JoinForm } from './JoinForm'
-import { EventForm } from './EventForm'
+import { JoinForm } from '../form/JoinForm'
+import { EventForm } from '../form/EventForm'
 import { Button } from 'react-bootstrap'
 
 const libraries = ['places']
@@ -27,18 +26,15 @@ const options = {
 }
 
 export function Maps(props) {
-  console.log(props)
-  //抓開/跟團指示的對話框以及事件資訊id
-  let eventStep1 = document.getElementById('eventStep1')
-  let eventStep2 = document.getElementById('eventStep2')
-  let eventInfo = document.getElementById('eventInfo')
-  let ifBeHost = document.getElementById('ifBeHost')
-  let ifBeMember = document.getElementById('ifBeMember')
+  const eventStep1 = document.getElementById('eventStep1')
+  const eventStep2 = document.getElementById('eventStep2')
+  const eventInfo = document.getElementById('eventInfo')
+  const ifBeHost = document.getElementById('ifBeHost')
+  const ifBeMember = document.getElementById('ifBeMember')
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: `AIzaSyAhDv35adlrxazUwPtZvjU7NE3RAaq3piQ`,
     libraries,
   })
-  //render畫面用
   const [events, setEvents] = useState([])
 
   useEffect(() => {
@@ -47,14 +43,9 @@ export function Maps(props) {
     }
     showEvent(saveEventsInMap)
   }, [])
-
-  console.log(events)
-  //render markers
-  // eslint-disable-next-line no-unused-vars
-  const [markers, setMarkers] = useState([])
-  //click to choose new location
+  // const [markers, setMarkers] = useState([])
   const [newMarker, setNewMarker] = useState([])
-  let allMarkers = []
+  const allMarkers = []
   events.forEach((event) => {
     allMarkers.push({
       eventId: event.eventId,
@@ -74,16 +65,10 @@ export function Maps(props) {
       status: event.status,
     })
   })
-  console.log(markers)
-  console.log(allMarkers)
 
   const onMapClick = useCallback(
     (event) => {
-      console.log(props)
-      console.log(props.uid)
-      //抓開/跟團指示的對話框以及事件資訊id
       if (props.uid) {
-        console.log(props.uid)
         setNewMarker(() => [
           {
             lat: event.latLng.lat(),
@@ -91,16 +76,15 @@ export function Maps(props) {
             time: new Date().getTime(),
           },
         ])
-        //開啟開團教學框
         eventStep1.style.display = 'block'
         eventStep2.style.display = 'none'
         eventInfo.style.display = 'none'
         ifBeHost.style.backgroundColor = '#add8e6'
         ifBeMember.style.backgroundColor = ''
         //清除"我要跟團"InfoBox
-        setSelected1(null)
+        setSelectedEvent(null)
         //清除"我要開團"InfoBox
-        setSelected2(null)
+        setSelectedNewSite(null)
       } else {
         setNewMarker([])
       }
@@ -110,9 +94,9 @@ export function Maps(props) {
   )
   //點擊icon時存該點data
   //跟團
-  const [selected1, setSelected1] = useState(null)
+  const [selectedEvent, setSelectedEvent] = useState(null)
   //開團
-  const [selected2, setSelected2] = useState(null)
+  const [selectedNewSite, setSelectedNewSite] = useState(null)
 
   if (loadError) return 'Error loading maps'
   if (!isLoaded) return 'Loading Maps'
@@ -121,20 +105,20 @@ export function Maps(props) {
   function ShowMarkerData(obj) {
     console.log(obj)
     //抓日期
-    let startTimeObj = new Date(obj?.startTime)
-    let endTimeObj = new Date(obj?.endTime)
-    let weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
+    const startTimeObj = new Date(obj?.startTime)
+    const endTimeObj = new Date(obj?.endTime)
+    const weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
     // 抓時間
-    let startTimePart = startTimeObj.toTimeString().split(':')
-    let endTimePart = endTimeObj.toTimeString().split(':')
+    const startTimePart = startTimeObj.toTimeString().split(':')
+    const endTimePart = endTimeObj.toTimeString().split(':')
 
-    let infoTitle = document.getElementById('infoTitle')
-    let infoHost = document.getElementById('infoHost')
-    let infoEmail = document.getElementById('infoEmail')
-    let infoStartDate = document.getElementById('infoStartDate')
-    let infoTime = document.getElementById('infoTime')
-    let memberLimit = document.getElementById('memberLimit')
-    let memberNum = document.getElementById('memberNum')
+    const infoTitle = document.getElementById('infoTitle')
+    const infoHost = document.getElementById('infoHost')
+    const infoEmail = document.getElementById('infoEmail')
+    const infoStartDate = document.getElementById('infoStartDate')
+    const infoTime = document.getElementById('infoTime')
+    const memberLimit = document.getElementById('memberLimit')
+    const memberNum = document.getElementById('memberNum')
     infoTitle.textContent = `行動主題：${obj?.title}`
     infoHost.textContent = `開團人：${obj?.hostName}`
     infoEmail.textContent = `開團人信箱：${obj?.email}`
@@ -152,20 +136,20 @@ export function Maps(props) {
   }
 
   function showJoinForm() {
-    console.log(props.uid)
-    console.log(selected1)
-    console.log(selected1.memberId)
-    let memberIdArray = selected1.memberId
-    let memberIdArray1 = memberIdArray.filter(function (x) {
+    // console.log(props.uid)
+    // console.log(selectedEvent)
+    // console.log(selectedEvent.memberId)
+    const memberIdArray = selectedEvent.memberId
+    const memberIdArray1 = memberIdArray.filter(function (x) {
       return x === props.uid
     })
     console.log(memberIdArray1)
     if (memberIdArray1.length === 1) {
       Swal.fire('不可以重複跟團喔！', '除非你會影分身之術', 'warning')
-    } else if (props.uid === selected1.hostId) {
+    } else if (props.uid === selectedEvent.hostId) {
       Swal.fire('這是你本人開的團喔！', '', 'warning')
     } else {
-      let closePopup = document.getElementById('joinForm')
+      const closePopup = document.getElementById('joinForm')
       closePopup.style.display = 'block'
     }
   }
@@ -177,7 +161,7 @@ export function Maps(props) {
         title: '請先登入喔!',
       })
     } else {
-      let closePopup = document.getElementById('eventForm')
+      const closePopup = document.getElementById('eventForm')
       closePopup.style.display = 'block'
     }
   }
@@ -189,10 +173,12 @@ export function Maps(props) {
     // console.log(obj.marker.members)
     // console.log(obj.marker.members?.length)
     // console.log(obj.marker.memberLimit)
-    // useEffect(() => {
     if (obj.marker.members?.length < obj.marker.memberLimit) {
       return (
-        <InfoWindow position={{ lat: selected1?.lat, lng: selected1?.lng }} onCloseClick={() => setSelected1(null)}>
+        <InfoWindow
+          position={{ lat: selectedEvent?.lat, lng: selectedEvent?.lng }}
+          onCloseClick={() => setSelectedEvent(null)}
+        >
           <div>
             <Button className={styles.openForm} variant="outline-danger" onClick={showJoinForm}>
               我要跟團
@@ -201,16 +187,17 @@ export function Maps(props) {
         </InfoWindow>
       )
     } else {
-      console.log('2')
       return (
-        <InfoWindow position={{ lat: selected1?.lat, lng: selected1?.lng }} onCloseClick={() => setSelected1(null)}>
+        <InfoWindow
+          position={{ lat: selectedEvent?.lat, lng: selectedEvent?.lng }}
+          onCloseClick={() => setSelectedEvent(null)}
+        >
           <div>
             <p style={{ fontSize: '1rem', margin: '0' }}>報名人數已額滿</p>
           </div>
         </InfoWindow>
       )
     }
-    // }, [])
   }
 
   return (
@@ -230,12 +217,12 @@ export function Maps(props) {
             onClick={() => {
               //清除"我要開團"icon及InfoBox
               setNewMarker([])
-              setSelected2(null)
+              setSelectedNewSite(null)
               console.log(props.uid)
               console.log(marker)
               if (props.uid) {
                 //儲存這個點的經緯度到marker並show此事件的Data
-                setSelected1(marker)
+                setSelectedEvent(marker)
                 ShowMarkerData(marker)
                 //關開團教學框，開跟團教學框
                 eventStep1.style.display = 'none'
@@ -257,20 +244,20 @@ export function Maps(props) {
               scaledSize: new window.google.maps.Size(50, 50),
             }}
             onClick={() => {
-              setSelected2(marker)
+              setSelectedNewSite(marker)
               eventStep1.style.display = 'block'
               eventStep2.style.display = 'none'
               eventInfo.style.display = 'none'
             }}
           />
         ))}
-        {selected1 ? <Recruitment marker={selected1} /> : null}
+        {selectedEvent ? <Recruitment marker={selectedEvent} /> : null}
 
-        {selected2 ? (
+        {selectedNewSite ? (
           <InfoWindow
-            position={{ lat: selected2.lat, lng: selected2.lng }}
+            position={{ lat: selectedNewSite.lat, lng: selectedNewSite.lng }}
             onCloseClick={() => {
-              setSelected2(null)
+              setSelectedNewSite(null)
               setNewMarker([])
             }}
           >
@@ -283,12 +270,12 @@ export function Maps(props) {
         ) : null}
       </GoogleMap>
       <JoinForm
-        event={selected1}
+        event={selectedEvent}
         uid={props.uid}
         events={events}
         setEvents={setEvents}
-        selected1={selected1}
-        setSelected1={setSelected1}
+        selectedEvent={selectedEvent}
+        setSelectedEvent={setSelectedEvent}
         ShowMarkerData={ShowMarkerData}
       />
       <EventForm
@@ -298,8 +285,8 @@ export function Maps(props) {
         setEvents={setEvents}
         newMarker={newMarker}
         setNewMarker={setNewMarker}
-        selected2={selected2}
-        setSelected2={setSelected2}
+        selectedNewSite={selectedNewSite}
+        setSelectedNewSite={setSelectedNewSite}
       />
     </div>
   )

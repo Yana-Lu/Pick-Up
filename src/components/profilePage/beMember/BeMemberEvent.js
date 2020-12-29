@@ -1,11 +1,8 @@
 import React from 'react'
-//scss
-import styles from '../scss/ProfilePage.module.scss'
-//StatusAndBtn
-import { StatusAndBtn } from './StatusAndBtn'
-export function BeMemberEvent(props) {
-  console.log(props)
+import styles from '../ProfilePage.module.scss'
+import { StatusAndBtn } from '../StatusAndBtn'
 
+export function BeMemberEvent(props) {
   let weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
 
   const memberList = (
@@ -26,7 +23,6 @@ export function BeMemberEvent(props) {
       </p>
       <p className={styles.eventMumberLimit}>人數上限：{props.event.member_limit} 人</p>
       <p className={styles.eventMumbers}>參加人數：{props.event.members.length} 人</p>
-      {/* <p className={styles.eventStatus}>活動狀態：{props.event.status}</p> */}
     </div>
   )
 

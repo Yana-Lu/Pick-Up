@@ -1,13 +1,8 @@
 import React from 'react'
-//scss
-import styles from '../scss/ProfilePage.module.scss'
-//memberDataBtn
+import styles from '../ProfilePage.module.scss'
 import { MemberDataBtn } from './MemberDataBtn'
-//StatusAndBtn
-import { StatusAndBtn } from './StatusAndBtn'
+import { StatusAndBtn } from '../StatusAndBtn'
 export function BeHostEvent(props) {
-  console.log(props)
-
   let weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
 
   const eventList = (

@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { JoinEvent } from './Firebase'
+import { JoinEvent } from '../../Firebase'
 import { Form, Button, Col } from 'react-bootstrap'
-//alert樣式
 import Swal from 'sweetalert2'
-//scss
-import styles from '../scss/EventPage.module.scss'
+import styles from '../EventPage.module.scss'
 
 export function JoinForm(props) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
 
-  console.log(props)
-  //render畫面用
-
-  //判斷Email格式
   let isEmail = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
   let emailInput = document.getElementById('memeber-email-input')
   useEffect(() => {
@@ -25,7 +19,7 @@ export function JoinForm(props) {
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [emailInput])
-  //判斷手機格式
+
   let isMobNumber = /^09\d{8}$/
   let phoneInput = document.getElementById('memeber-phone-input')
   useEffect(() => {
@@ -37,8 +31,6 @@ export function JoinForm(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phoneInput])
   function eventChange(e) {
-    console.log(e.target.id)
-    console.log(e.target.value)
     if (e.target.id === 'memeber-name-input') {
       setName(e.target.value)
     } else if (e.target.id === 'memeber-phone-input') {
@@ -51,7 +43,7 @@ export function JoinForm(props) {
   const [thisEvendId, setThisEventId] = useState('')
   function handleSubmit(e) {
     e.preventDefault()
-    //打包表單
+
     let obj = {
       name: name,
       email: email,
@@ -60,7 +52,6 @@ export function JoinForm(props) {
       userId: props.uid,
     }
 
-    //判斷有沒有輸入內容
     if (name === '') {
       Swal.fire('請輸入姓名')
     } else if (phone === '') {
@@ -69,8 +60,7 @@ export function JoinForm(props) {
       Swal.fire('請輸入Email')
     } else {
       JoinEvent(obj)
-      //在selected1被存成null前把eventId存下來
-      setThisEventId(props.selected1.eventId)
+      setThisEventId(props.selectedEvent.eventId)
       Swal.fire({
         title: '確定要跟團嗎？',
         showCancelButton: true,
@@ -78,7 +68,6 @@ export function JoinForm(props) {
         cancelButtonText: `取消`,
       })
         .then((result) => {
-          /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
             Swal.fire('跟團成功!', '', 'success')
           }
@@ -86,12 +75,11 @@ export function JoinForm(props) {
         .then(() => {
           let closePopup = document.getElementById('joinForm')
           closePopup.style.display = 'none'
-          props.setSelected1(null)
-          // props.setNewMarker([])
+          props.setSelectedEvent(null)
         })
     }
   }
-  //改變"想要跟團"的參加人數資訊
+
   useEffect(() => {
     for (let i = 0; i < props.events.length; i++) {
       if (props.events[i].eventId === thisEvendId) {
