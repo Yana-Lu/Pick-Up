@@ -16,14 +16,14 @@ function App() {
   const [userData, setUserData] = useState('')
   const [showSignInBtn, setShowSignInBtn] = useState(true)
   const [showSignOutBtn, setShowSignOutBtn] = useState(false)
-  const userName = document.getElementById('userName')
+  const userNameRef = useRef(null)
   auth.onAuthStateChanged(function (user) {
     if (user) {
       setUid(auth.currentUser.uid)
       setUserData(auth.currentUser)
-      userName.textContent = `${auth.currentUser.displayName}`
+      userNameRef.current.textContent = `${auth.currentUser.displayName}`
     } else {
-      userName.style = 'cursor: default'
+      userNameRef.current.style = 'cursor: default'
     }
   })
 
@@ -61,7 +61,7 @@ function App() {
             <Link to="/eventpage">我要參與</Link>
           </li>
           <li className={styles.hiUser}>
-            <div className={styles.userName} id="userName" onClick={toProfilePage}>
+            <div className={styles.userName} ref={userNameRef} onClick={toProfilePage}>
               目前未登入
             </div>
           </li>

@@ -131,7 +131,6 @@ export function JoinEvent(obj) {
 }
 
 function saveMemberId(userId, eventId) {
-  console.log(userId)
   db.collection('user')
     .doc(userId)
     .update({

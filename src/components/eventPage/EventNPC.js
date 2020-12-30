@@ -1,59 +1,50 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styles from './EventPage.module.scss'
 import Fade from 'react-reveal/Fade'
-import Swal from 'sweetalert2'
 
 export function EventNPC(props) {
-  useEffect(() => {
-    const mapContain = document.getElementById('mapContain')
-    const ifBeHost = document.getElementById('ifBeHost')
-    const eventStep1 = document.getElementById('eventStep1')
-    const ifBeMember = document.getElementById('ifBeMember')
-    const eventStep2 = document.getElementById('eventStep2')
-    const eventInfo = document.getElementById('eventInfo')
+  console.log(props)
+  EventNPC.propTypes = {
+    uid: PropTypes.string,
+    beHostInfo: PropTypes.bool,
+    setBeHostInfo: PropTypes.func,
+    beMemberInfo: PropTypes.bool,
+    setBeMemberInfo: PropTypes.func,
+    showbeHostInfo: PropTypes.bool,
+    setShowbeHostInfo: PropTypes.func,
+    showbeMemberInfo: PropTypes.bool,
+    setShowbeMemberInfo: PropTypes.func,
+    infoTitle: PropTypes.string,
+    infoHost: PropTypes.string,
+    infoEmail: PropTypes.string,
+    infoStartDate: PropTypes.string,
+    infoTime: PropTypes.string,
+    memberLimit: PropTypes.string,
+    memberNum: PropTypes.string,
+  }
 
-    EventNPC.propTypes = {
-      uid: PropTypes.string,
-    }
+  function clickBeHostBtn() {
+    props.setBeMemberInfo(false)
+    props.setShowbeMemberInfo(false)
+    props.setBeHostInfo(true)
+    props.setShowbeHostInfo(true)
+  }
+  function clickBeMemberBtn() {
+    props.setBeHostInfo(false)
+    props.setShowbeHostInfo(false)
+    props.setBeMemberInfo(true)
+    props.setShowbeMemberInfo(true)
+  }
 
-    function alert() {
-      if (!props.uid) {
-        Swal.fire({
-          icon: 'warning',
-          title: '請先登入喔!',
-        })
-      }
-    }
-
-    mapContain?.addEventListener('click', alert)
-
-    ifBeHost?.addEventListener('click', () => {
-      eventStep1.style.display = 'block'
-      ifBeHost.style.backgroundColor = '#add8e6'
-    })
-    ifBeMember?.addEventListener('click', () => {
-      eventStep1.style.display = 'none'
-      ifBeHost.style.backgroundColor = ''
-    })
-    ifBeMember?.addEventListener('click', () => {
-      eventStep2.style.display = 'block'
-      eventInfo.style.display = 'block'
-      ifBeMember.style.backgroundColor = '#add8e6'
-    })
-    ifBeHost?.addEventListener('click', () => {
-      eventStep2.style.display = 'none'
-      eventInfo.style.display = 'none'
-      ifBeMember.style.backgroundColor = ''
-    })
-    return function cleanup() {
-      mapContain.removeEventListener('click', alert)
-    }
-  }, [props.uid])
   return (
     <div className={styles.eventHostBG}>
       <Fade top>
-        <div className={styles.eventHost} id="ifBeHost">
+        <div
+          className={`${styles.eventHost}  ${props.beHostInfo ? styles.lightUp : ''}`}
+          id="ifBeHost"
+          onClick={clickBeHostBtn}
+        >
           <br />
           <div className={styles.ifBeHost}>
             <div className={styles.ifBeHostImg}></div>
@@ -63,7 +54,11 @@ export function EventNPC(props) {
         </div>
       </Fade>
       <Fade top>
-        <div className={styles.eventJoin} id="ifBeMember">
+        <div
+          className={`${styles.eventJoin}  ${props.beMemberInfo ? styles.lightUp : ''}`}
+          id="ifBeMember"
+          onClick={clickBeMemberBtn}
+        >
           <br />
           <div className={styles.ifBeMember}>
             <div className={styles.ifBeMemberImg}></div>
@@ -73,7 +68,7 @@ export function EventNPC(props) {
         </div>
       </Fade>
       <Fade>
-        <div className={styles.eventStep1} id="eventStep1">
+        <div className={`${styles.eventStep1}  ${props.showbeHostInfo ? styles.showUp : ''}`} id="eventStep1">
           <h3>在地圖上點擊地點設立座標</h3>
           <br />
           <h3>點擊該座標</h3>
@@ -85,21 +80,21 @@ export function EventNPC(props) {
       </Fade>
 
       <Fade>
-        <div className={styles.eventStep2} id="eventStep2">
+        <div className={`${styles.eventStep2}  ${props.showbeMemberInfo ? styles.showUp : ''}`} id="eventStep2">
           <h3>點擊地圖上想跟團的座標</h3>
           <br />
           <h3>點擊我想跟團</h3>
           <br />
           <h3>填好完整資料並點擊跟團按鈕</h3>
 
-          <div className={styles.eventInfo} id="eventInfo">
-            <p id="infoTitle">行動主題：</p>
-            <p id="infoHost">開團人：</p>
-            <p id="infoEmail">開團人信箱：</p>
-            <p id="infoStartDate">活動日期：</p>
-            <p id="infoTime">活動時間：</p>
-            <p id="memberLimit">人數上限：</p>
-            <p id="memberNum">目前人數：</p>
+          <div className={styles.eventInfo}>
+            <p id="infoTitle">行動主題： {props.infoTitle}</p>
+            <p id="infoHost">開團人： {props.infoHost}</p>
+            <p id="infoEmail">開團人信箱： {props.infoEmail}</p>
+            <p id="infoStartDate">活動日期： {props.infoStartDate}</p>
+            <p id="infoTime">活動時間： {props.infoTime}</p>
+            <p id="memberLimit">人數上限： {props.memberLimit} </p>
+            <p id="memberNum">目前人數： {props.memberNum}</p>
           </div>
         </div>
       </Fade>

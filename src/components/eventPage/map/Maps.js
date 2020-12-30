@@ -8,6 +8,7 @@ import Swal from 'sweetalert2'
 import { JoinForm } from '../form/JoinForm'
 import { EventForm } from '../form/EventForm'
 import { Button } from 'react-bootstrap'
+// import { propTypes } from 'react-bootstrap/esm/Image'
 
 const libraries = ['places']
 const mapContainerStyle = {
@@ -27,19 +28,38 @@ const options = {
 }
 
 export function Maps(props) {
-  const eventStep1 = document.getElementById('eventStep1')
-  const eventStep2 = document.getElementById('eventStep2')
-  const eventInfo = document.getElementById('eventInfo')
-  const ifBeHost = document.getElementById('ifBeHost')
-  const ifBeMember = document.getElementById('ifBeMember')
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: `AIzaSyAhDv35adlrxazUwPtZvjU7NE3RAaq3piQ`,
     libraries,
   })
   const [events, setEvents] = useState([])
+  const [showUpEventForm, setShowUpEventForm] = useState(false)
+  // const [showUpJoinForm, setShowUpJoinForm] = useState(false)
 
   Maps.propTypes = {
     uid: PropTypes.string,
+    beHostInfo: PropTypes.bool,
+    setBeHostInfo: PropTypes.func,
+    beMemberInfo: PropTypes.bool,
+    setBeMemberInfo: PropTypes.func,
+    showbeHostInfo: PropTypes.bool,
+    setShowbeHostInfo: PropTypes.func,
+    showbeMemberInfo: PropTypes.bool,
+    setShowbeMemberInfo: PropTypes.func,
+    infoTitle: PropTypes.string,
+    setInfoTitle: PropTypes.func,
+    infoHost: PropTypes.string,
+    setInfoHost: PropTypes.func,
+    infoEmail: PropTypes.string,
+    setInfoEmail: PropTypes.func,
+    infoStartDate: PropTypes.string,
+    setInfoStartDate: PropTypes.func,
+    infoTime: PropTypes.string,
+    setInfoTime: PropTypes.func,
+    memberLimit: PropTypes.string,
+    setMemberLimit: PropTypes.func,
+    memberNum: PropTypes.string,
+    setMemberNum: PropTypes.func,
   }
 
   useEffect(() => {
@@ -81,11 +101,10 @@ export function Maps(props) {
             time: new Date().getTime(),
           },
         ])
-        eventStep1.style.display = 'block'
-        eventStep2.style.display = 'none'
-        eventInfo.style.display = 'none'
-        ifBeHost.style.backgroundColor = '#add8e6'
-        ifBeMember.style.backgroundColor = ''
+        props.setBeMemberInfo(false)
+        props.setShowbeMemberInfo(false)
+        props.setBeHostInfo(true)
+        props.setShowbeHostInfo(true)
         //清除"我要跟團"InfoBox
         setSelectedEvent(null)
         //清除"我要開團"InfoBox
@@ -107,30 +126,23 @@ export function Maps(props) {
     const startTimeObj = new Date(obj?.startTime)
     const endTimeObj = new Date(obj?.endTime)
     const weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
-
     const startTimePart = startTimeObj.toTimeString().split(':')
     const endTimePart = endTimeObj.toTimeString().split(':')
 
-    const infoTitle = document.getElementById('infoTitle')
-    const infoHost = document.getElementById('infoHost')
-    const infoEmail = document.getElementById('infoEmail')
-    const infoStartDate = document.getElementById('infoStartDate')
-    const infoTime = document.getElementById('infoTime')
-    const memberLimit = document.getElementById('memberLimit')
-    const memberNum = document.getElementById('memberNum')
-    infoTitle.textContent = `行動主題：${obj?.title}`
-    infoHost.textContent = `開團人：${obj?.hostName}`
-    infoEmail.textContent = `開團人信箱：${obj?.email}`
-    infoStartDate.textContent = `活動日期：${startTimeObj.getFullYear()}/${
-      startTimeObj.getMonth() + 1
-    }/${startTimeObj.getDate()} ${weekdays[startTimeObj.getDay()]}`
-    infoTime.textContent = `活動時間：${startTimePart[0]}：${startTimePart[1]}~${endTimePart[0]}：${endTimePart[1]}`
-    memberLimit.textContent = `人數上限：${obj?.memberLimit} 人`
-    memberNum.textContent = `目前人數：${obj?.members.length} 人`
-    if (obj?.members.length < obj?.memberLimit) {
-      memberNum.textContent = `目前人數：${obj?.members.length} 人 `
+    props.setInfoTitle(obj.title)
+    props.setInfoHost(obj.hostName)
+    props.setInfoEmail(obj.email)
+    props.setInfoStartDate(
+      `${startTimeObj.getFullYear()}/${startTimeObj.getMonth() + 1}/${startTimeObj.getDate()} ${
+        weekdays[startTimeObj.getDay()]
+      }`
+    )
+    props.setInfoTime(`${startTimePart[0]}：${startTimePart[1]}~${endTimePart[0]}：${endTimePart[1]}`)
+    props.setMemberLimit(`${obj.memberLimit} 人`)
+    if (obj.members.length < obj.memberLimit) {
+      props.setMemberNum(`${obj.members.length} `)
     } else {
-      memberNum.textContent = `目前人數：${obj?.members.length} 人 (報名已額滿)`
+      props.setMemberNum('報名人數已額滿')
     }
   }
 
@@ -155,8 +167,7 @@ export function Maps(props) {
         title: '請先登入喔!',
       })
     } else {
-      const closePopup = document.getElementById('eventForm')
-      closePopup.style.display = 'block'
+      setShowUpEventForm(true)
     }
   }
   function Recruitment(obj) {
@@ -203,11 +214,10 @@ export function Maps(props) {
                 setSelectedEvent(marker)
                 ShowMarkerData(marker)
                 //關開團教學框，開跟團教學框
-                eventStep1.style.display = 'none'
-                eventStep2.style.display = 'block'
-                eventInfo.style.display = 'block'
-                ifBeMember.style.backgroundColor = '#add8e6'
-                ifBeHost.style.backgroundColor = ''
+                props.setBeHostInfo(false)
+                props.setShowbeHostInfo(false)
+                props.setBeMemberInfo(true)
+                props.setShowbeMemberInfo(true)
               }
             }}
           />
@@ -222,9 +232,6 @@ export function Maps(props) {
             }}
             onClick={() => {
               setSelectedNewSite(marker)
-              eventStep1.style.display = 'block'
-              eventStep2.style.display = 'none'
-              eventInfo.style.display = 'none'
             }}
           />
         ))}
@@ -256,6 +263,8 @@ export function Maps(props) {
         ShowMarkerData={ShowMarkerData}
       />
       <EventForm
+        showUpEventForm={showUpEventForm}
+        setShowUpEventForm={setShowUpEventForm}
         location={newMarker}
         uid={props.uid}
         events={events}

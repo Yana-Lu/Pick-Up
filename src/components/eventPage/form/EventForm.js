@@ -20,6 +20,7 @@ export function EventForm(props) {
   const [memberLimit, setMemberLimit] = useState('')
 
   EventForm.propTypes = {
+    showUpEventForm: PropTypes.bool,
     location: PropTypes.array,
     lat: PropTypes.number,
     lng: PropTypes.number,
@@ -130,7 +131,7 @@ export function EventForm(props) {
   }
 
   return (
-    <div className={styles.eventFormBG} id="eventForm">
+    <div className={`${styles.eventFormBG}  ${props.showUpEventForm ? styles.showUp : ''}`} id="eventForm">
       <div className={styles.eventFormOut}>
         <Form className={styles.eventForm} onSubmit={eventSubmit}>
           <h3>填寫開團資料</h3>

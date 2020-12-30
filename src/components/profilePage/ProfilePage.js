@@ -43,19 +43,19 @@ export function ProfilePage(props) {
     userBeMember.style.backgroundColor = ''
   })
   useEffect(() => {
-    try {
-      showBeHostEvents(uid, setBeHostEvents)
-    } catch (err) {
-      console.log(err.message)
-    }
+    // try {
+    showBeHostEvents(uid, setBeHostEvents)
+    // } catch (err) {
+    //   console.log(err.message)
+    // }
   }, [uid])
 
   useEffect(() => {
-    try {
-      showBeMemberEvents(uid, setBeMemberEvents)
-    } catch (err) {
-      console.log(err.message)
-    }
+    // try {
+    showBeMemberEvents(uid, setBeMemberEvents)
+    // } catch (err) {
+    //   console.log(err.message)
+    // }
   }, [uid])
 
   return (

@@ -38,6 +38,10 @@ p {
     }
   }
 }
+.showUp {
+  display: block;
+}
+
 .startDateNav {
   width: 100%;
 }
@@ -59,9 +63,6 @@ p {
 
 .Form {
   text-align: center;
-}
-.joinForm {
-  display: none;
 }
 .container {
   width: 100%;
@@ -104,6 +105,9 @@ p {
           }
         }
       }
+      .lightUp {
+        background-color: #add8e6;
+      }
       .eventJoin {
         margin-left: 10px;
         display: block;
@@ -131,6 +135,9 @@ p {
           }
         }
       }
+      .lightUp {
+        background-color: #add8e6;
+      }
       .eventStep1 {
         margin-top: 30px;
         padding: 10px;
@@ -144,6 +151,9 @@ p {
           line-height: 2rem;
         }
       }
+      .showUp {
+        display: block;
+      }
       .eventStep2 {
         width: 92%;
         display: none;
@@ -156,15 +166,18 @@ p {
           font-size: 1.5rem;
           line-height: 2rem;
         }
+
+        .eventInfo {
+          margin-top: 20px;
+          width: 100%;
+          padding: 10px;
+          background-color: #d6ecf3;
+          border-radius: 5px;
+          box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
+        }
       }
-      .eventInfo {
-        margin-top: 20px;
-        width: 100%;
-        display: none;
-        padding: 10px;
-        background-color: #d6ecf3;
-        border-radius: 5px;
-        box-shadow: rgba(149, 157, 165, 0.2) 10px 20px 30px;
+      .showUp {
+        display: block;
       }
     }
   }
