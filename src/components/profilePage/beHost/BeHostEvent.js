@@ -5,7 +5,7 @@ import { MemberDataBtn } from './MemberDataBtn'
 import { StatusAndBtn } from '../StatusAndBtn'
 export function BeHostEvent(props) {
   BeHostEvent.propTypes = {
-    event: PropTypes.array,
+    event: PropTypes.object,
     uid: PropTypes.string,
     beHostEvents: PropTypes.array,
     setBeHostEvents: PropTypes.func,

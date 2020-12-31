@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { JoinEvent } from '../../Firebase'
 import { Form, Button, Col } from 'react-bootstrap'
@@ -9,8 +9,12 @@ export function JoinForm(props) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
+  const emailInputRef = useRef(null)
+  const phoneInputRef = useRef(null)
 
   JoinForm.propTypes = {
+    showUpJoinForm: PropTypes.bool,
+    setShowUpJoinForm: PropTypes.func,
     event: PropTypes.array,
     uid: PropTypes.string,
     selectedEvent: PropTypes.object,
@@ -81,8 +85,7 @@ export function JoinForm(props) {
           }
         })
         .then(() => {
-          const closePopup = document.getElementById('joinForm')
-          closePopup.style.display = 'none'
+          props.setShowUpJoinForm(false)
           props.setSelectedEvent(null)
         })
     }
@@ -97,14 +100,13 @@ export function JoinForm(props) {
   }, [props.events])
 
   function closePopup() {
-    const closePopup = document.getElementById('joinForm')
-    closePopup.style.display = 'none'
+    props.setShowUpJoinForm(false)
   }
 
   return (
-    <div className={styles.formBG} id="joinForm">
-      <div className={styles.formOut}>
-        <Form className={styles.form} onSubmit={handleSubmit}>
+    <div className={`${styles.joinFormBG}  ${props.showUpJoinForm ? styles.showUp : ''}`} id="joinForm">
+      <div className={styles.joinFormOut}>
+        <Form className={styles.joinForm} onSubmit={handleSubmit}>
           <h3>填寫跟團資料</h3>
           <Form.Group as={Col} controlId="memeber-name-input">
             <Form.Label>姓名</Form.Label>
@@ -112,11 +114,11 @@ export function JoinForm(props) {
           </Form.Group>
           <Form.Group as={Col} controlId="memeber-phone-input">
             <Form.Label>連絡電話</Form.Label>
-            <Form.Control type="phone" placeholder="請輸入聯絡電話" onChange={eventChange} />
+            <Form.Control type="phone" placeholder="範例：0912345678" ref={phoneInputRef} onChange={eventChange} />
           </Form.Group>
           <Form.Group as={Col} controlId="memeber-email-input">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="請輸入email" onChange={eventChange} />
+            <Form.Control type="email" placeholder="範例：lion@gmail.com" ref={emailInputRef} onChange={eventChange} />
           </Form.Group>
           <div className={styles.btns}>
             <Button variant="outline-success" type="submit">

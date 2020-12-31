@@ -4,7 +4,6 @@ import styles from './EventPage.module.scss'
 import Fade from 'react-reveal/Fade'
 
 export function EventNPC(props) {
-  console.log(props)
   EventNPC.propTypes = {
     uid: PropTypes.string,
     beHostInfo: PropTypes.bool,

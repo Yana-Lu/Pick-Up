@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { SetEvent } from '../../Firebase'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -18,6 +18,8 @@ export function EventForm(props) {
   const [startTime, setStartTime] = useState(new Date().setDate(new Date().getDate() + 1))
   const [endTime, setEndTime] = useState(new Date().setDate(new Date().getDate() + 1))
   const [memberLimit, setMemberLimit] = useState('')
+  const emailInputRef = useRef(null)
+  const phoneInputRef = useRef(null)
 
   EventForm.propTypes = {
     showUpEventForm: PropTypes.bool,
@@ -30,25 +32,24 @@ export function EventForm(props) {
     setNewMarker: PropTypes.func,
   }
 
-  const isEmail = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
-  const emailInput = document.getElementById('event-email-input')
-  useEffect(() => {
-    emailInput?.addEventListener('blur', () => {
-      if (!isEmail.test(emailInput.value)) {
-        Swal.fire('請輸入正確Email格式')
-      }
-    })
-  }, [emailInput])
-
   const isMobNumber = /^09\d{8}$/
-  const phoneInput = document.getElementById('event-phone-input')
   useEffect(() => {
-    phoneInput?.addEventListener('blur', () => {
-      if (!isMobNumber.test(phoneInput.value)) {
+    phoneInputRef.current.addEventListener('blur', () => {
+      if (!isMobNumber.test(phoneInputRef.current.value)) {
         Swal.fire('請輸入正確手機號碼格式')
       }
     })
-  }, [phoneInput])
+  }, [phone])
+
+  const isEmail = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
+  useEffect(() => {
+    emailInputRef.current.addEventListener('blur', () => {
+      if (!isEmail.test(emailInputRef.current.value)) {
+        Swal.fire('請輸入正確Email格式')
+      }
+    })
+  }, [email])
+
   function eventChange(e) {
     if (e.target.id === 'event-title-input') {
       setTitle(e.target.value)
@@ -118,8 +119,7 @@ export function EventForm(props) {
           }
         })
         .then(() => {
-          const closePopup = document.getElementById('eventForm')
-          closePopup.style.display = 'none'
+          props.setShowUpEventForm(false)
           props.setSelectedNewSite(null)
           props.setNewMarker([])
         })
@@ -131,9 +131,9 @@ export function EventForm(props) {
   }
 
   return (
-    <div className={`${styles.formBG}  ${props.showUpEventForm ? styles.showUp : ''}`} id="eventForm">
-      <div className={styles.formOut}>
-        <Form className={styles.form} onSubmit={eventSubmit}>
+    <div className={`${styles.eventFormBG}  ${props.showUpEventForm ? styles.showUp : ''}`} id="eventForm">
+      <div className={styles.eventFormOut}>
+        <Form className={styles.eventForm} onSubmit={eventSubmit}>
           <h3>填寫開團資料</h3>
           <Form.Row as={Col}>
             <Form.Group as={Col} controlId="event-name-input">
@@ -142,16 +142,16 @@ export function EventForm(props) {
             </Form.Group>
             <Form.Group as={Col} controlId="event-phone-input">
               <Form.Label>連絡電話</Form.Label>
-              <Form.Control type="text" placeholder="範例：0912345678" onChange={eventChange} />
+              <Form.Control type="text" placeholder="範例：0912345678" ref={phoneInputRef} onChange={eventChange} />
             </Form.Group>
           </Form.Row>
           <Form.Group as={Col} controlId="event-email-input">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="範例：lion@gmail.com" onChange={eventChange} />
+            <Form.Control type="email" placeholder="範例：lion@gmail.com" ref={emailInputRef} onChange={eventChange} />
           </Form.Group>
           <Form.Group as={Col} controlId="event-title-input">
             <Form.Label>活動名稱</Form.Label>
-            <Form.Control componentClass="textarea" placeholder="範例：整個海灘都是我的遊樂場" onChange={eventChange} />
+            <Form.Control type="text" placeholder="範例：整個海灘都是我的遊樂場" onChange={eventChange} />
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>活動時間</Form.Label>

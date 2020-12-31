@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { nanoid } from 'nanoid'
 import styles from '../ProfilePage.module.scss'
 import { Button } from 'react-bootstrap'
 
@@ -12,7 +13,7 @@ export function MemberDatas(props) {
 
   const datas = props.eventData.members
   const memberDatas = datas.map((data) => (
-    <div className={styles.memberDatas} key={data.eventId}>
+    <div className={styles.memberDatas} key={nanoid()}>
       <div className={styles.memberData}>
         <p className={styles.memberName}>姓名：{data.name}</p>
         <p className={styles.memberEmail}>信箱：{data.email}</p>

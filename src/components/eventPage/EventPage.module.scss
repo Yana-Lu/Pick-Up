@@ -4,7 +4,7 @@ p {
   font-weight: 600;
 }
 
-.formBG {
+.eventFormBG {
   display: none;
   position: fixed;
   top: 0;
@@ -14,14 +14,14 @@ p {
   background: rgba(0, 0, 0, 0.5);
   z-index: 100;
 
-  .formOut {
+  .eventFormOut {
     background-color: #f3f3f3;
     border-radius: 10px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    .form {
+    .eventForm {
       margin: 30px;
       h3 {
         margin-bottom: 15px;
@@ -42,6 +42,43 @@ p {
   display: block;
 }
 
+.joinFormBG {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+
+  .joinFormOut {
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .joinForm {
+      margin: 30px;
+      h3 {
+        margin-bottom: 15px;
+        padding-left: 15px;
+        padding-bottom: 10px;
+        border-bottom: 0.5px solid gray;
+      }
+    }
+    .btns {
+      text-align: center;
+      button {
+        margin-top: 10px;
+      }
+    }
+  }
+}
+.showUp {
+  display: block;
+}
 .startDateNav {
   width: 100%;
 }

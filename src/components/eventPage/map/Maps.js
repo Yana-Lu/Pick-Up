@@ -34,7 +34,7 @@ export function Maps(props) {
   })
   const [events, setEvents] = useState([])
   const [showUpEventForm, setShowUpEventForm] = useState(false)
-  // const [showUpJoinForm, setShowUpJoinForm] = useState(false)
+  const [showUpJoinForm, setShowUpJoinForm] = useState(false)
 
   Maps.propTypes = {
     uid: PropTypes.string,
@@ -159,16 +159,15 @@ export function Maps(props) {
 
   function showJoinForm() {
     const memberIdArray = selectedEvent.memberId
-    const memberIdArray1 = memberIdArray.filter(function (x) {
-      return x === props.uid
+    const memberIdArray1 = memberIdArray.filter(function (uid) {
+      return uid === props.uid
     })
     if (memberIdArray1.length === 1) {
       Swal.fire('不可以重複跟團喔！', '除非你會影分身之術', 'warning')
     } else if (props.uid === selectedEvent.hostId) {
       Swal.fire('這是你本人開的團喔！', '', 'warning')
     } else {
-      const closePopup = document.getElementById('joinForm')
-      closePopup.style.display = 'block'
+      setShowUpJoinForm(true)
     }
   }
 
@@ -256,6 +255,8 @@ export function Maps(props) {
         ) : null}
       </GoogleMap>
       <JoinForm
+        showUpJoinForm={showUpJoinForm}
+        setShowUpJoinForm={setShowUpJoinForm}
         event={selectedEvent}
         uid={props.uid}
         events={events}
