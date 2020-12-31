@@ -21,6 +21,7 @@ export function EventForm(props) {
 
   EventForm.propTypes = {
     showUpEventForm: PropTypes.bool,
+    setShowUpEventForm: PropTypes.func,
     location: PropTypes.array,
     lat: PropTypes.number,
     lng: PropTypes.number,
@@ -126,14 +127,13 @@ export function EventForm(props) {
   }
 
   function closePopup() {
-    const closePopup = document.getElementById('eventForm')
-    closePopup.style.display = 'none'
+    props.setShowUpEventForm(false)
   }
 
   return (
-    <div className={`${styles.eventFormBG}  ${props.showUpEventForm ? styles.showUp : ''}`} id="eventForm">
-      <div className={styles.eventFormOut}>
-        <Form className={styles.eventForm} onSubmit={eventSubmit}>
+    <div className={`${styles.formBG}  ${props.showUpEventForm ? styles.showUp : ''}`} id="eventForm">
+      <div className={styles.formOut}>
+        <Form className={styles.form} onSubmit={eventSubmit}>
           <h3>填寫開團資料</h3>
           <Form.Row as={Col}>
             <Form.Group as={Col} controlId="event-name-input">
@@ -202,7 +202,7 @@ export function EventForm(props) {
           </Form.Group>
           <Form.Group as={Col} controlId="event-limit-input">
             <Form.Label>人數上限</Form.Label>
-            <Form.Control controlId="event-limit-input" type="number" placeholder="範例：5" onChange={eventChange} />
+            <Form.Control controlId="event-limit-input" type="text" placeholder="範例：5" onChange={eventChange} />
           </Form.Group>
           <div className={styles.btns}>
             <Button variant="outline-success" type="submit">

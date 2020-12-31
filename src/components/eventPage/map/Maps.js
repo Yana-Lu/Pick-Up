@@ -146,6 +146,17 @@ export function Maps(props) {
     }
   }
 
+  function showEventForm() {
+    if (!props.uid) {
+      Swal.fire({
+        icon: 'warning',
+        title: '請先登入喔!',
+      })
+    } else {
+      setShowUpEventForm(true)
+    }
+  }
+
   function showJoinForm() {
     const memberIdArray = selectedEvent.memberId
     const memberIdArray1 = memberIdArray.filter(function (x) {
@@ -160,16 +171,7 @@ export function Maps(props) {
       closePopup.style.display = 'block'
     }
   }
-  function showEventForm() {
-    if (!props.uid) {
-      Swal.fire({
-        icon: 'warning',
-        title: '請先登入喔!',
-      })
-    } else {
-      setShowUpEventForm(true)
-    }
-  }
+
   function Recruitment(obj) {
     if (obj.marker.members?.length < obj.marker.memberLimit) {
       return (

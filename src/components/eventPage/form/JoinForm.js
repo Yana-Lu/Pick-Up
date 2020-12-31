@@ -102,9 +102,9 @@ export function JoinForm(props) {
   }
 
   return (
-    <div className={styles.eventFormBG} id="joinForm">
-      <div className={styles.eventFormOut}>
-        <Form className={styles.eventForm} onSubmit={handleSubmit}>
+    <div className={styles.formBG} id="joinForm">
+      <div className={styles.formOut}>
+        <Form className={styles.form} onSubmit={handleSubmit}>
           <h3>填寫跟團資料</h3>
           <Form.Group as={Col} controlId="memeber-name-input">
             <Form.Label>姓名</Form.Label>
