@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { EventPage } from '../eventPage/EventPage'
@@ -9,95 +9,96 @@ import Fade from 'react-reveal/Fade'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export function HomePage() {
+  const mainRef = useRef(null)
+  const keyTextRef = useRef(null)
+  const keyConsoleRef = useRef(null)
+  const [showEquipment, setShowEquipment] = useState(true)
+  const [showSafetyRules, setShowSafetyRules] = useState(false)
+  const [showExecution, setShowExecution] = useState(false)
   const [showResultCategory, setShowResultCategory] = useState(false)
-  useEffect(() => {
-    const box1 = document.getElementById('box1')
-    const box2 = document.getElementById('box2')
-    const box3 = document.getElementById('box3')
-    const Intro1 = document.getElementById('Intro1')
-    const Intro2 = document.getElementById('Intro2')
-    const Intro3 = document.getElementById('Intro3')
 
-    box2?.addEventListener('click', () => {
-      Intro2.style.display = 'block'
-      Intro1.style.display = 'none'
-      Intro3.style.display = 'none'
-    })
-    box3?.addEventListener('click', () => {
-      Intro3.style.display = 'block'
-      Intro1.style.display = 'none'
-      Intro2.style.display = 'none'
-    })
-    box1?.addEventListener('click', () => {
-      Intro1.style.display = 'block'
-      Intro2.style.display = 'none'
-      Intro3.style.display = 'none'
-    })
-  }, [])
+  function clickEquipmentBtn() {
+    setShowEquipment(true)
+    setShowSafetyRules(false)
+    setShowExecution(false)
+  }
+  function clickSafetyRulesBtn() {
+    setShowEquipment(false)
+    setShowSafetyRules(true)
+    setShowExecution(false)
+  }
+  function clickExecutionBtn() {
+    setShowEquipment(false)
+    setShowSafetyRules(false)
+    setShowExecution(true)
+  }
+
   function scrollToTop() {
-    const target = document.querySelector('#target')
-    target.scrollIntoView({ behavior: 'smooth' })
+    mainRef.current.scrollIntoView({ behavior: 'smooth' })
   }
   useEffect(() => {
-    consoleText(['Future.', 'Earth.', 'Love.'], 'text', ['skyblue', 'aquamarine', '#ec9a9a'])
+    consoleText(['Future.', 'Earth.', 'Love.'], ['skyblue', 'aquamarine', '#ec9a9a'])
 
-    consoleText(['Future.', 'Earth.', 'Love.'], 'text', ['skyblue', 'aquamarine', '#ec9a9a'])
+    consoleText(['Future.', 'Earth.', 'Love.'], ['skyblue', 'aquamarine', '#ec9a9a'])
 
-    function consoleText(words, id, colors) {
+    function consoleText(words, colors) {
       if (colors === undefined) colors = ['#fff']
       let visible = true
-      const con = document.getElementById('console')
       let letterCount = 1
       let x = 1
       let waiting = false
-      const target = document.getElementById(id)
-      target.setAttribute('style', 'color:' + colors[0])
+
+      keyTextRef?.current.setAttribute('style', 'color:' + colors[0])
       window.setInterval(function () {
-        if (letterCount === 0 && waiting === false) {
-          waiting = true
-          target.innerHTML = words[0].substring(0, letterCount)
-          window.setTimeout(function () {
-            const usedColor = colors.shift()
-            colors.push(usedColor)
-            const usedWord = words.shift()
-            words.push(usedWord)
-            x = 1
-            target.setAttribute('style', 'color:' + colors[0])
+        if (keyTextRef.current !== null) {
+          if (letterCount === 0 && waiting === false) {
+            waiting = true
+            keyTextRef.current.innerHTML = words[0].substring(0, letterCount)
+            window.setTimeout(function () {
+              const usedColor = colors.shift()
+              colors.push(usedColor)
+              const usedWord = words.shift()
+              words.push(usedWord)
+              x = 1
+              keyTextRef.current.setAttribute('style', 'color:' + colors[0])
+              letterCount += x
+              waiting = false
+            }, 1000)
+          } else if (letterCount === words[0].length + 1 && waiting === false) {
+            waiting = true
+            window.setTimeout(function () {
+              x = -1
+              letterCount += x
+              waiting = false
+            }, 1000)
+          } else if (waiting === false) {
+            keyTextRef.current.innerHTML = words[0].substring(0, letterCount)
             letterCount += x
-            waiting = false
-          }, 1000)
-        } else if (letterCount === words[0].length + 1 && waiting === false) {
-          waiting = true
-          window.setTimeout(function () {
-            x = -1
-            letterCount += x
-            waiting = false
-          }, 1000)
-        } else if (waiting === false) {
-          target.innerHTML = words[0].substring(0, letterCount)
-          letterCount += x
+          }
         }
       }, 120)
       window.setInterval(function () {
-        if (visible === true) {
-          con.className = 'console-underscore hidden'
-          visible = false
-        } else {
-          con.className = 'console-underscore'
+        if (keyConsoleRef.current !== null) {
+          if (visible === true) {
+            keyConsoleRef.current.className = 'console-underscore hidden'
+            visible = false
+          } else {
+            keyConsoleRef.current.className = 'console-underscore'
 
-          visible = true
+            visible = true
+          }
         }
       }, 400)
     }
   }, [])
   return (
-    <div className={styles.main} id="target">
+    <div className={styles.main} ref={mainRef} id="target">
       <section className={styles.landing}>
         <div className={styles.bigText}>
           <span>For the</span>
           <div className="console-container">
-            <span id="text"></span>
-            <div className="console-underscore" id="console">
+            <span ref={keyTextRef} id="text"></span>
+            <div className="console-underscore" ref={keyConsoleRef} id="console">
               &#95;
             </div>
           </div>
@@ -170,19 +171,19 @@ export function HomePage() {
             <p>點擊以下圖示看介紹內容。</p>
           </div>
           <div className={styles.boxes}>
-            <div className={styles.box1} id="box1">
+            <div className={styles.box1} onClick={clickEquipmentBtn} id="box1">
               <h3>裝備介紹</h3>
             </div>
-            <div className={styles.box2} id="box2">
+            <div className={styles.box2} onClick={clickSafetyRulesBtn} id="box2">
               <h3>安全小叮嚀</h3>
             </div>
-            <div className={styles.box3} id="box3">
+            <div className={styles.box3} onClick={clickExecutionBtn} id="box3">
               <h3>活動執行</h3>
             </div>
           </div>
           <div className={styles.actionIntroContent}>
-            <div className={styles.Intro1} id="Intro1">
-              <Fade>
+            <Fade>
+              <div className={`${styles.Intro1}  ${showEquipment ? styles.showUp : ''}`} id="Intro1">
                 <div className={styles.innerIntro}>
                   <p className={styles.subTitle}>
                     服裝建議以透氣、舒適，方便戶外活動的衣物為佳，建議可參考天氣預報調整服裝。
@@ -190,10 +191,10 @@ export function HomePage() {
                   <div className={styles.IntroImg1}></div>
                   <p>圖片來源：台灣環境資訊協會《淨灘手冊》</p>
                 </div>
-              </Fade>
-            </div>
-            <div className={styles.Intro2} id="Intro2">
-              <Fade>
+              </div>
+            </Fade>
+            <Fade>
+              <div className={`${styles.Intro2}  ${showSafetyRules ? styles.showUp : ''}`} id="Intro2">
                 <div className={styles.innerIntro}>
                   <div className={styles.IntroTitle}>
                     <div className={styles.noticeImg}></div>
@@ -211,12 +212,11 @@ export function HomePage() {
                   <p>避免踩踏傷害海濱之動植物及危險物品。</p>
                   <br />
                   <p>廢棄物請自行打包帶離海邊，或者於事前聯繫當地清潔隊協助清運，事後依約定之位置集中堆放。</p>
-                  {/* <div className={styles.IntroImg2}></div> */}
                 </div>
-              </Fade>
-            </div>
-            <div className={styles.Intro3} id="Intro3">
-              <Fade>
+              </div>
+            </Fade>
+            <Fade>
+              <div className={`${styles.Intro3}  ${showExecution ? styles.showUp : ''}`} id="Intro3">
                 <div className={styles.innerIntro}>
                   <div className={styles.actionStep}>
                     <div className={styles.IntroTitle}>
@@ -242,8 +242,8 @@ export function HomePage() {
                     <p>*點圖放大</p>
                   </div>
                 </div>
-              </Fade>
-            </div>
+              </div>
+            </Fade>
           </div>
         </div>
       </div>

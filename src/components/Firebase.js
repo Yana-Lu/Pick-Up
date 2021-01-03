@@ -177,7 +177,7 @@ render data 到 ProfilePage
 ====================================
 */
 
-export function showBeHostEvents(userId, callback) {
+export function getBeHostEvents(userId, callback) {
   db.collection('event')
     .where('userId', '==', userId)
     .orderBy('startTime', 'asc')
@@ -202,7 +202,7 @@ export function showBeHostEvents(userId, callback) {
     })
 }
 
-export function showBeMemberEvents(userId, callback) {
+export function getBeMemberEvents(userId, callback) {
   db.collection('event')
     .where('memberId', 'array-contains', userId)
     // .orderBy('startTime', 'asc')

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { SaveResult } from '../../Firebase'
-import { showBeHostEvents } from '../../Firebase'
+import { getBeHostEvents } from '../../Firebase'
 import { Form, Button, Col } from 'react-bootstrap'
 import Swal from 'sweetalert2'
 import styles from './ResultForm.module.scss'
@@ -115,7 +115,7 @@ export function ResultForm(props) {
       icon: 'success',
       title: '上傳成功!',
     }).then(() => {
-      showBeHostEvents(props.uid, props.setBeHostEvents, 'hihi')
+      getBeHostEvents(props.uid, props.setBeHostEvents, 'hihi')
       props.handleShowResultForm(false)
     })
   }

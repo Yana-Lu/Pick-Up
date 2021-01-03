@@ -285,6 +285,7 @@ p {
         width: 100%;
         margin: 30px auto;
         align-items: center;
+        display: none;
 
         .innerIntro {
           width: 100%;
@@ -316,12 +317,16 @@ p {
           }
         }
       }
+      .showUp {
+        display: block;
+      }
       .Intro2 {
         display: none;
         width: 1000px;
         margin: 30px auto;
         align-items: center;
         font-weight: 600;
+        display: none;
 
         .innerIntro {
           width: 100%;
@@ -351,11 +356,15 @@ p {
           }
         }
       }
+      .showUp {
+        display: block;
+      }
       .Intro3 {
         display: none;
         width: 1000px;
         margin: 30px auto;
         align-items: center;
+        display: none;
         .innerIntro {
           width: 100%;
           height: 100%;
@@ -404,6 +413,9 @@ p {
             }
           }
         }
+      }
+      .showUp {
+        display: block;
       }
     }
   }

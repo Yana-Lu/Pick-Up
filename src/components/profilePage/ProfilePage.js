@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
-import { showBeHostEvents } from '../Firebase'
-import { showBeMemberEvents } from '../Firebase'
+import { getBeHostEvents } from '../Firebase'
+import { getBeMemberEvents } from '../Firebase'
 import { ProfilePageBeHost } from './beHost/ProfilePageBeHost'
 import { ProfilePageBeMember } from './beMember/ProfilePageBeMember'
 import styles from './ProfilePage.module.scss'
@@ -9,53 +9,35 @@ import { Button, ButtonToolbar } from 'react-bootstrap'
 import Fade from 'react-reveal/Fade'
 
 export function ProfilePage(props) {
-  ProfilePage.propTypes = {
-    userData: PropTypes.object,
-  }
-  const uid = props.userData.uid
-
-  useEffect(() => {
-    const avatarImg = document.getElementById('avatarImg')
-    const userName = document.getElementById('userDisplayName')
-    const userEmail = document.getElementById('userEmail')
-    avatarImg.src = `${props?.userData?.photoURL}?type=large`
-    userName.textContent = props.userData.displayName
-    userEmail.textContent = props.userData.email
-  }, [uid])
-
+  const avatarImgRef = useRef(null)
+  const userNameRef = useRef(null)
+  const userEmailRef = useRef(null)
   const [beHostEvents, setBeHostEvents] = useState([])
   const [beMemberEvents, setBeMemberEvents] = useState([])
   const [showBeHost, setShowBeHost] = useState(false)
   const [showBeMember, setShowBeMember] = useState(false)
+  const uid = props.userData.uid
 
-  const userBeHost = document.getElementById('userBeHost')
-  const userBeMember = document.getElementById('userBeMember')
-  userBeHost?.addEventListener('click', () => {
-    userBeHost.style.backgroundColor = '#add8e6'
-  })
-  userBeMember?.addEventListener('click', () => {
-    userBeHost.style.backgroundColor = ''
-  })
-  userBeMember?.addEventListener('click', () => {
-    userBeMember.style.backgroundColor = '#add8e6'
-  })
-  userBeHost?.addEventListener('click', () => {
-    userBeMember.style.backgroundColor = ''
-  })
-  useEffect(() => {
-    // try {
-    showBeHostEvents(uid, setBeHostEvents)
-    // } catch (err) {
-    //   console.log(err.message)
-    // }
-  }, [uid])
+  ProfilePage.propTypes = {
+    userData: PropTypes.object,
+  }
 
   useEffect(() => {
-    // try {
-    showBeMemberEvents(uid, setBeMemberEvents)
-    // } catch (err) {
-    //   console.log(err.message)
-    // }
+    avatarImgRef.current.src = `${props?.userData?.photoURL}?type=large`
+    userNameRef.current.textContent = props.userData.displayName
+    userEmailRef.current.textContent = props.userData.email
+
+    try {
+      getBeHostEvents(uid, setBeHostEvents)
+    } catch (err) {
+      console.log(err.message)
+    }
+
+    try {
+      getBeMemberEvents(uid, setBeMemberEvents)
+    } catch (err) {
+      console.log(err.message)
+    }
   }, [uid])
 
   return (
@@ -63,10 +45,10 @@ export function ProfilePage(props) {
       <div className={styles.ProfileContain}>
         <div className={styles.ProfileData}>
           <div className={styles.avatar}>
-            <img alt="avatar" className={styles.avatarImg} id="avatarImg"></img>
+            <img alt="avatar" className={styles.avatarImg} ref={avatarImgRef}></img>
           </div>
-          <div className={styles.userDisplayName} id="userDisplayName"></div>
-          <div className={styles.userEmail} id="userEmail"></div>
+          <div className={styles.userDisplayName} ref={userNameRef}></div>
+          <div className={styles.userEmail} ref={userEmailRef}></div>
         </div>
       </div>
       <div className={styles.eventsContain}>

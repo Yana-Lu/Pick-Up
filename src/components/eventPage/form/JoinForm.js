@@ -23,25 +23,24 @@ export function JoinForm(props) {
     ShowMarkerData: PropTypes.func,
   }
 
-  const isEmail = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
-  const emailInput = document.getElementById('memeber-email-input')
-  useEffect(() => {
-    emailInput?.addEventListener('blur', () => {
-      if (!isEmail.test(emailInput.value)) {
-        Swal.fire('請輸入正確Email格式')
-      }
-    })
-  }, [emailInput])
-
   const isMobNumber = /^09\d{8}$/
-  const phoneInput = document.getElementById('memeber-phone-input')
   useEffect(() => {
-    phoneInput?.addEventListener('blur', () => {
-      if (!isMobNumber.test(phoneInput.value)) {
+    phoneInputRef.current.addEventListener('blur', () => {
+      if (!isMobNumber.test(phoneInputRef.current.value)) {
         Swal.fire('請輸入正確手機號碼格式')
       }
     })
-  }, [phoneInput])
+  }, [phone])
+
+  const isEmail = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/
+  useEffect(() => {
+    emailInputRef.current.addEventListener('blur', () => {
+      if (!isEmail.test(emailInputRef.current.value)) {
+        Swal.fire('請輸入正確Email格式')
+      }
+    })
+  }, [email])
+
   function eventChange(e) {
     if (e.target.id === 'memeber-name-input') {
       setName(e.target.value)
