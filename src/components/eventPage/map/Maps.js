@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { showEvent } from '../../Firebase'
+import { getEvents } from '../../Firebase'
 import styles from './Map.module.scss'
 import MapStyles from './MapStyles'
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
@@ -8,7 +8,6 @@ import Swal from 'sweetalert2'
 import { JoinForm } from '../form/JoinForm'
 import { EventForm } from '../form/EventForm'
 import { Button } from 'react-bootstrap'
-// import { propTypes } from 'react-bootstrap/esm/Image'
 
 const libraries = ['places']
 const mapContainerStyle = {
@@ -36,37 +35,11 @@ export function Maps(props) {
   const [showUpEventForm, setShowUpEventForm] = useState(false)
   const [showUpJoinForm, setShowUpJoinForm] = useState(false)
 
-  Maps.propTypes = {
-    uid: PropTypes.string,
-    beHostInfo: PropTypes.bool,
-    setBeHostInfo: PropTypes.func,
-    beMemberInfo: PropTypes.bool,
-    setBeMemberInfo: PropTypes.func,
-    showbeHostInfo: PropTypes.bool,
-    setShowbeHostInfo: PropTypes.func,
-    showbeMemberInfo: PropTypes.bool,
-    setShowbeMemberInfo: PropTypes.func,
-    infoTitle: PropTypes.string,
-    setInfoTitle: PropTypes.func,
-    infoHost: PropTypes.string,
-    setInfoHost: PropTypes.func,
-    infoEmail: PropTypes.string,
-    setInfoEmail: PropTypes.func,
-    infoStartDate: PropTypes.string,
-    setInfoStartDate: PropTypes.func,
-    infoTime: PropTypes.string,
-    setInfoTime: PropTypes.func,
-    memberLimit: PropTypes.string,
-    setMemberLimit: PropTypes.func,
-    memberNum: PropTypes.string,
-    setMemberNum: PropTypes.func,
-  }
-
   useEffect(() => {
     function saveEventsInMap(data) {
       setEvents(data)
     }
-    showEvent(saveEventsInMap)
+    getEvents(saveEventsInMap)
   }, [])
 
   const [newMarker, setNewMarker] = useState([])
@@ -279,4 +252,30 @@ export function Maps(props) {
       />
     </div>
   )
+}
+
+Maps.propTypes = {
+  uid: PropTypes.string,
+  beHostInfo: PropTypes.bool,
+  setBeHostInfo: PropTypes.func,
+  beMemberInfo: PropTypes.bool,
+  setBeMemberInfo: PropTypes.func,
+  showbeHostInfo: PropTypes.bool,
+  setShowbeHostInfo: PropTypes.func,
+  showbeMemberInfo: PropTypes.bool,
+  setShowbeMemberInfo: PropTypes.func,
+  infoTitle: PropTypes.string,
+  setInfoTitle: PropTypes.func,
+  infoHost: PropTypes.string,
+  setInfoHost: PropTypes.func,
+  infoEmail: PropTypes.string,
+  setInfoEmail: PropTypes.func,
+  infoStartDate: PropTypes.string,
+  setInfoStartDate: PropTypes.func,
+  infoTime: PropTypes.string,
+  setInfoTime: PropTypes.func,
+  memberLimit: PropTypes.string,
+  setMemberLimit: PropTypes.func,
+  memberNum: PropTypes.string,
+  setMemberNum: PropTypes.func,
 }

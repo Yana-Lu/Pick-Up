@@ -12,15 +12,13 @@ export function ProfilePage(props) {
   const avatarImgRef = useRef(null)
   const userNameRef = useRef(null)
   const userEmailRef = useRef(null)
+  const [clickBeHostBtn, setClickBeHostBtn] = useState(false)
+  const [clickBeMemberBtn, setClickBeMemberBtn] = useState(false)
   const [beHostEvents, setBeHostEvents] = useState([])
   const [beMemberEvents, setBeMemberEvents] = useState([])
   const [showBeHost, setShowBeHost] = useState(false)
   const [showBeMember, setShowBeMember] = useState(false)
   const uid = props.userData.uid
-
-  ProfilePage.propTypes = {
-    userData: PropTypes.object,
-  }
 
   useEffect(() => {
     avatarImgRef.current.src = `${props?.userData?.photoURL}?type=large`
@@ -29,17 +27,11 @@ export function ProfilePage(props) {
 
     try {
       getBeHostEvents(uid, setBeHostEvents)
-    } catch (err) {
-      console.log(err.message)
-    }
-
-    try {
       getBeMemberEvents(uid, setBeMemberEvents)
     } catch (err) {
       console.log(err.message)
     }
   }, [uid])
-
   return (
     <div className={styles.MainContain}>
       <div className={styles.ProfileContain}>
@@ -54,10 +46,11 @@ export function ProfilePage(props) {
       <div className={styles.eventsContain}>
         <ButtonToolbar className={styles.buttons}>
           <Button
-            className={styles.button}
+            className={`${styles.button} ${clickBeHostBtn ? styles.btnBlue : ''}`}
             variant="default"
-            id="userBeHost"
             onClick={() => {
+              setClickBeHostBtn(true)
+              setClickBeMemberBtn(false)
               setShowBeHost(true)
               setShowBeMember(false)
             }}
@@ -65,10 +58,11 @@ export function ProfilePage(props) {
             我的開團
           </Button>
           <Button
-            className={styles.button}
+            className={`${styles.button} ${clickBeMemberBtn ? styles.btnBlue : ''}`}
             variant="default"
-            id="userBeMember"
             onClick={() => {
+              setClickBeHostBtn(false)
+              setClickBeMemberBtn(true)
               setShowBeHost(false)
               setShowBeMember(true)
             }}
@@ -92,4 +86,8 @@ export function ProfilePage(props) {
       </div>
     </div>
   )
+}
+
+ProfilePage.propTypes = {
+  userData: PropTypes.object,
 }

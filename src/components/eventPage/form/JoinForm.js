@@ -12,17 +12,6 @@ export function JoinForm(props) {
   const emailInputRef = useRef(null)
   const phoneInputRef = useRef(null)
 
-  JoinForm.propTypes = {
-    showUpJoinForm: PropTypes.bool,
-    setShowUpJoinForm: PropTypes.func,
-    event: PropTypes.array,
-    uid: PropTypes.string,
-    selectedEvent: PropTypes.object,
-    setSelectedEvent: PropTypes.func,
-    events: PropTypes.array,
-    ShowMarkerData: PropTypes.func,
-  }
-
   const isMobNumber = /^09\d{8}$/
   useEffect(() => {
     phoneInputRef.current.addEventListener('blur', () => {
@@ -70,8 +59,6 @@ export function JoinForm(props) {
     } else if (email === '') {
       Swal.fire('請輸入Email')
     } else {
-      JoinEvent(obj)
-      setThisEventId(props.selectedEvent.eventId)
       Swal.fire({
         title: '確定要跟團嗎？',
         showCancelButton: true,
@@ -81,6 +68,8 @@ export function JoinForm(props) {
         .then((result) => {
           if (result.isConfirmed) {
             Swal.fire('跟團成功!', '', 'success')
+            JoinEvent(obj)
+            setThisEventId(props.selectedEvent.eventId)
           }
         })
         .then(() => {
@@ -109,7 +98,7 @@ export function JoinForm(props) {
           <h3>填寫跟團資料</h3>
           <Form.Group as={Col} controlId="memeber-name-input">
             <Form.Label>姓名</Form.Label>
-            <Form.Control type="text" placeholder="請輸入姓名" onChange={eventChange} />
+            <Form.Control type="text" placeholder="範例：宮城獅" onChange={eventChange} />
           </Form.Group>
           <Form.Group as={Col} controlId="memeber-phone-input">
             <Form.Label>連絡電話</Form.Label>
@@ -123,7 +112,7 @@ export function JoinForm(props) {
             <Button variant="outline-success" type="submit">
               跟團
             </Button>
-            <Button variant="default" id="closePopup" onClick={closePopup}>
+            <Button variant="default" onClick={closePopup}>
               關閉
             </Button>
           </div>
@@ -131,4 +120,15 @@ export function JoinForm(props) {
       </div>
     </div>
   )
+}
+
+JoinForm.propTypes = {
+  showUpJoinForm: PropTypes.bool,
+  setShowUpJoinForm: PropTypes.func,
+  event: PropTypes.array,
+  uid: PropTypes.string,
+  selectedEvent: PropTypes.object,
+  setSelectedEvent: PropTypes.func,
+  events: PropTypes.array,
+  ShowMarkerData: PropTypes.func,
 }

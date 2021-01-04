@@ -21,17 +21,6 @@ export function EventForm(props) {
   const emailInputRef = useRef(null)
   const phoneInputRef = useRef(null)
 
-  EventForm.propTypes = {
-    showUpEventForm: PropTypes.bool,
-    setShowUpEventForm: PropTypes.func,
-    location: PropTypes.array,
-    lat: PropTypes.number,
-    lng: PropTypes.number,
-    uid: PropTypes.string,
-    setSelectedNewSite: PropTypes.func,
-    setNewMarker: PropTypes.func,
-  }
-
   const isMobNumber = /^09\d{8}$/
   useEffect(() => {
     phoneInputRef.current.addEventListener('blur', () => {
@@ -106,7 +95,6 @@ export function EventForm(props) {
     } else if (memberLimit === '' || memberLimit <= 0) {
       Swal.fire('請輸入人數上限')
     } else {
-      SetEvent(obj)
       Swal.fire({
         title: '確定要開團嗎？',
         showCancelButton: true,
@@ -116,6 +104,7 @@ export function EventForm(props) {
         .then((result) => {
           if (result.isConfirmed) {
             Swal.fire('開團成功!', '', 'success')
+            SetEvent(obj)
           }
         })
         .then(() => {
@@ -208,7 +197,7 @@ export function EventForm(props) {
             <Button variant="outline-success" type="submit">
               開團
             </Button>
-            <Button variant="default" id="closePopup" onClick={closePopup}>
+            <Button variant="default" onClick={closePopup}>
               關閉
             </Button>
           </div>
@@ -216,4 +205,15 @@ export function EventForm(props) {
       </div>
     </div>
   )
+}
+
+EventForm.propTypes = {
+  showUpEventForm: PropTypes.bool,
+  setShowUpEventForm: PropTypes.func,
+  location: PropTypes.array,
+  lat: PropTypes.number,
+  lng: PropTypes.number,
+  uid: PropTypes.string,
+  setSelectedNewSite: PropTypes.func,
+  setNewMarker: PropTypes.func,
 }

@@ -2,13 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
-// import ScrollToTop from './components/ScrollToTop'
+import ScrollToTop from './components/ScrollToTop'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Switch } from 'react-router-dom'
 
 ReactDOM.render(
   <BrowserRouter>
-    {/* <ScrollToTop /> */}
+    <ScrollToTop />
     <Switch>
       <App />
     </Switch>

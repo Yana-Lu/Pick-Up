@@ -30,13 +30,6 @@ export function ResultForm(props) {
   const [metal, setMetal] = useState('')
   const [hook, setHook] = useState('')
 
-  ResultForm.propTypes = {
-    eventId: PropTypes.string,
-    uid: PropTypes.string,
-    setBeHostEvents: PropTypes.func,
-    handleShowResultForm: PropTypes.func,
-    showResultForm: propTypes.bool,
-  }
   function resultChange(e) {
     if (e.target.id === 'result-bottle-input') {
       setBottle(e.target.value)
@@ -239,4 +232,12 @@ export function ResultForm(props) {
       </div>
     </div>
   )
+}
+
+ResultForm.propTypes = {
+  eventId: PropTypes.string,
+  uid: PropTypes.string,
+  setBeHostEvents: PropTypes.func,
+  handleShowResultForm: PropTypes.func,
+  showResultForm: propTypes.bool,
 }

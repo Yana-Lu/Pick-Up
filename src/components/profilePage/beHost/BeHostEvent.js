@@ -4,13 +4,6 @@ import styles from '../ProfilePage.module.scss'
 import { MemberDataBtn } from './MemberDataBtn'
 import { StatusAndBtn } from '../StatusAndBtn'
 export function BeHostEvent(props) {
-  BeHostEvent.propTypes = {
-    event: PropTypes.object,
-    uid: PropTypes.string,
-    beHostEvents: PropTypes.array,
-    setBeHostEvents: PropTypes.func,
-  }
-
   const weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
 
   const eventList = (
@@ -44,4 +37,11 @@ export function BeHostEvent(props) {
       />
     </div>
   )
+}
+
+BeHostEvent.propTypes = {
+  event: PropTypes.object,
+  uid: PropTypes.string,
+  beHostEvents: PropTypes.array,
+  setBeHostEvents: PropTypes.func,
 }

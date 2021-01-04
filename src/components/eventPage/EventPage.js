@@ -20,10 +20,6 @@ export function EventPage(props) {
   const [memberLimit, setMemberLimit] = useState('')
   const [memberNum, setMemberNum] = useState('')
 
-  EventPage.propTypes = {
-    uid: PropTypes.string,
-  }
-
   function checkUid() {
     if (!props.uid) {
       Swal.fire({
@@ -96,4 +92,8 @@ export function EventPage(props) {
       </div>
     </div>
   )
+}
+
+EventPage.propTypes = {
+  uid: PropTypes.string,
 }

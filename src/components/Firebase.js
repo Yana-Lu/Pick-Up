@@ -54,11 +54,6 @@ export default firebaseSet
 
 const db = firebase.firestore()
 
-/*
-====================================
-開團
-====================================
-*/
 export function SetEvent(obj) {
   db.collection('event')
     .add({
@@ -101,11 +96,7 @@ function saveHostId(userId, docRef) {
       console.error('Error setting document: ', error)
     })
 }
-/*
-====================================
-跟團
-====================================
-*/
+
 export function JoinEvent(obj) {
   db.collection('event')
     .doc(obj.eventId)
@@ -140,12 +131,8 @@ function saveMemberId(userId, eventId) {
       console.error('Error setting document: ', error)
     })
 }
-/*
-====================================
-render data 到 eventPage
-====================================
-*/
-export function showEvent(callback) {
+
+export function getEvents(callback) {
   db.collection('event')
     .where('status', '==', 'true')
     .onSnapshot((querySnapshot) => {
@@ -171,16 +158,11 @@ export function showEvent(callback) {
       callback(allEvent)
     })
 }
-/*
-====================================
-render data 到 ProfilePage
-====================================
-*/
 
 export function getBeHostEvents(userId, callback) {
   db.collection('event')
     .where('userId', '==', userId)
-    .orderBy('startTime', 'asc')
+    .orderBy('startTime', 'desc')
     .onSnapshot((item) => {
       const beHostEventList = []
       item.forEach((doc) => {
@@ -205,7 +187,7 @@ export function getBeHostEvents(userId, callback) {
 export function getBeMemberEvents(userId, callback) {
   db.collection('event')
     .where('memberId', 'array-contains', userId)
-    // .orderBy('startTime', 'asc')
+    .orderBy('startTime', 'desc')
     .onSnapshot((item) => {
       const beMemberEventList = []
       item.forEach((doc) => {
@@ -229,11 +211,7 @@ export function getBeMemberEvents(userId, callback) {
       callback(beMemberEventList)
     })
 }
-/*
-====================================
-上傳淨灘成果到 Firebase
-====================================
-*/
+
 export function SaveResult(obj) {
   db.collection('event')
     .doc(obj.eventId)
@@ -271,11 +249,7 @@ export function SaveResult(obj) {
       console.error('Error adding document: ', error)
     })
 }
-/*
-====================================
-render 淨灘成果到 ProfilePage
-====================================
-*/
+
 export function showResults(callback) {
   db.collection('event')
     .where('status', '==', 'done')

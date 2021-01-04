@@ -2,14 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { BeHostEvent } from './BeHostEvent'
 import styles from '../ProfilePage.module.scss'
-export function ProfilePageBeHost(props) {
-  ProfilePageBeHost.propTypes = {
-    events: PropTypes.array,
-    uid: PropTypes.string,
-    beHostEvents: PropTypes.array,
-    setBeHostEvents: PropTypes.func,
-  }
 
+export function ProfilePageBeHost(props) {
   const events = props.events
   const beHostEvents = events.map((event) => (
     <BeHostEvent
@@ -22,4 +16,11 @@ export function ProfilePageBeHost(props) {
   ))
 
   return <div className={styles.eventContain}>{beHostEvents}</div>
+}
+
+ProfilePageBeHost.propTypes = {
+  events: PropTypes.array,
+  uid: PropTypes.string,
+  beHostEvents: PropTypes.array,
+  setBeHostEvents: PropTypes.func,
 }

@@ -36,6 +36,7 @@ export function HomePage() {
   function scrollToTop() {
     mainRef.current.scrollIntoView({ behavior: 'smooth' })
   }
+  console.log('23')
   useEffect(() => {
     consoleText(['Future.', 'Earth.', 'Love.'], ['skyblue', 'aquamarine', '#ec9a9a'])
 
@@ -50,7 +51,9 @@ export function HomePage() {
 
       keyTextRef?.current.setAttribute('style', 'color:' + colors[0])
       window.setInterval(function () {
+        // console.log('1')
         if (keyTextRef.current !== null) {
+          // console.log('2')
           if (letterCount === 0 && waiting === false) {
             waiting = true
             keyTextRef.current.innerHTML = words[0].substring(0, letterCount)

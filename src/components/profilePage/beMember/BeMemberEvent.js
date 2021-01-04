@@ -4,11 +4,6 @@ import styles from '../ProfilePage.module.scss'
 import { StatusAndBtn } from '../StatusAndBtn'
 
 export function BeMemberEvent(props) {
-  BeMemberEvent.propTypes = {
-    event: PropTypes.array,
-    uid: PropTypes.string,
-  }
-
   const weekdays = '星期日,星期一,星期二,星期三,星期四,星期五,星期六'.split(',')
 
   const memberList = (
@@ -38,4 +33,9 @@ export function BeMemberEvent(props) {
       <StatusAndBtn eventData={props.event} status={props.event.status} uid={props.uid} />
     </div>
   )
+}
+
+BeMemberEvent.propTypes = {
+  event: PropTypes.object,
+  uid: PropTypes.string,
 }

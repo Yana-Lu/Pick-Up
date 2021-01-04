@@ -4,25 +4,6 @@ import styles from './EventPage.module.scss'
 import Fade from 'react-reveal/Fade'
 
 export function EventNPC(props) {
-  EventNPC.propTypes = {
-    uid: PropTypes.string,
-    beHostInfo: PropTypes.bool,
-    setBeHostInfo: PropTypes.func,
-    beMemberInfo: PropTypes.bool,
-    setBeMemberInfo: PropTypes.func,
-    showbeHostInfo: PropTypes.bool,
-    setShowbeHostInfo: PropTypes.func,
-    showbeMemberInfo: PropTypes.bool,
-    setShowbeMemberInfo: PropTypes.func,
-    infoTitle: PropTypes.string,
-    infoHost: PropTypes.string,
-    infoEmail: PropTypes.string,
-    infoStartDate: PropTypes.string,
-    infoTime: PropTypes.string,
-    memberLimit: PropTypes.string,
-    memberNum: PropTypes.string,
-  }
-
   function clickBeHostBtn() {
     props.setBeMemberInfo(false)
     props.setShowbeMemberInfo(false)
@@ -99,4 +80,23 @@ export function EventNPC(props) {
       </Fade>
     </div>
   )
+}
+
+EventNPC.propTypes = {
+  uid: PropTypes.string,
+  beHostInfo: PropTypes.bool,
+  setBeHostInfo: PropTypes.func,
+  beMemberInfo: PropTypes.bool,
+  setBeMemberInfo: PropTypes.func,
+  showbeHostInfo: PropTypes.bool,
+  setShowbeHostInfo: PropTypes.func,
+  showbeMemberInfo: PropTypes.bool,
+  setShowbeMemberInfo: PropTypes.func,
+  infoTitle: PropTypes.string,
+  infoHost: PropTypes.string,
+  infoEmail: PropTypes.string,
+  infoStartDate: PropTypes.string,
+  infoTime: PropTypes.string,
+  memberLimit: PropTypes.string,
+  memberNum: PropTypes.string,
 }

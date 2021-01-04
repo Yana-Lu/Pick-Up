@@ -5,12 +5,6 @@ import styles from '../ProfilePage.module.scss'
 import { Button } from 'react-bootstrap'
 
 export function MemberDatas(props) {
-  MemberDatas.propTypes = {
-    eventData: PropTypes.object,
-    showMemberDatas: PropTypes.bool,
-    handleShowMemberDatas: PropTypes.func,
-  }
-
   const datas = props.eventData.members
   const memberDatas = datas.map((data) => (
     <div className={styles.memberDatas} key={nanoid()}>
@@ -37,4 +31,10 @@ export function MemberDatas(props) {
       </div>
     </div>
   )
+}
+
+MemberDatas.propTypes = {
+  eventData: PropTypes.object,
+  showMemberDatas: PropTypes.bool,
+  handleShowMemberDatas: PropTypes.func,
 }
