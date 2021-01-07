@@ -1,4 +1,4 @@
-# Pick Uo
+# Pick Up
 
 A website that users initiate a team cleaning the beach easily.
 ## Available Scripts
