@@ -1,7 +1,6 @@
-# Getting Started with Create React App
+# Pick Uo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+A website that users initiate a team cleaning the beach easily.
 ## Available Scripts
 
 In the project directory, you can run:
