@@ -17,3 +17,23 @@ Password:<br>
 ### Layout
 - Responsive Web Design (RWD)
 - Flexbox 
+
+### Front-End Frameworks
+- React
+- React Router
+- SCSS
+
+### Firebase Services
+- Authentication
+- Cloud Firebase
+- Cloud Function
+- Hosting
+
+### Tool for Development
+- Node Package Manager (NPM)
+
+### Other
+- Version Control : Git / GitHub
+
+
+
