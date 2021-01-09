@@ -13,3 +13,7 @@ Password:<br>
 - HTML
 - CSS
 - JavaScript(ES6)
+
+### Layout
+- Responsive Web Design (RWD)
+- Flexbox 
