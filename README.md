@@ -3,7 +3,7 @@
 A website that users initiate a team cleaning the beach easily.
 ## Demo
 
-https://pick-up-test-ba782.firebaseapp.com/(https://pick-up-test-ba782.firebaseapp.com/)<br>
+https://pick-up-test-ba782.firebaseapp.com/<br>
 User:<br>
 Password:<br>
 
@@ -44,4 +44,4 @@ Password:<br>
 
 ## Contact
 
-Email:a7636439@gmail.com(a7636439@gmail.com)
+Email:a7636439@gmail.com
