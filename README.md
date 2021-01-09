@@ -26,7 +26,6 @@ Password:<br>
 ### Firebase Services
 - Authentication
 - Cloud Firebase
-- Cloud Function
 - Hosting
 
 ### Tool for Development
