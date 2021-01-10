@@ -1,4 +1,15 @@
 @import '~bootstrap/scss/bootstrap';
+
+@mixin pad {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin mobile {
+  @media (max-width: 375px) {
+    @content;
+  }
+}
 body {
   background-color: #f1faee4f;
   font-weight: 600;
@@ -20,12 +31,18 @@ p {
   box-sizing: border-box;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   background-color: rgba(255, 255, 255, 0.863);
-
+  @include pad {
+    display: block;
+  }
   .logo {
     width: 150px;
     height: auto;
     position: absolute;
     left: 50px;
+    @include pad {
+      margin: 15px auto;
+      position: initial;
+    }
     .image {
       width: auto;
       height: 50px;
@@ -34,7 +51,7 @@ p {
       background-repeat: no-repeat;
     }
   }
-  .navLinks {
+  .navLinks1 {
     display: flex;
     list-style: none;
     align-items: center;
@@ -43,6 +60,9 @@ p {
     margin-bottom: 0;
     position: absolute;
     right: 50px;
+    @include pad {
+      display: none;
+    }
     li {
       margin-left: 5rem;
     }
@@ -130,11 +150,166 @@ p {
       }
     }
   }
+  .navLinks2 {
+    display: none;
+    list-style: none;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 0;
+    position: absolute;
+    right: 50px;
+    @include pad {
+      position: initial;
+      display: none;
+      width: 100%;
+      padding: 0px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.863);
+    }
+    li {
+      margin-left: 5rem;
+      @include pad {
+        margin: 15px 0px;
+      }
+    }
+    li:not(:nth-child(3)) {
+      a {
+        text-decoration: none;
+        color: #4f7175;
+        letter-spacing: 1px;
+      }
+      &:after,
+      &:before {
+        backface-visibility: hidden;
+        border: 1px solid rgba(#4f7175, 0);
+        bottom: 0px;
+        content: ' ';
+        display: block;
+        margin: 0 auto;
+        position: relative;
+        transition: all 280ms ease-in-out;
+        width: 0;
+      }
+
+      &:hover:after,
+      :hover:before {
+        backface-visibility: hidden;
+        border-color: #4f7175;
+        transition: width 350ms ease-in-out;
+        width: 100%;
+      }
+
+      &:hover:before {
+        bottom: auto;
+        top: 0;
+        width: 100%;
+      }
+    }
+
+    .hiUser {
+      text-decoration: none;
+      .userName {
+        cursor: pointer;
+        color: #4f7175;
+        letter-spacing: 1px;
+      }
+    }
+
+    .signIn {
+      grid-column-start: 10;
+      grid-column-end: 11;
+      display: flex;
+      .profile {
+        .profileIcon {
+          background-size: contain;
+          background-repeat: no-repeat;
+          width: 4vw;
+          height: 3vh;
+          margin-right: 5px;
+        }
+      }
+      .signInBtn {
+        display: block;
+        line-height: 1;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #182828;
+        @include pad {
+          margin: 0 auto;
+        }
+      }
+      .signInBtnHideUp {
+        display: none;
+      }
+
+      .signOutBtn {
+        display: block;
+        line-height: 1;
+        font-weight: 600;
+        box-sizing: border-box;
+        letter-spacing: 1px;
+        color: #182828;
+        @include pad {
+          margin: 0 auto;
+        }
+      }
+      .signOutBtnHideUp {
+        display: none;
+      }
+      &:hover {
+        box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+          rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+      }
+    }
+  }
+  .showUp {
+    display: block;
+  }
 }
 .hideUp {
   transform: translateY(-80px);
   transition: top 0.6s ease-in-out;
   transition: transform 0.6s ease-in;
+}
+
+.Xbox {
+  display: none;
+  background-image: url('./../images/xbox-menu.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  @include pad {
+    display: none;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: 20px;
+    top: 20px;
+    color: #182828;
+    cursor: pointer;
+  }
+}
+.showUp {
+  display: block;
+}
+.closeBtn {
+  display: none;
+  background-image: url('./../images/unnamed.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  @include pad {
+    display: none;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: 20px;
+    top: 20px;
+    color: #182828;
+    cursor: pointer;
+  }
+}
+.showUp {
+  display: block;
 }
 .App {
   max-height: 1080px;

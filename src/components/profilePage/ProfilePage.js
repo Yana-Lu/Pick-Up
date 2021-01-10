@@ -21,9 +21,14 @@ export function ProfilePage(props) {
   const uid = props.userData.uid
 
   useEffect(() => {
-    avatarImgRef.current.src = `${props?.userData?.photoURL}?type=large`
-    userNameRef.current.textContent = props.userData.displayName
-    userEmailRef.current.textContent = props.userData.email
+    if (uid) {
+      avatarImgRef.current.src = `${props?.userData?.photoURL}?type=large`
+      userNameRef.current.textContent = props.userData.displayName
+      userEmailRef.current.textContent = props.userData.email
+    } else {
+      avatarImgRef.current.src = './member-icon.png'
+      userNameRef.current.textContent = '使用者未登入'
+    }
 
     try {
       getBeHostEvents(uid, setBeHostEvents)

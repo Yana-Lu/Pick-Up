@@ -2,6 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/analytics'
 import 'firebase/auth'
 import 'firebase/firestore'
+import Swal from 'sweetalert2'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCGnUEwUEFGeIYkKWsgz9Okg1AV7vzR8sI',
@@ -17,15 +18,77 @@ const firebaseConfig = {
 const firebaseSet = firebase.initializeApp(firebaseConfig)
 export const auth = firebaseSet.auth()
 export const firestore = firebaseSet.firestore()
+const db = firebase.firestore()
 firebase.analytics()
 
-const provider = new firebase.auth.FacebookAuthProvider()
-provider.setCustomParameters({
+export function nativeSignUp(obj) {
+  auth
+    .createUserWithEmailAndPassword(obj.email, obj.password)
+    .then(() => {
+      db.collection('user').doc(auth.currentUser.uid).set({
+        userName: obj.name,
+        email: auth.currentUser.email,
+        userId: auth.currentUser.uid,
+        beHost: [],
+        beMember: [],
+      })
+      Swal.fire('註冊成功')
+      window.localStorage.setItem('UserName', JSON.stringify(obj.name))
+      return 'success'
+    })
+    .catch((error) => {
+      return error
+    })
+}
+
+export function nativeSignIn(obj) {
+  auth
+    .signInWithEmailAndPassword(obj.email, obj.password)
+    .then(() => {
+      db.collection('user')
+        .where('email', '==', obj.email)
+        .onSnapshot((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            window.localStorage.setItem('UserName', JSON.stringify(doc.data().userName))
+          })
+        })
+      Swal.fire('登入成功')
+      return 'success'
+    })
+    .catch(() => {
+      Swal.fire('輸入的信箱或密碼不正確喔！')
+    })
+}
+
+const FacebookProvider = new firebase.auth.FacebookAuthProvider()
+FacebookProvider.setCustomParameters({
+  prompt: 'select_account',
+})
+
+const GoogleProvider = new firebase.auth.GoogleAuthProvider()
+GoogleProvider.setCustomParameters({
   prompt: 'select_account',
 })
 
 export const signInWithFacebook = () =>
-  auth.signInWithPopup(provider).then(async (result) => {
+  auth.signInWithPopup(FacebookProvider).then(async (result) => {
+    if (result) {
+      const { user } = result
+      db.collection('user').doc(user.uid).set(
+        {
+          userId: user.uid,
+          userName: user.displayName,
+          email: user.email,
+          beHost: [],
+          beMember: [],
+        },
+        { merge: true }
+      )
+    }
+  })
+
+export const signInWithGoogle = () =>
+  auth.signInWithPopup(GoogleProvider).then(async (result) => {
     if (result) {
       const { user } = result
       db.collection('user').doc(user.uid).set(
@@ -42,17 +105,11 @@ export const signInWithFacebook = () =>
   })
 
 export const signOutWithFacebook = () =>
-  auth
-    .signOut()
-    .then(function () {
-      window.location.reload()
-    })
-    .catch(function () {
-      window.alert('登入失敗')
-    })
+  auth.signOut().then(function () {
+    window.location.reload()
+    window.localStorage.clear()
+  })
 export default firebaseSet
-
-const db = firebase.firestore()
 
 export function SetEvent(obj) {
   db.collection('event')

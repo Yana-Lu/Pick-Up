@@ -45,6 +45,11 @@ key visual big text
   color: white;
   margin: auto;
 }
+@media screen and (max-width: 630px) {
+  .console-container {
+    width: 100%;
+  }
+}
 .console-underscore {
   letter-spacing: 0.2rem;
   display: inline-block;
@@ -66,6 +71,7 @@ Start for Pick Up
 }
 
 .hero-grid {
+  display: block;
   position: relative;
   float: left;
   overflow: hidden;
@@ -77,12 +83,17 @@ Start for Pick Up
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
   transition: all ease-in-out 0.5s;
   border-radius: 5px;
-  /* margin: 20px;
-  max-width: 400px;
-  max-height: 300px; */
+  flex: none;
 }
+@media screen and (max-width: 768px) {
+  .hero-grid {
+    width: 80%;
+    height: 28%;
+  }
+}
+
 .hero-grid-image1 {
-  background-image: url('../../images/beach.jpg');
+  background-image: url('../../images/beach1.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
