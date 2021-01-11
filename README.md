@@ -4,8 +4,8 @@ A website that users initiate a team cleaning the beach easily.
 ## Demo
 
 https://pick-up-test-ba782.firebaseapp.com/<br>
-User:<br>
-Password:<br>
+User:loveocean@gmail.com<br>
+Password:loveocean<br>
 
 ## Technologies
 
@@ -35,7 +35,9 @@ Password:<br>
 - Version Control : Git / GitHub
 
 
-## Flow Chart
+## Structure
+
+![image](https://github.com/Yana-Lu/Pick-Up/blob/master/src/images/readme/Pick%20Up.png)
 
 ## Website Demo
 
