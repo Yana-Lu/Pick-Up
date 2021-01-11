@@ -24,10 +24,10 @@ export function SignInUp(props) {
     })
   }, [signInEmail])
 
-  const isPassword = /\d{8}$/
+  // const isPassword = /\w{8,}$/
   useEffect(() => {
     signInPasswordInputRef.current.addEventListener('blur', () => {
-      if (!isPassword.test(signInPasswordInputRef.current.value)) {
+      if (signInPasswordInputRef.current.value.length < 8) {
         Swal.fire('請輸入最少8個字元')
       }
     })
@@ -74,11 +74,16 @@ export function SignInUp(props) {
           <h3>會員登入</h3>
           <Form.Group as={Col} controlId="signIn-email-input">
             <Form.Control type="email" placeholder="Email" ref={signInEmailInputRef} onChange={signInChange} />
-            <Form.Text className="text-muted">Demo用信箱：demo@gmail.com</Form.Text>
+            <Form.Text className="text-muted">Demo信箱：loveocean@gmail.com</Form.Text>
           </Form.Group>
           <Form.Group as={Col} controlId="signIn-password-input">
-            <Form.Control type="text" placeholder="密碼" ref={signInPasswordInputRef} onChange={signInChange} />
-            <Form.Text className="text-muted">Demo用密碼：12345678</Form.Text>
+            <Form.Control
+              type="text"
+              placeholder="請輸入8位以上英數字"
+              ref={signInPasswordInputRef}
+              onChange={signInChange}
+            />
+            <Form.Text className="text-muted">Demo密碼：loveocean</Form.Text>
           </Form.Group>
           <div className={styles.btns}>
             <Button variant="outline-success" size="lg" block type="submit">
