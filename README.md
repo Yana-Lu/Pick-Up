@@ -3,7 +3,7 @@
 A website that users initiate a team cleaning the beach easily.
 ## Demo
 
-https://pick-up-test-ba782.firebaseapp.com/<br>
+[Pick Up](https://pick-up-test-ba782.firebaseapp.com/)<br>
 User:loveocean@gmail.com<br>
 Password:loveocean<br>
 
@@ -42,6 +42,9 @@ Password:loveocean<br>
 ## Website Demo
 
 ## Future Features
+- Upload beach cleanup photos
+- Search site on map
+- Result Page to show all results
 
 ## Contact
 
