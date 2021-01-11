@@ -26,18 +26,31 @@ export function nativeSignUp(obj) {
     .createUserWithEmailAndPassword(obj.email, obj.password)
     .then(() => {
       db.collection('user').doc(auth.currentUser.uid).set({
-        userName: obj.name,
+        displayName: obj.name,
         email: auth.currentUser.email,
         userId: auth.currentUser.uid,
         beHost: [],
         beMember: [],
       })
       Swal.fire('註冊成功')
-      window.localStorage.setItem('UserName', JSON.stringify(obj.name))
       return 'success'
     })
     .catch((error) => {
       return error
+    })
+}
+export function nativeDisplayName(id) {
+  return db
+    .collection('user')
+    .where('userId', '==', id)
+    .get()
+    .then((docRef) => {
+      const userInfo = []
+      docRef.forEach((doc) => {
+        userInfo.push(doc.data())
+      })
+
+      return userInfo
     })
 }
 

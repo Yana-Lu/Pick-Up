@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { getBeHostEvents } from '../Firebase'
 import { getBeMemberEvents } from '../Firebase'
@@ -7,8 +8,10 @@ import { ProfilePageBeMember } from './beMember/ProfilePageBeMember'
 import styles from './ProfilePage.module.scss'
 import { Button, ButtonToolbar } from 'react-bootstrap'
 import Fade from 'react-reveal/Fade'
+import memberPic from '../../images/member-icon.png'
 
 export function ProfilePage(props) {
+  const history = useHistory()
   const avatarImgRef = useRef(null)
   const userNameRef = useRef(null)
   const userEmailRef = useRef(null)
@@ -22,12 +25,14 @@ export function ProfilePage(props) {
 
   useEffect(() => {
     if (uid) {
-      avatarImgRef.current.src = `${props?.userData?.photoURL}?type=large`
-      userNameRef.current.textContent = props.userData.displayName
+      if (props.userData.photoURL === null) {
+        avatarImgRef.current.src = memberPic
+      } else {
+        avatarImgRef.current.src = `${props?.userData?.photoURL}?type=large`
+      }
       userEmailRef.current.textContent = props.userData.email
     } else {
-      avatarImgRef.current.src = './member-icon.png'
-      userNameRef.current.textContent = '使用者未登入'
+      history.push('/')
     }
 
     try {
@@ -44,7 +49,9 @@ export function ProfilePage(props) {
           <div className={styles.avatar}>
             <img alt="avatar" className={styles.avatarImg} ref={avatarImgRef}></img>
           </div>
-          <div className={styles.userDisplayName} ref={userNameRef}></div>
+          <div className={styles.userDisplayName} ref={userNameRef}>
+            {props.userName}
+          </div>
           <div className={styles.userEmail} ref={userEmailRef}></div>
         </div>
       </div>
@@ -95,4 +102,5 @@ export function ProfilePage(props) {
 
 ProfilePage.propTypes = {
   userData: PropTypes.object,
+  userName: PropTypes.object,
 }

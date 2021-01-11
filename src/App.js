@@ -4,8 +4,8 @@ import { HomePage } from './components/homePage/HomePage'
 import { EventPage } from './components/eventPage/EventPage'
 import { ProfilePage } from './components/profilePage/ProfilePage'
 import { SignInUp } from './components/signIn/SignInUp'
-// import { signInWithFacebook, signOutWithFacebook, auth } from './components/Firebase'
 import { signOutWithFacebook, auth } from './components/Firebase'
+import { nativeDisplayName } from './components/Firebase'
 import { useHistory } from 'react-router-dom'
 import styles from './scss/MainPage.module.scss'
 import { Button } from 'react-bootstrap'
@@ -25,25 +25,25 @@ function App() {
   const [showUpSignInForm, setShowUpSignInForm] = useState(false)
   const [showSignInBtn, setShowSignInBtn] = useState(true)
   const [showSignOutBtn, setShowSignOutBtn] = useState(false)
-  const [userName, setUserName] = useState('')
-  console.log(userName)
-  useEffect(() => {
-    setUserName(JSON.parse(window.localStorage.getItem('UserName')))
-    auth.onAuthStateChanged(function (user) {
-      if (user) {
-        setUid(auth.currentUser.uid)
-        setUserData(auth.currentUser)
-        if (userName) {
-          userNameRef.current.textContent = `${userName}`
-        } else {
-          userNameRef.current.textContent = `${auth.currentUser.displayName}`
-        }
-        userNameRef.current.style = 'cursor: pointer'
+  const [userName, setUserName] = useState('目前未登入')
+
+  auth.onAuthStateChanged(function (user) {
+    if (user) {
+      setUid(auth.currentUser.uid)
+      setUserData(auth.currentUser)
+      if (user.displayName === null) {
+        nativeDisplayName(user.uid).then((res) => {
+          setUserName(res[0].displayName)
+        })
+        userNameRef.current.textContent = userName
       } else {
-        userNameRef.current.style = 'cursor: default'
+        setUserName(user.displayName)
       }
-    })
-  }, [userName])
+    } else {
+      userNameRef.current.style = 'cursor: default'
+    }
+  })
+
   useEffect(() => {
     if (uid) {
       setShowSignInBtn(false)
@@ -59,6 +59,9 @@ function App() {
   const scrollevent = (value) => {
     if (value.scrollTop > 80) {
       setHide(true)
+      setShowUpNavLinks2(false)
+      setShowCloseBtn(false)
+      setShowXboxBtn(true)
     } else {
       setHide(false)
     }
@@ -91,7 +94,7 @@ function App() {
           </li>
           <li className={styles.hiUser}>
             <div className={styles.userName} ref={userNameRef} onClick={toProfilePage}>
-              目前未登入
+              {userName}
             </div>
           </li>
           <li className={styles.signIn}>
@@ -117,7 +120,7 @@ function App() {
           </li>
           <li className={styles.hiUser}>
             <div className={styles.userName} ref={userNameRef} onClick={toProfilePage}>
-              目前未登入
+              {userName}
             </div>
           </li>
           <li className={styles.signIn}>
@@ -145,7 +148,7 @@ function App() {
         <EventPage uid={uid} />
       </Route>
       <Route path="/profile" exact>
-        <ProfilePage userData={userData} />
+        <ProfilePage userData={userData} userName={userName} />
       </Route>
       <Route path="/" exact component={HomePage} />
     </div>

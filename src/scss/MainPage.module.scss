@@ -170,40 +170,13 @@ p {
     li {
       margin-left: 5rem;
       @include pad {
-        margin: 15px 0px;
+        margin: 15px 0px 0px 0px;
+        line-height: 3rem;
       }
-    }
-    li:not(:nth-child(3)) {
       a {
         text-decoration: none;
         color: #4f7175;
         letter-spacing: 1px;
-      }
-      &:after,
-      &:before {
-        backface-visibility: hidden;
-        border: 1px solid rgba(#4f7175, 0);
-        bottom: 0px;
-        content: ' ';
-        display: block;
-        margin: 0 auto;
-        position: relative;
-        transition: all 280ms ease-in-out;
-        width: 0;
-      }
-
-      &:hover:after,
-      :hover:before {
-        backface-visibility: hidden;
-        border-color: #4f7175;
-        transition: width 350ms ease-in-out;
-        width: 100%;
-      }
-
-      &:hover:before {
-        bottom: auto;
-        top: 0;
-        width: 100%;
       }
     }
 
@@ -237,6 +210,7 @@ p {
         color: #182828;
         @include pad {
           margin: 0 auto;
+          padding: 0.8rem 0px;
         }
       }
       .signInBtnHideUp {
@@ -252,15 +226,16 @@ p {
         color: #182828;
         @include pad {
           margin: 0 auto;
+          padding: 0.8rem 0px;
         }
       }
       .signOutBtnHideUp {
         display: none;
       }
-      &:hover {
-        box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
-          rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-      }
+      // &:hover {
+      //   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+      //     rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+      // }
     }
   }
   .showUp {
