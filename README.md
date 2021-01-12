@@ -41,6 +41,31 @@ Password:loveocean<br>
 
 ## Website Demo
 
+### Home Page
+- Key Visual Slogan
+- Interactive and Informative Design
+
+![image](https://github.com/Yana-Lu/Pick-Up/blob/master/src/images/readme/PickUp_HomPage1.gif)
+
+### Event Page
+- Show Events Location/Information on Map
+- Initiate Beach Cleaning Event
+
+![image](https://github.com/Yana-Lu/Pick-Up/blob/master/src/images/readme/PickUp_Initiate.gif)
+
+- Participate in Beach Cleaning Event
+
+![image](https://github.com/Yana-Lu/Pick-Up/blob/master/src/images/readme/PickUp_Participate.gif)
+
+### Event Page
+- Show Be Host/Member Event Data
+
+![image](https://github.com/Yana-Lu/Pick-Up/blob/master/src/images/readme/PickUp_Participate.gif)
+
+- Host Upload Result
+
+
+
 ## Future Features
 - Upload beach cleanup photos
 - Search site on map
