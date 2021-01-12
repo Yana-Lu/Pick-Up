@@ -37,7 +37,7 @@ Password:loveocean<br>
 
 ## Structure
 
-![image](https://github.com/Yana-Lu/Pick-Up/blob/master/src/images/readme/Pick%20Up.png)
+![image]()
 
 ## Website Demo
 
