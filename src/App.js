@@ -15,7 +15,6 @@ function App() {
   const history = useHistory()
   const headRef = useRef(null)
   const userNameRef = useRef(null)
-  // const navLink2Ref = useRef(null)
 
   const [hide, setHide] = useState(false)
   const [uid, setUid] = useState('')
