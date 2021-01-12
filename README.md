@@ -58,13 +58,14 @@ Password:loveocean<br>
 ![image](https://github.com/Yana-Lu/Pick-Up/blob/master/src/images/readme/PickUp_Participate.gif)
 
 ### Event Page
-- Show Be Host/Member Event Data
-
-![image](https://github.com/Yana-Lu/Pick-Up/blob/master/src/images/readme/PickUp_ProfilePage.gif)
-
+- Show Be Host Event Data
 - Host Upload Result
 
+![image](https://github.com/Yana-Lu/Pick-Up/blob/master/src/images/readme/PickUp_ProfilePage_BeHost.gif)
 
+- Show Be Member Event Data
+
+![image](https://github.com/Yana-Lu/Pick-Up/blob/master/src/images/readme/PickUp_ProfilePage_BeMember.gif)
 
 ## Future Features
 - Upload beach cleanup photos
