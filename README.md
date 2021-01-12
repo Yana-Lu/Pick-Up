@@ -60,7 +60,7 @@ Password:loveocean<br>
 ### Event Page
 - Show Be Host/Member Event Data
 
-![image](https://github.com/Yana-Lu/Pick-Up/blob/master/src/images/readme/PickUp_Participate.gif)
+![image](https://github.com/Yana-Lu/Pick-Up/blob/master/src/images/readme/PickUp_ProfilePage.gif)
 
 - Host Upload Result
 
