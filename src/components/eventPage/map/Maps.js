@@ -113,7 +113,7 @@ export function Maps(props) {
     props.setInfoTime(`${startTimePart[0]}：${startTimePart[1]}~${endTimePart[0]}：${endTimePart[1]}`)
     props.setMemberLimit(`${obj.memberLimit} 人`)
     if (obj.members.length < obj.memberLimit) {
-      props.setMemberNum(`${obj.members.length} `)
+      props.setMemberNum(`${obj.members.length} 人`)
     } else {
       props.setMemberNum('報名人數已額滿')
     }
