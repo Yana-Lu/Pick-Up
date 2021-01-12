@@ -38,9 +38,9 @@ export function HomePage() {
   }
 
   useEffect(() => {
-    consoleText(['Future.', 'Earth.', 'Love.'], ['skyblue', 'aquamarine', '#ec9a9a'])
+    consoleText(['Future.', 'Earth.', 'Love.'], ['skyblue', 'aquamarine', '#f08080'])
 
-    consoleText(['Future.', 'Earth.', 'Love.'], ['skyblue', 'aquamarine', '#ec9a9a'])
+    consoleText(['Future.', 'Earth.', 'Love.'], ['skyblue', 'aquamarine', '#f08080'])
 
     function consoleText(words, colors) {
       if (colors === undefined) colors = ['#fff']
@@ -206,7 +206,7 @@ export function HomePage() {
                   <br />
                   <p>做好防曬措施，並隨時補充水分。</p>
                   <br />
-                  <p>穿戴手套與包腳鞋，避免徒手撿拾廢棄物，勿伸手到看不淸楚的位置撈廢棄物。</p>
+                  <p>穿戴手套與包腳鞋，避免徒手撿拾廢棄物及伸手到看不淸楚的位置撈廢棄物。</p>
                   <br />
                   <p>
                     隨時注意潮水及天氣變化，如果聽到雷聲，應盡速離開沙灘、空曠地區，移動時也優先離開海水可觸及、或已潮濕的海灘範圍。

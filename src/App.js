@@ -66,6 +66,7 @@ function App() {
       setHide(false)
     }
   }
+
   function showPopUp() {
     setShowUpSignInForm(true)
   }
