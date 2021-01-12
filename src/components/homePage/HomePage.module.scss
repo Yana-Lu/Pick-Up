@@ -95,6 +95,7 @@ p {
     }
     .subTitle {
       text-align: center;
+      margin: 10px;
     }
     p {
       font-size: 20px;
@@ -147,6 +148,7 @@ p {
       }
       @include mobile {
         height: 6%;
+        margin-top: 30px;
       }
       h2 {
         width: 60%;
@@ -169,6 +171,9 @@ p {
       font-size: 1.5rem;
       font-weight: 600;
       color: #e7e7e7;
+      @include mobile {
+        height: 15%;
+      }
     }
     .highlight {
       font-size: 1.5rem;
@@ -271,6 +276,9 @@ p {
         }
       }
     }
+    @include pad {
+      margin: 30px 10px;
+    }
   }
   @include mobile {
     height: 2000px;
@@ -350,9 +358,17 @@ p {
           height: 120px;
           margin: 10px 10px;
         }
+        @include mobile {
+          width: 80px;
+          height: 80px;
+          margin: 10px 10px;
+        }
         h3 {
           @include pad {
             font-size: 1.3rem;
+          }
+          @include mobile {
+            font-size: 0.8rem;
           }
         }
       }
@@ -381,9 +397,17 @@ p {
           height: 120px;
           margin: 10px 10px;
         }
+        @include mobile {
+          width: 80px;
+          height: 80px;
+          margin: 10px 10px;
+        }
         h3 {
           @include pad {
             font-size: 1.3rem;
+          }
+          @include mobile {
+            font-size: 0.8rem;
           }
         }
       }
@@ -412,14 +436,25 @@ p {
           height: 120px;
           margin: 10px 10px;
         }
+        @include mobile {
+          width: 80px;
+          height: 80px;
+          margin: 10px 10px;
+        }
         h3 {
           @include pad {
             font-size: 1.3rem;
+          }
+          @include mobile {
+            font-size: 0.8rem;
           }
         }
       }
       @include pad {
         height: 180px;
+      }
+      @include mobile {
+        height: 120px;
       }
     }
     .actionIntroContent {
@@ -440,26 +475,62 @@ p {
           height: 100%;
           text-align: center;
           font-weight: 600;
+          display: flex;
+          flex-wrap: wrap;
           .subTitle {
             font-size: 1.5rem;
             line-height: 5rem;
+            width: 100%;
             @include pad {
               font-size: 1rem;
               line-height: 1.2rem;
             }
+            @include mobile {
+              font-size: 1rem;
+              line-height: 1.2rem;
+            }
           }
-          .IntroImg1 {
-            width: 100%;
+          .IntroImg1Left {
+            width: 48%;
             height: 80%;
-            background-image: url('../../images/requipments.jpg');
+            background-image: url('../../images/requipments1.jpg');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
+            background-color: #ffffff;
             border-radius: 5px;
-            box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
             margin-bottom: 5px;
             @include pad {
               height: 70%;
+            }
+            @include mobile {
+              height: 300px;
+              width: 100%;
+            }
+          }
+          .IntroImg1Right {
+            width: 48%;
+            height: 80%;
+            background-image: url('../../images/requipments2.jpg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: #ffffff;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            @include pad {
+              height: 70%;
+            }
+            @include mobile {
+              height: 300px;
+              width: 100%;
+            }
+          }
+          p {
+            width: 100%;
+            @include pad {
+              font-size: 0.8rem;
+              line-height: 1rem;
             }
           }
         }
@@ -582,6 +653,10 @@ p {
                 font-size: 0.8rem;
               }
             }
+            @include mobile {
+              margin-top: 0px;
+              width: 100%;
+            }
           }
           .IntroImg3 {
             width: 52%;
@@ -603,6 +678,14 @@ p {
               grid-row-start: 2;
               grid-row-end: 3;
               text-align: center;
+              @include mobile {
+                visibility: hidden;
+              }
+            }
+            @include mobile {
+              width: 100%;
+              margin: 0;
+              height: 50%;
             }
           }
         }
@@ -646,6 +729,10 @@ p {
           font-size: 1.5rem;
         }
       }
+      @include mobile {
+        height: 30%;
+        padding-top: 0px;
+      }
     }
 
     .actionGoBG {
@@ -676,10 +763,14 @@ p {
           @include pad {
             font-size: 1.5rem;
           }
+          @include mobile {
+            font-size: 1rem;
+          }
         }
         .actionWay1 {
           width: 50%;
           display: flex;
+          flex-wrap: wrap;
           align-items: center;
           justify-content: center;
           .beHost {
@@ -690,15 +781,23 @@ p {
             background-repeat: no-repeat;
             background-position: center;
             margin: 0 10px;
+            @include mobile {
+              width: 100%;
+            }
           }
           .beHostText {
             font-size: 22px;
+            @include mobile {
+              font-size: 14px;
+            }
           }
         }
         .actionWay2 {
           width: 50%;
           display: flex;
+          flex-wrap: wrap;
           align-items: center;
+          justify-content: center;
           .beMember {
             width: 50px;
             height: 50px;
@@ -707,14 +806,24 @@ p {
             background-repeat: no-repeat;
             background-position: center;
             margin: 0 10px 0 25px;
+            @include mobile {
+              width: 100%;
+            }
           }
           .beMemberText {
             font-size: 22px;
+            @include mobile {
+              font-size: 14px;
+            }
           }
         }
         @include pad {
           width: 60%;
           height: 300px;
+        }
+        @include mobile {
+          width: 85%;
+          height: 250px;
         }
       }
       .actionStart {
@@ -727,6 +836,9 @@ p {
           box-sizing: border-box;
           letter-spacing: 1px;
           color: #182828;
+          @include mobile {
+            font-size: 14px;
+          }
         }
         &:after,
         &:before {
@@ -756,6 +868,9 @@ p {
         }
       }
     }
+  }
+  @include mobile {
+    height: 500px;
   }
 }
 .resultCategoryBG {

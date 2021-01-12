@@ -35,7 +35,7 @@ export function StatusAndBtn(props) {
   } else if (props.status === 'false' && props.uid === props.eventData.hostId) {
     return (
       <div>
-        <p className={styles.eventStatus}>行動狀態：行動已執行，待成果上傳</p>
+        <p className={styles.eventStatus}>行動狀態：已執行，待成果上傳</p>
         <div className={styles.eventStatusBtns}>
           <Button
             variant="outline-primary"

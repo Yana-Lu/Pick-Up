@@ -6,7 +6,7 @@
   }
 }
 @mixin mobile {
-  @media (max-width: 375px) {
+  @media (max-width: 415px) {
     @content;
   }
 }
@@ -287,6 +287,6 @@ p {
   display: block;
 }
 .App {
-  max-height: 1080px;
+  max-height: 100;
   overflow-y: auto;
 }

@@ -1,3 +1,13 @@
+@mixin pad {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin mobile {
+  @media (max-width: 415px) {
+    @content;
+  }
+}
 .MainContain {
   width: 1200px;
   margin: 80px auto;
@@ -95,6 +105,9 @@
                 h3 {
                   padding-bottom: 15px;
                   border-bottom: 0.5px solid gray;
+                  @include pad {
+                    font-size: 1.5rem;
+                  }
                 }
                 .memberDataContain {
                   margin: 30px 30px 0 30px;
@@ -130,11 +143,18 @@
           &:hover {
             background-color: rgb(222, 235, 222);
           }
+          @include mobile {
+            width: 90%;
+            padding: 10px;
+          }
         }
       }
     }
     .showUp {
       display: flex;
     }
+  }
+  @include pad {
+    width: 100vw;
   }
 }

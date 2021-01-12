@@ -113,7 +113,7 @@ export function HomePage() {
             <h2>Pick Up 的起點</h2>
           </div>
           <p className={styles.subTitle}>
-            台灣是海島國家，身為島國的人民，海洋與我們息息相關，但我們卻少有機會好好親近與了解。
+            台灣是海島國家，身為島國的人民，海洋與我們息息相關，但我們卻少有機會親近與了解。
             <br />
             海洋不曾言語，卻能透過其他方式表達，走一趟海灘聽取其中的訊息吧。
           </p>
@@ -145,7 +145,7 @@ export function HomePage() {
       <div className={styles.mainBG2}>
         <div className={styles.forWhat}>
           <div className={styles.title}>
-            <h2>Pick Up 想做的事</h2>
+            <h2>Pick Up 的目標</h2>
           </div>
           <div className={styles.intro1}>
             <p className={styles.highlight}>
@@ -156,7 +156,7 @@ export function HomePage() {
               但淨灘所拾起的垃圾僅是流入自然環境中的一部分，更重要的是減少垃圾產生。
               <br />
               <br />
-              希望透過淨灘活動及親身體驗，讓更多人了解垃圾減量、減少使用一次性產品的重要。
+              希望透過淨灘活動及親身體驗，了解垃圾減量、減少使用一次性產品的重要。
             </p>
           </div>
           <div className={styles.introImgs}>
@@ -189,9 +189,10 @@ export function HomePage() {
               <div className={`${styles.Intro1}  ${showEquipment ? styles.showUp : ''}`} id="Intro1">
                 <div className={styles.innerIntro}>
                   <p className={styles.subTitle}>
-                    服裝建議以透氣、舒適，方便戶外活動的衣物為佳，建議可參考天氣預報調整服裝。
+                    服裝建議以透氣、舒適，方便戶外活動的衣物為佳，建議可參考天氣預報調整。
                   </p>
-                  <div className={styles.IntroImg1}></div>
+                  <div className={styles.IntroImg1Left}></div>
+                  <div className={styles.IntroImg1Right}></div>
                   <p>圖片來源：台灣環境資訊協會《淨灘手冊》</p>
                 </div>
               </div>
@@ -258,7 +259,7 @@ export function HomePage() {
           <div className={styles.actionGoBG}>
             <Fade top>
               <div className={styles.actionGo}>
-                <h3>你可以選擇兩種不同的方式加入行動</h3>
+                <h3>你可以選擇兩種不同的方式行動</h3>
                 <div className={styles.actionWay1}>
                   <div className={styles.beHost}></div>
                   <div className={styles.beHostText}>開團發起行動</div>

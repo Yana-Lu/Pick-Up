@@ -1,3 +1,13 @@
+@mixin pad {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin mobile {
+  @media (max-width: 415px) {
+    @content;
+  }
+}
 .resultBG {
   display: none;
   position: fixed;
@@ -16,6 +26,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
+    height: 75vh;
+    overflow: auto;
     .resultInfo {
       margin: 30px;
       h3 {
@@ -23,11 +35,17 @@
         padding-left: 15px;
         padding-bottom: 10px;
         border-bottom: 0.5px solid gray;
+        @include pad {
+          font-size: 1.5rem;
+        }
       }
       p {
         margin-bottom: 15px;
         padding-left: 15px;
         padding-bottom: 10px;
+        @include pad {
+          line-height: 1rem;
+        }
       }
     }
     .resultsData {
@@ -37,6 +55,9 @@
         padding-left: 15px;
         padding-bottom: 10px;
         border-bottom: 0.5px solid gray;
+        @include pad {
+          font-size: 1.5rem;
+        }
       }
       .resultsDataRow {
         display: flex;
@@ -46,6 +67,10 @@
         margin-bottom: 15px;
         padding-left: 15px;
         padding-bottom: 10px;
+        @include pad {
+          font-size: 1rem;
+          line-height: 1rem;
+        }
       }
     }
 
@@ -54,6 +79,9 @@
       button {
         margin-bottom: 10px;
       }
+    }
+    @include pad {
+      width: 85%;
     }
   }
 }
