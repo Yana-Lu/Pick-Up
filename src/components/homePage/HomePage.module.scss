@@ -296,7 +296,7 @@ p {
     margin: 30px auto;
     display: flex;
     flex-wrap: wrap;
-
+    justify-content: center;
     .title {
       width: 100%;
       margin-top: 10%;
@@ -587,7 +587,9 @@ p {
                 font-size: 28px;
               }
               @include mobile {
-                font-size: 14px;
+                font-size: 24px;
+                line-height: 30px;
+                margin-bottom: 10px;
               }
             }
           }
@@ -597,7 +599,7 @@ p {
               font-size: 24px;
             }
             @include mobile {
-              font-size: 14px;
+              font-size: 20px;
             }
           }
         }
@@ -630,6 +632,13 @@ p {
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: center;
+                @include pad {
+                  width: 30px;
+                  height: 30px;
+                }
+                @include mobile {
+                  font-size: 14px;
+                }
               }
               h3 {
                 font-size: 32px;
@@ -640,7 +649,9 @@ p {
                   font-size: 28px;
                 }
                 @include mobile {
-                  font-size: 14px;
+                  font-size: 24px;
+                  line-height: 30px;
+                  margin-bottom: 10px;
                 }
               }
             }
