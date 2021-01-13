@@ -102,6 +102,8 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
                 width: 35%;
+                height: 75vh;
+                overflow: auto;
                 h3 {
                   padding-bottom: 15px;
                   border-bottom: 0.5px solid gray;
@@ -124,6 +126,9 @@
                     justify-content: center;
                     height: 40px;
                   }
+                }
+                @include pad {
+                  width: 85%;
                 }
               }
             }

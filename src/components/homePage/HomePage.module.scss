@@ -690,6 +690,7 @@ p {
               grid-row-start: 2;
               grid-row-end: 3;
               text-align: center;
+              margin: 0px;
               @include mobile {
                 visibility: hidden;
               }
