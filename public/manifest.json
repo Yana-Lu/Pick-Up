@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Pick Up",
+  "name": "Pick Up",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,12 +10,12 @@
     {
       "src": "logo.png",
       "type": "image/png",
-      "sizes": "200x200"
+      "sizes": "192x192"
     },
     {
       "src": "logo1.png",
       "type": "image/png",
-      "sizes": "200x200"
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",

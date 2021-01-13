@@ -84,6 +84,9 @@ p {
         padding-left: 15px;
         padding-bottom: 10px;
         border-bottom: 0.5px solid gray;
+        @include mobile {
+          font-size: 1.25rem;
+        }
       }
     }
     .btns {
@@ -91,6 +94,9 @@ p {
       button {
         margin-top: 10px;
       }
+    }
+    @include mobile {
+      width: 80%;
     }
   }
 }
