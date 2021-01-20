@@ -9,7 +9,7 @@
   }
 }
 .MainContain {
-  width: 1200px;
+  width: 100vw;
   margin: 80px auto;
   .ProfileContain {
     display: grid;
@@ -40,7 +40,7 @@
   .eventsContain {
     margin: 20px auto;
     text-align: center;
-    width: 80%;
+    max-width: 1000px;
     .buttons {
       border: rgb(46, 46, 46) 1.5px solid;
       border-radius: 0.25rem;
@@ -64,7 +64,7 @@
         width: 100%;
         display: flex;
         flex-wrap: wrap;
-
+        justify-content: center;
         .event {
           width: 44%;
           margin: 3%;
@@ -148,6 +148,10 @@
           &:hover {
             background-color: rgb(222, 235, 222);
           }
+          @include pad {
+            width: 75%;
+            padding: 10px;
+          }
           @include mobile {
             width: 90%;
             padding: 10px;
@@ -158,8 +162,5 @@
     .showUp {
       display: flex;
     }
-  }
-  @include pad {
-    width: 100vw;
   }
 }

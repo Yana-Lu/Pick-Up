@@ -53,7 +53,13 @@ export function nativeDisplayName(id) {
       return userInfo
     })
 }
-
+const signInAlert = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: false,
+})
 export function nativeSignIn(obj) {
   auth
     .signInWithEmailAndPassword(obj.email, obj.password)
@@ -65,11 +71,18 @@ export function nativeSignIn(obj) {
             window.localStorage.setItem('UserName', JSON.stringify(doc.data().userName))
           })
         })
-      Swal.fire('登入成功')
+      signInAlert.fire({
+        icon: 'success',
+        title: '登入成功!',
+      })
       return 'success'
     })
     .catch(() => {
-      Swal.fire('輸入的信箱或密碼不正確喔！')
+      signInAlert.fire({
+        icon: 'warning',
+        title: '輸入的信箱或密碼不正確喔!',
+      })
+      return 'fail'
     })
 }
 

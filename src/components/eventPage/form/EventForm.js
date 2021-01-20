@@ -25,7 +25,7 @@ export function EventForm(props) {
   useEffect(() => {
     phoneInputRef.current.addEventListener('blur', () => {
       if (!isMobNumber.test(phoneInputRef.current.value)) {
-        Swal.fire('請輸入正確手機號碼格式')
+        checkAlert.fire('請輸入正確手機號碼格式')
       }
     })
   }, [phone])
@@ -34,11 +34,19 @@ export function EventForm(props) {
   useEffect(() => {
     emailInputRef.current.addEventListener('blur', () => {
       if (!isEmail.test(emailInputRef.current.value)) {
-        Swal.fire('請輸入正確Email格式')
+        checkAlert.fire('請輸入正確Email格式')
       }
     })
   }, [email])
 
+  const checkAlert = Swal.mixin({
+    toast: true,
+    position: 'center',
+    showConfirmButton: true,
+    icon: 'warning',
+    timerProgressBar: false,
+    confirmButtonText: `OK`,
+  })
   function eventChange(e) {
     if (e.target.id === 'event-title-input') {
       setTitle(e.target.value)
@@ -53,10 +61,10 @@ export function EventForm(props) {
     }
   }
 
-  function handleDateChange(e) {
-    setEventDate(e)
-    setStartTime(new Date(e.getFullYear(), e.getMonth(), e.getDate(), 0, 0))
-    setEndTime(new Date(e.getFullYear(), e.getMonth(), e.getDate(), 0, 0))
+  function handleDateChange() {
+    setEventDate(new Date().setDate(new Date().getDate() + 1))
+    setStartTime(new Date().setDate(new Date().getDate() + 1))
+    setEndTime(new Date().setDate(new Date().getDate() + 1))
   }
   function handleStartTimeChange(e) {
     setStartTime(e.getTime())
@@ -67,7 +75,6 @@ export function EventForm(props) {
 
   function eventSubmit(e) {
     e.preventDefault()
-
     const obj = {
       title: title,
       host: host,
@@ -83,35 +90,34 @@ export function EventForm(props) {
     }
 
     if (host === '') {
-      Swal.fire('請輸入姓名')
+      checkAlert.fire('請輸入姓名')
     } else if (phone === '') {
-      Swal.fire('請輸入連絡電話')
+      checkAlert.fire('請輸入連絡電話')
     } else if (email === '') {
-      Swal.fire('請輸入Email')
+      checkAlert.fire('請輸入Email')
     } else if (title === '') {
-      Swal.fire('請輸入活動名稱')
-    } else if (startTime === endTime) {
-      Swal.fire('請確認活動時間')
+      checkAlert.fire('請輸入活動名稱')
+    } else if (startTime >= endTime) {
+      checkAlert.fire('請確認活動時間')
     } else if (memberLimit === '' || memberLimit <= 0) {
-      Swal.fire('請輸入人數上限')
+      checkAlert.fire('請輸入人數上限')
+    } else if (isNaN(memberLimit) === true) {
+      checkAlert.fire('請輸入數字')
     } else {
       Swal.fire({
         title: '確定要開團嗎？',
         showCancelButton: true,
         confirmButtonText: `確定`,
         cancelButtonText: `取消`,
-      })
-        .then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire('開團成功!', '', 'success')
-            SetEvent(obj)
-          }
-        })
-        .then(() => {
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire('開團成功!', '', 'success')
+          SetEvent(obj)
           props.setShowUpEventForm(false)
           props.setSelectedNewSite(null)
           props.setNewMarker([])
-        })
+        }
+      })
     }
   }
 

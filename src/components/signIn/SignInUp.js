@@ -19,20 +19,26 @@ export function SignInUp(props) {
   useEffect(() => {
     signInEmailInputRef.current.addEventListener('blur', () => {
       if (!isEmail.test(signInEmailInputRef.current.value)) {
-        Swal.fire('請輸入正確Email格式')
+        checkAlert.fire('請輸入正確Email格式')
       }
     })
   }, [signInEmail])
 
-  // const isPassword = /\w{8,}$/
   useEffect(() => {
     signInPasswordInputRef.current.addEventListener('blur', () => {
       if (signInPasswordInputRef.current.value.length < 8) {
-        Swal.fire('請輸入最少8個字元')
+        checkAlert.fire('請輸入最少8個字元')
       }
     })
   }, [signInPassword])
-
+  const checkAlert = Swal.mixin({
+    toast: true,
+    position: 'center',
+    showConfirmButton: true,
+    icon: 'warning',
+    timerProgressBar: false,
+    confirmButtonText: `OK`,
+  })
   function signInChange(e) {
     if (e.target.id === 'signIn-email-input') {
       setSignInEmail(e.target.value)
@@ -49,9 +55,9 @@ export function SignInUp(props) {
     }
 
     if (signInEmail === '') {
-      Swal.fire('請輸入Email')
+      checkAlert.fire('請輸入Email')
     } else if (signInPassword === '') {
-      Swal.fire('請輸入密碼')
+      checkAlert.fire('請輸入密碼')
     } else {
       nativeSignIn(signInObj)
       closePopup()
@@ -79,7 +85,7 @@ export function SignInUp(props) {
           <Form.Group as={Col} controlId="signIn-password-input">
             <Form.Control
               type="text"
-              placeholder="請輸入8位以上英數字"
+              placeholder="請輸入8位以上英/數字"
               ref={signInPasswordInputRef}
               onChange={signInChange}
             />

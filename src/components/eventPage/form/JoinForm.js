@@ -16,7 +16,7 @@ export function JoinForm(props) {
   useEffect(() => {
     phoneInputRef.current.addEventListener('blur', () => {
       if (!isMobNumber.test(phoneInputRef.current.value)) {
-        Swal.fire('請輸入正確手機號碼格式')
+        checkAlert.fire('請輸入正確手機號碼格式')
       }
     })
   }, [phone])
@@ -25,10 +25,19 @@ export function JoinForm(props) {
   useEffect(() => {
     emailInputRef.current.addEventListener('blur', () => {
       if (!isEmail.test(emailInputRef.current.value)) {
-        Swal.fire('請輸入正確Email格式')
+        checkAlert.fire('請輸入正確Email格式')
       }
     })
   }, [email])
+
+  const checkAlert = Swal.mixin({
+    toast: true,
+    position: 'center',
+    showConfirmButton: true,
+    icon: 'warning',
+    timerProgressBar: false,
+    confirmButtonText: `OK`,
+  })
 
   function eventChange(e) {
     if (e.target.id === 'memeber-name-input') {
@@ -53,29 +62,26 @@ export function JoinForm(props) {
     }
 
     if (name === '') {
-      Swal.fire('請輸入姓名')
+      checkAlert.fire('請輸入姓名')
     } else if (phone === '') {
-      Swal.fire('請輸入連絡電話')
+      checkAlert.fire('請輸入連絡電話')
     } else if (email === '') {
-      Swal.fire('請輸入Email')
+      checkAlert.fire('請輸入Email')
     } else {
       Swal.fire({
         title: '確定要跟團嗎？',
         showCancelButton: true,
         confirmButtonText: `確定`,
         cancelButtonText: `取消`,
-      })
-        .then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire('跟團成功!', '', 'success')
-            JoinEvent(obj)
-            setThisEventId(props.selectedEvent.eventId)
-          }
-        })
-        .then(() => {
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire('跟團成功!', '', 'success')
+          JoinEvent(obj)
+          setThisEventId(props.selectedEvent.eventId)
           props.setShowUpJoinForm(false)
           props.setSelectedEvent(null)
-        })
+        }
+      })
     }
   }
 

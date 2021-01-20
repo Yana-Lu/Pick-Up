@@ -17,7 +17,7 @@ export function SignUp(props) {
   useEffect(() => {
     signUpEmailInputRef.current.addEventListener('blur', () => {
       if (!isEmail.test(signUpEmailInputRef.current.value)) {
-        Swal.fire('請輸入正確Email格式')
+        checkAlert.fire('請輸入正確Email格式')
       }
     })
   }, [signUpEmail])
@@ -25,11 +25,18 @@ export function SignUp(props) {
   useEffect(() => {
     signUpPasswordInputRef.current.addEventListener('blur', () => {
       if (signUpPasswordInputRef.current.value.length < 8) {
-        Swal.fire('請輸入最少8個字元')
+        checkAlert.fire('請輸入最少8個字元')
       }
     })
   }, [signUpPassword])
-
+  const checkAlert = Swal.mixin({
+    toast: true,
+    position: 'center',
+    showConfirmButton: true,
+    icon: 'warning',
+    timerProgressBar: false,
+    confirmButtonText: `OK`,
+  })
   function signUpChange(e) {
     if (e.target.id === 'signUp-name-input') {
       setSignUpName(e.target.value)
@@ -49,11 +56,11 @@ export function SignUp(props) {
     }
 
     if (signUpName === '') {
-      Swal.fire('請輸入姓名')
+      checkAlert.fire('請輸入姓名')
     } else if (signUpEmail === '') {
-      Swal.fire('請輸入Email')
+      checkAlert.fire('請輸入Email')
     } else if (signUpPassword === '') {
-      Swal.fire('請輸入密碼')
+      checkAlert.fire('請輸入密碼')
     } else {
       nativeSignUp(signUpObj)
       closePopup()

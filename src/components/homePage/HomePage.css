@@ -1,35 +1,8 @@
-/* .Intro > .current {
-  display: block;
-  opacity: 1;
-  transition: opacity 1s;
-} */
-
-/* .innerIntro {
-  width: 100%;
-  height: 100%;
-  /* border: solid 3px gray; */
-/* text-align: center;
-} */
-/* .IntroImg1 {
-  width: 100%;
-  height: 100%;
-  background-image: url('../../images/requipments.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
-} */
-
 /*==============================================================
 key visual big text
 ================================================================*/
 
 @import url(https://fonts.googleapis.com/css?family=Khula:700);
-/* body {
-  background-color: #112233;
-} */
 .hidden {
   opacity: 0;
 }
@@ -85,7 +58,7 @@ Start for Pick Up
   border-radius: 5px;
   flex: none;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
   .hero-grid {
     width: 80%;
     height: 28%;
