@@ -2,18 +2,8 @@ import firebase from 'firebase/app'
 import 'firebase/analytics'
 import 'firebase/auth'
 import 'firebase/firestore'
+import { firebaseConfig } from './firebaseConfig'
 import Swal from 'sweetalert2'
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyCGnUEwUEFGeIYkKWsgz9Okg1AV7vzR8sI',
-  authDomain: 'pick-up-test-ba782.firebaseapp.com',
-  databaseURL: 'https://pick-up-test-ba782.firebaseio.com',
-  projectId: 'pick-up-test-ba782',
-  storageBucket: 'pick-up-test-ba782.appspot.com',
-  messagingSenderId: '959486632936',
-  appId: '1:959486632936:web:7c9a07fba63669b9277a5d',
-  measurementId: 'G-1194R79V9K',
-}
 
 const firebaseSet = firebase.initializeApp(firebaseConfig)
 export const auth = firebaseSet.auth()

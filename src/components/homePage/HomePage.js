@@ -129,14 +129,14 @@ export function HomePage() {
               <div className="hero-grid-image2 effect-image"></div>
               <figcaption className="hero-grid-content">
                 <p className="hero-grid-title effect-target">走近一看</p>
-                <p className="hero-grid-text effect-target effect-text">沙灘上五顏六色的各式物品</p>
+                <p className="hero-grid-text effect-target effect-text">五顏六色的各式物品</p>
               </figcaption>
             </figure>
             <figure className="hero-grid effect-move">
               <div className="hero-grid-image3 effect-image"></div>
               <figcaption className="hero-grid-content">
-                <p className="hero-grid-title effect-target">還有無辜的受害者</p>
-                <p className="hero-grid-text effect-target effect-text">被廢棄魚網纏住的海洋生物</p>
+                <p className="hero-grid-title effect-target">以及無辜受害者</p>
+                <p className="hero-grid-text effect-target effect-text">生物被廢棄魚網纏繞</p>
               </figcaption>
             </figure>
           </div>
@@ -239,11 +239,11 @@ export function HomePage() {
                   </div>
                   <div
                     className={styles.IntroImg3}
-                    onClick={() => {
-                      setShowResultCategory(true)
-                    }}
+                    // onClick={() => {
+                    //   setShowResultCategory(true)
+                    // }}
                   >
-                    <p>*點圖放大</p>
+                    {/* <p>*點圖放大</p> */}
                   </div>
                 </div>
               </div>

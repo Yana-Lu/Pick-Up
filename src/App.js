@@ -115,11 +115,7 @@ function App() {
             </Button>
           </li>
         </ul>
-        <ul
-          className={`${styles.navLinks2}  ${showUpNavLinks2 ? styles.showUp : ''}`}
-          // ref={navLink2Ref}
-          onClick={hideNavLink2}
-        >
+        <ul className={`${styles.navLinks2}  ${showUpNavLinks2 ? styles.showUp : ''}`} onClick={hideNavLink2}>
           <li className={styles.startAction}>
             <Link to="/eventpage">我要參與</Link>
           </li>

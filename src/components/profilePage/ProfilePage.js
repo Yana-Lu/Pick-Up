@@ -25,12 +25,9 @@ export function ProfilePage(props) {
 
   useEffect(() => {
     if (uid) {
-      console.log(props.userData.photoURL)
       if (props.userData.photoURL === null) {
-        console.log('1')
         avatarImgRef.current.src = memberPic
       } else {
-        console.log('2')
         avatarImgRef.current.src = `${props?.userData?.photoURL}?type=large`
       }
       userEmailRef.current.textContent = props.userData.email

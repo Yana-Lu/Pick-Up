@@ -65,7 +65,7 @@ export function EventNPC(props) {
           <br />
           <h3>點擊我想跟團</h3>
           <br />
-          <h3>填好完整資料並點擊跟團按鈕</h3>
+          <h3>填妥資料並點擊跟團按鈕</h3>
 
           <div className={styles.eventInfo}>
             <p id="infoTitle">行動主題： {props.infoTitle}</p>

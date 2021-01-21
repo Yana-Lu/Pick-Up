@@ -8,27 +8,27 @@ import styles from './ResultForm.module.scss'
 import { propTypes } from 'react-bootstrap/esm/Image'
 
 export function ResultForm(props) {
-  const [bottle, setBottle] = useState('')
-  const [bottleCap, setBottleCap] = useState('')
-  const [foodContainer, setFoodContainer] = useState('')
-  const [noFoodContainer, setNoFoodContainer] = useState('')
-  const [PlasticBag, setPlasticBag] = useState('')
-  const [foodPackage, setFoodPackage] = useState('')
-  const [straw, setStraw] = useState('')
-  const [drinkCup, setDrinkCup] = useState('')
-  const [tableware, setTableware] = useState('')
-  const [can, setCan] = useState('')
-  const [aluminumFoilBag, setAluminumFoilBag] = useState('')
-  const [glassBottle, setGlassBottle] = useState('')
-  const [fishingGear, setFishingGear] = useState('')
-  const [fishingTool, setFishingTool] = useState('')
-  const [fishingNet, setFishingNet] = useState('')
-  const [cigaretteButt, setCigaretteButt] = useState('')
-  const [toothbrush, setToothbrush] = useState('')
-  const [syringeneedle, setSyringeneedle] = useState('')
-  const [lighter, setLighter] = useState('')
-  const [metal, setMetal] = useState('')
-  const [hook, setHook] = useState('')
+  const [bottle, setBottle] = useState('0')
+  const [bottleCap, setBottleCap] = useState('0')
+  const [foodContainer, setFoodContainer] = useState('0')
+  const [noFoodContainer, setNoFoodContainer] = useState('0')
+  const [PlasticBag, setPlasticBag] = useState('0')
+  const [foodPackage, setFoodPackage] = useState('0')
+  const [straw, setStraw] = useState('0')
+  const [drinkCup, setDrinkCup] = useState('0')
+  const [tableware, setTableware] = useState('0')
+  const [can, setCan] = useState('0')
+  const [aluminumFoilBag, setAluminumFoilBag] = useState('0')
+  const [glassBottle, setGlassBottle] = useState('0')
+  const [fishingGear, setFishingGear] = useState('0')
+  const [fishingTool, setFishingTool] = useState('0')
+  const [fishingNet, setFishingNet] = useState('0')
+  const [cigaretteButt, setCigaretteButt] = useState('0')
+  const [toothbrush, setToothbrush] = useState('0')
+  const [syringeneedle, setSyringeneedle] = useState('0')
+  const [lighter, setLighter] = useState('0')
+  const [metal, setMetal] = useState('0')
+  const [hook, setHook] = useState('0')
 
   function resultChange(e) {
     if (e.target.id === 'result-bottle-input') {
@@ -78,46 +78,94 @@ export function ResultForm(props) {
 
   function resultSubmit(e) {
     e.preventDefault()
-
-    const obj = {
-      eventId: props.eventId,
-      bottle: bottle,
-      bottleCap: bottleCap,
-      foodContainer: foodContainer,
-      noFoodContainer: noFoodContainer,
-      PlasticBag: PlasticBag,
-      foodPackage: foodPackage,
-      straw: straw,
-      drinkCup: drinkCup,
-      tableware: tableware,
-      can: can,
-      aluminumFoilBag: aluminumFoilBag,
-      glassBottle: glassBottle,
-      fishingGear: fishingGear,
-      fishingTool: fishingTool,
-      fishingNet: fishingNet,
-      cigaretteButt: cigaretteButt,
-      toothbrush: toothbrush,
-      syringeneedle: syringeneedle,
-      lighter: lighter,
-      metal: metal,
-      hook: hook,
+    if (bottle === '') {
+      setBottle('0')
+    } else if (bottleCap === '') {
+      setBottleCap('0')
+    } else if (foodContainer === '') {
+      setFoodContainer('0')
+    } else if (noFoodContainer === '') {
+      setNoFoodContainer('0')
+    } else if (PlasticBag === '') {
+      setPlasticBag('0')
+    } else if (foodPackage === '') {
+      setFoodPackage('0')
+    } else if (straw === '') {
+      setStraw('0')
+    } else if (drinkCup === '') {
+      setDrinkCup('0')
+    } else if (tableware === '') {
+      setTableware('0')
+    } else if (can === '') {
+      setCan('0')
+    } else if (aluminumFoilBag === '') {
+      setAluminumFoilBag('0')
+    } else if (glassBottle === '') {
+      setGlassBottle('0')
+    } else if (fishingGear === '') {
+      setFishingGear('0')
+    } else if (fishingTool === '') {
+      setFishingTool('0')
+    } else if (fishingNet === '') {
+      setFishingNet('0')
+    } else if (cigaretteButt === '') {
+      setCigaretteButt('0')
+    } else if (toothbrush === '') {
+      setToothbrush('0')
+    } else if (syringeneedle === '') {
+      setSyringeneedle('0')
+    } else if (lighter === '') {
+      setLighter('0')
+    } else if (metal === '') {
+      setMetal('0')
+    } else if (hook === '') {
+      setHook('0')
+    } else {
+      const obj = {
+        eventId: props.eventId,
+        bottle: bottle,
+        bottleCap: bottleCap,
+        foodContainer: foodContainer,
+        noFoodContainer: noFoodContainer,
+        PlasticBag: PlasticBag,
+        foodPackage: foodPackage,
+        straw: straw,
+        drinkCup: drinkCup,
+        tableware: tableware,
+        can: can,
+        aluminumFoilBag: aluminumFoilBag,
+        glassBottle: glassBottle,
+        fishingGear: fishingGear,
+        fishingTool: fishingTool,
+        fishingNet: fishingNet,
+        cigaretteButt: cigaretteButt,
+        toothbrush: toothbrush,
+        syringeneedle: syringeneedle,
+        lighter: lighter,
+        metal: metal,
+        hook: hook,
+      }
+      Swal.fire({
+        title: '確定要上傳嗎？',
+        showCancelButton: true,
+        confirmButtonText: `確定`,
+        cancelButtonText: `取消`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire('上傳成功!', '', 'success')
+          SaveResult(obj)
+          getBeHostEvents(props.uid, props.setBeHostEvents, 'hihi')
+          props.handleShowResultForm(false)
+        }
+      })
     }
-    SaveResult(obj)
-    Swal.fire({
-      icon: 'success',
-      title: '上傳成功!',
-    }).then(() => {
-      getBeHostEvents(props.uid, props.setBeHostEvents, 'hihi')
-      props.handleShowResultForm(false)
-    })
   }
   return (
     <div className={`${styles.resultFormBG} ${props.showResultForm ? styles.showResultForm : ''}`}>
       <div className={styles.resultFormOut}>
         <Form className={styles.resultForm} onSubmit={resultSubmit}>
           <h3>填寫行動成果</h3>
-          <p>請填寫個數(若無則填“0”)</p>
+          <p>請填寫個數，若無則填空(範例：5)</p>
           <Form.Row as={Col}>
             <Form.Group as={Col} controlId="result-bottle-input">
               <Form.Label>寶特瓶</Form.Label>
