@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { googleMapsApiKeyLibraries } from './googleMapsApiKey'
+import { googleMapsApiKeyLibraries } from './googleMapsApiKeyLibraries'
 import { getEvents } from '../../Firebase'
 import styles from './Map.module.scss'
 import MapStyles from './MapStyles'
