@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
+import { googleMapsApiKey } from './googleMapsApiKey'
 import { getEvents } from '../../Firebase'
 import styles from './Map.module.scss'
 import MapStyles from './MapStyles'
@@ -9,7 +10,6 @@ import { JoinForm } from '../form/JoinForm'
 import { EventForm } from '../form/EventForm'
 import { Button } from 'react-bootstrap'
 
-const libraries = ['places']
 const mapContainerStyle = {
   width: '100%',
   height: '100%',
@@ -27,10 +27,7 @@ const options = {
 }
 
 export function Maps(props) {
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: `AIzaSyAhDv35adlrxazUwPtZvjU7NE3RAaq3piQ`,
-    libraries,
-  })
+  const { isLoaded, loadError } = useLoadScript(googleMapsApiKey)
   const [events, setEvents] = useState([])
   const [showUpEventForm, setShowUpEventForm] = useState(false)
   const [showUpJoinForm, setShowUpJoinForm] = useState(false)
