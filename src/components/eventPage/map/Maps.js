@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { googleMapsApiKey } from './googleMapsApiKey'
+import { googleMapsApiKeyLibraries } from './googleMapsApiKey'
 import { getEvents } from '../../Firebase'
 import styles from './Map.module.scss'
 import MapStyles from './MapStyles'
@@ -27,7 +27,7 @@ const options = {
 }
 
 export function Maps(props) {
-  const { isLoaded, loadError } = useLoadScript(googleMapsApiKey)
+  const { isLoaded, loadError } = useLoadScript(googleMapsApiKeyLibraries)
   const [events, setEvents] = useState([])
   const [showUpEventForm, setShowUpEventForm] = useState(false)
   const [showUpJoinForm, setShowUpJoinForm] = useState(false)
