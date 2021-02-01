@@ -149,7 +149,7 @@ export function HomePage() {
           </div>
           <div className={styles.intro1}>
             <p className={styles.highlight}>
-              參與淨灘活動並不難，透過 Pick Up 可以發起或參與活動，一同拾起沙灘上的不速之客。
+              參與淨灘活動並不難，透過 Pick Up 發起或參與活動，一同拾起沙灘上的不速之客。
             </p>
             <br />
             <p>

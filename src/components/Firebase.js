@@ -22,13 +22,23 @@ export function nativeSignUp(obj) {
         beHost: [],
         beMember: [],
       })
-      Swal.fire('註冊成功')
+      signInAlert.fire({
+        icon: 'success',
+        title: '歡迎加入！',
+      })
       return 'success'
     })
     .catch((error) => {
       return error
     })
 }
+const signInAlert = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: false,
+})
 export function nativeDisplayName(id) {
   return db
     .collection('user')
@@ -43,13 +53,7 @@ export function nativeDisplayName(id) {
       return userInfo
     })
 }
-const signInAlert = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: false,
-})
+
 export function nativeSignIn(obj) {
   auth
     .signInWithEmailAndPassword(obj.email, obj.password)
@@ -63,7 +67,7 @@ export function nativeSignIn(obj) {
         })
       signInAlert.fire({
         icon: 'success',
-        title: '登入成功!',
+        title: '歡迎回來！',
       })
       return 'success'
     })
@@ -100,6 +104,10 @@ export const signInWithFacebook = () =>
         },
         { merge: true }
       )
+      signInAlert.fire({
+        icon: 'success',
+        title: '歡迎回來！',
+      })
     }
   })
 
@@ -117,10 +125,14 @@ export const signInWithGoogle = () =>
         },
         { merge: true }
       )
+      signInAlert.fire({
+        icon: 'success',
+        title: '歡迎回來！',
+      })
     }
   })
 
-export const signOutWithFacebook = () =>
+export const signOut = () =>
   auth.signOut().then(function () {
     window.location.reload()
     window.localStorage.clear()

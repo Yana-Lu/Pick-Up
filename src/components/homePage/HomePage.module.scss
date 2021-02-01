@@ -289,8 +289,8 @@ p {
 }
 .mainBG3 {
   width: 100vw;
-  height: 1200px;
-  @include pad {
+  height: 1300px;
+  @include mobile {
     height: 1000px;
   }
   .actionIntro {
@@ -504,7 +504,8 @@ p {
             border-radius: 5px;
             margin-bottom: 5px;
             @include pad {
-              height: 70%;
+              height: 55%;
+              width: 100%;
             }
             @include mobile {
               height: 300px;
@@ -522,7 +523,8 @@ p {
             border-radius: 5px;
             margin-bottom: 5px;
             @include pad {
-              height: 70%;
+              height: 55%;
+              width: 100%;
             }
             @include mobile {
               height: 300px;
@@ -670,7 +672,7 @@ p {
                 font-size: 0.8rem;
               }
             }
-            @include mobile {
+            @include pad {
               margin-top: 0px;
               width: 100%;
             }
@@ -683,13 +685,12 @@ p {
             background-size: contain;
             background-position: center;
             margin: 5% 0 0 20px;
-            cursor: pointer;
             display: grid;
             grid-template-rows: 9.5fr 0.5fr;
             @include pad {
-              width: 50%;
-              margin: 15% 0 0 10px;
-              height: 65%;
+              width: 100%;
+              margin: 0;
+              height: 50%;
             }
 
             p {

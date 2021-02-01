@@ -12,6 +12,7 @@ import memberPic from '../../images/member-icon.png'
 
 export function ProfilePage(props) {
   const history = useHistory()
+  const profilePageRef = useRef(null)
   const avatarImgRef = useRef(null)
   const userNameRef = useRef(null)
   const userEmailRef = useRef(null)
@@ -22,6 +23,10 @@ export function ProfilePage(props) {
   const [showBeHost, setShowBeHost] = useState(false)
   const [showBeMember, setShowBeMember] = useState(false)
   const uid = props.userData.uid
+
+  function scrollToTop() {
+    profilePageRef.current.scrollIntoView({ behavior: 'smooth' })
+  }
 
   useEffect(() => {
     if (uid) {
@@ -43,7 +48,7 @@ export function ProfilePage(props) {
     }
   }, [uid])
   return (
-    <div className={styles.MainContain}>
+    <div className={styles.MainContain} ref={profilePageRef}>
       <div className={styles.ProfileContain}>
         <div className={styles.ProfileData}>
           <div className={styles.avatar}>
@@ -95,6 +100,9 @@ export function ProfilePage(props) {
             <ProfilePageBeMember uid={props.userData.uid} events={beMemberEvents} />
           </div>
         </Fade>
+      </div>
+      <div className={styles.toTopBtn} onClick={scrollToTop}>
+        ▲
       </div>
     </div>
   )

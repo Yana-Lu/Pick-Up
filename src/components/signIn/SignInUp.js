@@ -84,7 +84,7 @@ export function SignInUp(props) {
           </Form.Group>
           <Form.Group as={Col} controlId="signIn-password-input">
             <Form.Control
-              type="text"
+              type="password"
               placeholder="請輸入8位以上英/數字"
               ref={signInPasswordInputRef}
               onChange={signInChange}

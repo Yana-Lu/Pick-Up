@@ -4,12 +4,13 @@ import { HomePage } from './components/homePage/HomePage'
 import { EventPage } from './components/eventPage/EventPage'
 import { ProfilePage } from './components/profilePage/ProfilePage'
 import { SignInUp } from './components/signIn/SignInUp'
-import { signOutWithFacebook, auth } from './components/Firebase'
+import { signOut, auth } from './components/Firebase'
 import { nativeDisplayName } from './components/Firebase'
 import { useHistory } from 'react-router-dom'
 import styles from './scss/MainPage.module.scss'
 import { Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Swal from 'sweetalert2'
 
 function App() {
   const history = useHistory()
@@ -55,7 +56,38 @@ function App() {
       history.push('/profile')
     }
   }
-
+  const checkSignOutAlert = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    timerProgressBar: false,
+  })
+  function checkSignOut() {
+    console.log('BYE')
+    checkSignOutAlert
+      .fire({
+        title: '確定要登出嗎？',
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: true,
+        showCancelButton: true,
+        icon: 'warning',
+        timerProgressBar: false,
+        confirmButtonText: `確定`,
+        cancelButtonText: `取消`,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          signOut()
+        }
+      })
+      .then(() => {
+        checkSignOutAlert.fire({
+          title: '即將登出',
+          toast: true,
+          position: 'top-end',
+        })
+      })
+  }
   const scrollevent = (value) => {
     if (value.scrollTop > 80) {
       setHide(true)
@@ -109,7 +141,7 @@ function App() {
             <Button
               variant="default"
               className={`${styles.signOutBtn} ${showSignOutBtn ? '' : styles.signOutBtnHideUp}`}
-              onClick={signOutWithFacebook}
+              onClick={checkSignOut}
             >
               登出
             </Button>
@@ -135,7 +167,7 @@ function App() {
             <Button
               variant="default"
               className={`${styles.signOutBtn} ${showSignOutBtn ? '' : styles.signOutBtnHideUp}`}
-              onClick={signOutWithFacebook}
+              onClick={checkSignOut}
             >
               登出
             </Button>
