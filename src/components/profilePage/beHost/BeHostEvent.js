@@ -20,7 +20,6 @@ export function BeHostEvent(props) {
         {new Date(props.event.endTime).toTimeString().split(':')[1]}
       </p>
       <p className={styles.eventMumberLimit}>人數上限：{props.event.member_limit} 人</p>
-      {/* <p className={styles.eventMumbers}>參加人數：{props.event.members.length} 人</p> */}
     </div>
   )
 
